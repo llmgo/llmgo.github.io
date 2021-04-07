@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Jane - A super concise theme for Hugo</title>
+    <title>一个小运维的博客</title>
     <link>https://www.llmgo.cn/</link>
-    <description>Recent content on Jane - A super concise theme for Hugo</description>
+    <description>Recent content on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 06 Apr 2021 19:35:12 +0800</lastBuildDate>
@@ -22,6 +22,7 @@
 &lt;p&gt;下面是我收藏的一些好的网站&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://aliyundrive.com/&#34;&gt;阿里云盘&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://myssl.com/&#34;&gt;SSL工具&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
       
