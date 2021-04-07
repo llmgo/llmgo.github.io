@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>devops on 一个小运维的博客</title>
+    <link>https://www.llmgo.cn/categories/devops/</link>
+    <description>Recent content in devops on 一个小运维的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Apr 2021 11:11:53 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jenkins 利用Build Name and Description Setter插件在build history输出信息</title>
+      <link>https://www.llmgo.cn/post/jenkins-output-infomation-in-buildhistory/</link>
+      <pubDate>Wed, 07 Apr 2021 11:11:53 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/jenkins-output-infomation-in-buildhistory/</guid>
+      <description>Jenkins 利用Build Name and Description Setter插件在build history输出信息 插件名称：Build Name and Description Setter Pipeline语法 1 2 3 4 5 6 7 stage(&amp;#34;Initialization&amp;#34;) { steps</description>
+    </item>
+    
+    <item>
+      <title>Jenkins WebHook 自动构建</title>
+      <link>https://www.llmgo.cn/post/jenkins-webhook-autobuild/</link>
+      <pubDate>Wed, 07 Apr 2021 11:10:17 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/jenkins-webhook-autobuild/</guid>
+      <description>Jenkins WebHook 自动构建 [toc] 1. 安装 Gitlab Hook 插件 需要安装两个插件： Gitlab Hook GitLab 2. Jenkins Job设置自动构建 点击右下角的ADCANCED,构建一个Secret token 3. Gitlab 设置web</description>
+    </item>
+    
+  </channel>
+</rss>

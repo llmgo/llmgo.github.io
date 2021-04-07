@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>etcd on 一个小运维的博客</title>
+    <link>https://www.llmgo.cn/categories/etcd/</link>
+    <description>Recent content in etcd on 一个小运维的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Apr 2021 10:27:08 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/etcd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kubernetes 集群 etcd 故障恢复</title>
+      <link>https://www.llmgo.cn/post/etcd-in-kubernetes-recover/</link>
+      <pubDate>Wed, 07 Apr 2021 10:27:08 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/etcd-in-kubernetes-recover/</guid>
+      <description>kubernetes 集群 etcd 故障恢复 由于升级集群为多master的时候其中原先的master节点挂了。 恢复过程 删除有问题的etcd节点 1 2 3 4 # 列出所有成员 $ ./etcdctl</description>
+    </item>
+    
+  </channel>
+</rss>

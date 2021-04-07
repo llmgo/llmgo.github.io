@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>redis on 一个小运维的博客</title>
+    <link>https://www.llmgo.cn/tags/redis/</link>
+    <description>Recent content in redis on 一个小运维的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Apr 2021 10:33:57 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis 5.0 cluster 添加和移除节点</title>
+      <link>https://www.llmgo.cn/post/redis-cluster-add-del-nodes/</link>
+      <pubDate>Wed, 07 Apr 2021 10:33:57 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/redis-cluster-add-del-nodes/</guid>
+      <description>添加节点 搭建Redis集群文档: https://www.cnblogs.com/esofar/p/10486621.html 如果所示，之前的集群是三主三从的Redis集群，现在要加入一主一从，主从复制。主节点端口是7004，从节点</description>
+    </item>
+    
+    <item>
+      <title>redis 介绍</title>
+      <link>https://www.llmgo.cn/post/redis-introduction/</link>
+      <pubDate>Wed, 07 Apr 2021 10:30:22 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/redis-introduction/</guid>
+      <description>Redis REmote DIctionary Server(Redis) 是一个由Salvatore Sanfilippo写的key-value存储系统。 Redis是一个开源的使用ANSI C语言编写、遵守BS</description>
+    </item>
+    
+    <item>
+      <title>redis 批量删除keys</title>
+      <link>https://www.llmgo.cn/post/redis-batchd-del-keys/</link>
+      <pubDate>Wed, 07 Apr 2021 10:28:41 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/redis-batchd-del-keys/</guid>
+      <description>Redis 删除 Black 开头的key 适用于keys数量比较少的情况，如果keys数量大，由于redis是单线程的，容易造成堵塞。 1 redis-cli -a 1q2w3e -n 0 -p 6379 --raw keys Black* | xargs redis-cli</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nginx on 一个小运维的博客</title>
+    <link>https://www.llmgo.cn/tags/nginx/</link>
+    <description>Recent content in nginx on 一个小运维的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Apr 2021 10:26:23 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>k8s ingress basec authentication</title>
+      <link>https://www.llmgo.cn/post/basicauthentication/</link>
+      <pubDate>Wed, 07 Apr 2021 10:26:23 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/basicauthentication/</guid>
+      <description>基本身份验证 本示例说明如何使用包含由生成的文件的密钥在Ingress规则中添加身份验证htpasswd。生成的文件的名称很重要auth（实际</description>
+    </item>
+    
+  </channel>
+</rss>

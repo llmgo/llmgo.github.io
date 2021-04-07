@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on 一个小运维的博客</title>
+    <link>https://www.llmgo.cn/tags/python/</link>
+    <description>Recent content in python on 一个小运维的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Apr 2021 10:38:24 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS 7 安装 Py3</title>
+      <link>https://www.llmgo.cn/post/centos-install-py3/</link>
+      <pubDate>Wed, 07 Apr 2021 10:38:24 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/centos-install-py3/</guid>
+      <description>Python 升级到Python3 下载依赖包 1 2 3 4 5 6 7 8 9 10 11 12 13 yum install -y python-devel \ mysql-devel \ libxml2 \ libxml2-devel \ libxslt* \ zlib \ zlib-devel \ gcc \ gcc-c++ \ openssl \ openssl-devel \ openldap \ openldap-devel python 下载 1 wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz 解压包 1 tar xf Python-3.6.5.tgz</description>
+    </item>
+    
+  </channel>
+</rss>

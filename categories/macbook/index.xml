@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>macbook on 一个小运维的博客</title>
+    <link>https://www.llmgo.cn/categories/macbook/</link>
+    <description>Recent content in macbook on 一个小运维的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Apr 2021 10:33:20 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/macbook/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mac Vim Autocolor</title>
+      <link>https://www.llmgo.cn/post/mac-vim-autocolor/</link>
+      <pubDate>Wed, 07 Apr 2021 10:33:20 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/mac-vim-autocolor/</guid>
+      <description>macos vim 增加配色 在 ~目录下，vim .vimrc 1 2 3 set nu colorscheme desert syntax on</description>
+    </item>
+    
+  </channel>
+</rss>

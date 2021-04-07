@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mvn on 一个小运维的博客</title>
+    <link>https://www.llmgo.cn/tags/mvn/</link>
+    <description>Recent content in mvn on 一个小运维的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Apr 2021 10:34:41 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/mvn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mvn 命令基本使用</title>
+      <link>https://www.llmgo.cn/post/mvn-command/</link>
+      <pubDate>Wed, 07 Apr 2021 10:34:41 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/mvn-command/</guid>
+      <description>Mvn常用命令 序号 命令 含义 1 mvn archetype:create 创建Maven项目 2 mvn compile 编译源代码 3 mvn test-compile 编译测试代码 4 mvn test 运行测试 5 mvn site 生成项目相关信息的网站 6 mvn clean 清除项目</description>
+    </item>
+    
+  </channel>
+</rss>

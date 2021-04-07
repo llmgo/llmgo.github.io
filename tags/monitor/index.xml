@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>monitor on 一个小运维的博客</title>
+    <link>https://www.llmgo.cn/tags/monitor/</link>
+    <description>Recent content in monitor on 一个小运维的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Apr 2021 11:06:08 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/monitor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pinpoint 告警配置</title>
+      <link>https://www.llmgo.cn/post/pinpoint-alert-config/</link>
+      <pubDate>Wed, 07 Apr 2021 11:06:08 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/pinpoint-alert-config/</guid>
+      <description>Pinpoint 告警配置 新建一个组，添加2个成员 组必须是以数字构成 选择告警 添加告警 告警类型 以下规则中，请求是当前应用发送出去的，当前应用是请求的发起者。 类</description>
+    </item>
+    
+    <item>
+      <title>apm 软件pinpoint 安装</title>
+      <link>https://www.llmgo.cn/post/pinpoint-install/</link>
+      <pubDate>Wed, 07 Apr 2021 11:05:38 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/pinpoint-install/</guid>
+      <description>APM软件Pinpoint 安装 APM（Application Performance Management）应用性能管理 [toc] 项目地址：https://github.c</description>
+    </item>
+    
+  </channel>
+</rss>

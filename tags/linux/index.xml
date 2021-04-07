@@ -6,7 +6,34 @@
     <description>Recent content in linux on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 06 Apr 2021 19:31:55 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Apr 2021 11:08:33 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 应用cpu占用高排查思路</title>
+      <link>https://www.llmgo.cn/post/java-project-high-cpu-usage/</link>
+      <pubDate>Wed, 07 Apr 2021 11:08:33 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/java-project-high-cpu-usage/</guid>
+      <description>Java 项目CPU占用高排查 [toc] 一、分析问题 cpu占用高一般来说是项目本身自发导致的，自发包括定时任务和死循环，而具体哪一段代码也确定不了， 现在我们</description>
+    </item>
+    
+    <item>
+      <title>CentOS 升级至指定版本</title>
+      <link>https://www.llmgo.cn/post/centos-update-spce-version/</link>
+      <pubDate>Wed, 07 Apr 2021 10:39:46 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/centos-update-spce-version/</guid>
+      <description>CentOS 升级至指定版本 CentOS系统下用yum upgrade命令只能升级到最新版本，CentOS仓库并不维护历史版本，所以只能使用 vault.centos.org 历史版本快照</description>
+    </item>
+    
+    <item>
+      <title>redis 介绍</title>
+      <link>https://www.llmgo.cn/post/redis-introduction/</link>
+      <pubDate>Wed, 07 Apr 2021 10:30:22 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/redis-introduction/</guid>
+      <description>Redis REmote DIctionary Server(Redis) 是一个由Salvatore Sanfilippo写的key-value存储系统。 Redis是一个开源的使用ANSI C语言编写、遵守BS</description>
+    </item>
+    
     <item>
       <title>使用hugo&#43;github page搭建个人博客</title>
       <link>https://www.llmgo.cn/post/hugo-gihubpage/</link>
