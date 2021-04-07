@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux on Jane - A super concise theme for Hugo</title>
+    <link>https://www.llmgo.cn/categories/linux/</link>
+    <description>Recent content in linux on Jane - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 06 Apr 2021 19:34:41 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nexus-http2https-nginx-config</title>
+      <link>https://www.llmgo.cn/post/nexus-http2https-nginx-config/</link>
+      <pubDate>Tue, 06 Apr 2021 19:34:41 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/nexus-http2https-nginx-config/</guid>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  server { listen 443 ssl; server_name nexus.example.com; include /etc/nginx/ssl.conf; client_max_body_size 20m; location ~ ^/(.*){ proxy_pass http://nexus; proxy_set_header REMOTE_ADDR $remote_addr; proxy_set_header Host $http_host; proxy_set_header X-Forwarded-Proto https; proxy_set_header Connection &amp;#34;&amp;#34;; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection &amp;#34;upgrade&amp;#34;; } } server { listen 80; server_name nexus.example.com; rewrite ^(.*) https://$server_name$1 permanent; }   </description>
+    </item>
+    
+    <item>
+      <title>Vscode on Browser</title>
+      <link>https://www.llmgo.cn/post/vscode-on-browser/</link>
+      <pubDate>Tue, 06 Apr 2021 19:33:49 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/vscode-on-browser/</guid>
+      <description>在kubernetes集群上部署VSCode code-server 就是一个可以运行在服务器上面直接通过浏览器来访问的 VSCode，VSCode 是一个现代化的代码</description>
+    </item>
+    
+    <item>
+      <title>Go rand 的一点记录</title>
+      <link>https://www.llmgo.cn/post/go-rand/</link>
+      <pubDate>Tue, 06 Apr 2021 15:30:46 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/go-rand/</guid>
+      <description>rand 废话不多说，直接上代码 1 2 3 4 5 6 7 8 9 10 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;math/rand&amp;#34; ) func main() { fmt.Println(rand.Intn(100)) } 乍一看没问题 1 2 3 4 5 6 [liliming@llmTAT ~/mygo/code.llmgo.cn/temp 11:05:36]$ go run . 81 [liliming@llmTAT ~/mygo/code.llmgo.cn/temp 11:08:10]$ go run . 81 [liliming@llmTAT ~/mygo/code.llmgo.cn/temp 11:08:12]$ go run . 81 但是每</description>
+    </item>
+    
+    <item>
+      <title>Go 协程</title>
+      <link>https://www.llmgo.cn/post/go-channel/</link>
+      <pubDate>Tue, 06 Apr 2021 15:30:46 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/go-channel/</guid>
+      <description>Go 协程 Go协程是什么？ Go 协程是与其他函数或方法一起并发运行的函数或方法。Go 协程可以看作是轻量级线程。与线程相比，创建一个 Go 协程的成本很小。</description>
+    </item>
+    
+    <item>
+      <title>Go 语言发送邮件</title>
+      <link>https://www.llmgo.cn/post/go-mail/</link>
+      <pubDate>Tue, 06 Apr 2021 15:30:46 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/go-mail/</guid>
+      <description>Go 发送邮件 使用的第三方库：github.com/go-gomail/gomail 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30</description>
+    </item>
+    
+    <item>
+      <title>Go使用第三方库viper来解析ini文件</title>
+      <link>https://www.llmgo.cn/post/go-use-viper-parse-ini/</link>
+      <pubDate>Tue, 06 Apr 2021 15:30:46 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/go-use-viper-parse-ini/</guid>
+      <description>Go使用第三方库viper来解析ini文件 准备配置文件 1 2 3 4 5 6 7 8 9 $ cat &amp;lt;&amp;lt;EOF&amp;gt; config.ini city=beijing age=100 [common] app=nginx [lol] mid=fizz ad=timor EOF 代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20</description>
+    </item>
+    
+    <item>
+      <title>Go语言Json.marshal嵌套匿名结构体</title>
+      <link>https://www.llmgo.cn/post/go-marshal-anonymous-structure/</link>
+      <pubDate>Tue, 06 Apr 2021 15:30:46 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/go-marshal-anonymous-structure/</guid>
+      <description>Go语言Json.marshal嵌套匿名结构体 直接上代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 package</description>
+    </item>
+    
+    <item>
+      <title>Go语言获取本机的IPv4地址</title>
+      <link>https://www.llmgo.cn/post/go-get-localhost-ipv4/</link>
+      <pubDate>Tue, 06 Apr 2021 15:30:46 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/go-get-localhost-ipv4/</guid>
+      <description>Go语言获取本机的IPv4地址 获取本机ipv4地址 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;net&amp;#34; &amp;#34;os&amp;#34; ) func main() { ips, err := net.LookupIP(os.Getenv(&amp;#34;HOSTNAME&amp;#34;)) if err != nil { panic(err) } for _,</description>
+    </item>
+    
+    <item>
+      <title>Go语言如何实现tail命令的功能</title>
+      <link>https://www.llmgo.cn/post/go-tail/</link>
+      <pubDate>Thu, 01 Mar 2018 16:01:23 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/go-tail/</guid>
+      <description>Go语言如何实现tail命令的功能 大体上来说，要用Go 语言（或是其它的什么编程语言）来实现 tail -f 命令的功能，大致方法和逻辑不外乎： 直接调用ta</description>
+    </item>
+    
+  </channel>
+</rss>

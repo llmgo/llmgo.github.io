@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linx on Jane - A super concise theme for Hugo</title>
+    <link>https://www.llmgo.cn/categories/linx/</link>
+    <description>Recent content in linx on Jane - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 06 Apr 2021 19:31:55 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/linx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用hugo&#43;github page搭建个人博客</title>
+      <link>https://www.llmgo.cn/post/hugo-gihubpage/</link>
+      <pubDate>Tue, 06 Apr 2021 19:31:55 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/hugo-gihubpage/</guid>
+      <description>Hugo + Gihub Page 国内的博客园和简书都在审查，短时间估计不能用，刚好看到github page比较符合自己的胃口，所以搭建了一个自己的github pag</description>
+    </item>
+    
+  </channel>
+</rss>

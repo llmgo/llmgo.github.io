@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Jane - A super concise theme for Hugo</title>
+    <link>https://www.llmgo.cn/tags/</link>
+    <description>Recent content in Tags on Jane - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 06 Apr 2021 19:35:12 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kubernetes</title>
+      <link>https://www.llmgo.cn/tags/kubernetes/</link>
+      <pubDate>Tue, 06 Apr 2021 19:35:12 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>devops</title>
+      <link>https://www.llmgo.cn/tags/devops/</link>
+      <pubDate>Tue, 06 Apr 2021 19:34:41 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/tags/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dev</title>
+      <link>https://www.llmgo.cn/tags/dev/</link>
+      <pubDate>Tue, 06 Apr 2021 19:33:49 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/tags/dev/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blog</title>
+      <link>https://www.llmgo.cn/tags/blog/</link>
+      <pubDate>Tue, 06 Apr 2021 19:31:55 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://www.llmgo.cn/tags/linux/</link>
+      <pubDate>Tue, 06 Apr 2021 19:31:55 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>https://www.llmgo.cn/tags/go/</link>
+      <pubDate>Tue, 06 Apr 2021 15:30:46 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/tags/go/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

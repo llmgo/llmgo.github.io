@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kubernetes on Jane - A super concise theme for Hugo</title>
+    <link>https://www.llmgo.cn/tags/kubernetes/</link>
+    <description>Recent content in kubernetes on Jane - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 06 Apr 2021 19:35:12 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kubernetes 中利用lxcfs控制容器资源可见性</title>
+      <link>https://www.llmgo.cn/post/lxcfs-kubernetes/</link>
+      <pubDate>Tue, 06 Apr 2021 19:35:12 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/lxcfs-kubernetes/</guid>
+      <description>kubernetes 中利用lxcfs控制容器资源可见性 背景 Linux 利用 Cgroup 实现了对容器的资源限制，但在容器内部依然缺省挂载了宿主机上的 procfs 的 /proc 目录，其包含如：memin</description>
+    </item>
+    
+    <item>
+      <title>在Kubernetes上部署Redis集群</title>
+      <link>https://www.llmgo.cn/post/redis-in-kubernetes/</link>
+      <pubDate>Tue, 06 Apr 2021 18:27:22 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/redis-in-kubernetes/</guid>
+      <description>在Kubernetes上部署Redis集群 介绍 Redis（代表REmote DIctionary Server）是一种开源的内存中数据存储，通常用作数据库，缓存或</description>
+    </item>
+    
+  </channel>
+</rss>

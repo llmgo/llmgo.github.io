@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dev on Jane - A super concise theme for Hugo</title>
+    <link>https://www.llmgo.cn/tags/dev/</link>
+    <description>Recent content in dev on Jane - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 06 Apr 2021 19:33:49 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vscode on Browser</title>
+      <link>https://www.llmgo.cn/post/vscode-on-browser/</link>
+      <pubDate>Tue, 06 Apr 2021 19:33:49 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/vscode-on-browser/</guid>
+      <description>在kubernetes集群上部署VSCode code-server 就是一个可以运行在服务器上面直接通过浏览器来访问的 VSCode，VSCode 是一个现代化的代码</description>
+    </item>
+    
+  </channel>
+</rss>
