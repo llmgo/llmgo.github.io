@@ -337,6 +337,76 @@
   <header class="post-header">
     <h1 class="post-title">
       
+      <a class="post-link" href="/post/redis-batchd-del-keys/">redis 批量删除keys</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2021-04-07" class="post-time">
+        2021-04-07
+      </time>
+      <div class="post-category">
+          <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
+          <a href="https://www.llmgo.cn/categories/redis/"> redis </a>
+          
+        </div>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      Redis 删除 Black 开头的key 适用于keys数量比较少的情况，如果keys数量大，由于redis是单线程的，容易造成堵塞。 1 redis-cli -a 1q2w3e -n 0 -p 6379 --raw keys Black* | xargs redis-cli
+    </div>
+    <div class="read-more">
+      <a href="/post/redis-batchd-del-keys/" class="read-more-link">Read more</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      <a class="post-link" href="/post/etcd-in-kubernetes-recover/">kubernetes 集群 etcd 故障恢复</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2021-04-07" class="post-time">
+        2021-04-07
+      </time>
+      <div class="post-category">
+          <a href="https://www.llmgo.cn/categories/kubernetes/"> kubernetes </a>
+          <a href="https://www.llmgo.cn/categories/etcd/"> etcd </a>
+          
+        </div>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      kubernetes 集群 etcd 故障恢复 由于升级集群为多master的时候其中原先的master节点挂了。 恢复过程 删除有问题的etcd节点 1 2 3 4 # 列出所有成员 $ ./etcdctl
+    </div>
+    <div class="read-more">
+      <a href="/post/etcd-in-kubernetes-recover/" class="read-more-link">Read more</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
       <a class="post-link" href="/post/basicauthentication/">k8s ingress basec authentication</a>
     </h1>
     
@@ -361,74 +431,6 @@
     </div>
     <div class="read-more">
       <a href="/post/basicauthentication/" class="read-more-link">Read more</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/post/java-parameter/">Java -jar 参数携带问题</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2021-04-07" class="post-time">
-        2021-04-07
-      </time>
-      <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/java/"> java </a>
-          
-        </div>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      时间不在于你拥有多少，而在于你怎样使用。 方法一 -DpropName=propValue的形式携带，要放在-jar参数前面，亲测，放在它后面好
-    </div>
-    <div class="read-more">
-      <a href="/post/java-parameter/" class="read-more-link">Read more</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/post/lxcfs-kubernetes/">kubernetes 中利用lxcfs控制容器资源可见性</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2021-04-06" class="post-time">
-        2021-04-06
-      </time>
-      <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/kubernetes/"> kubernetes </a>
-          
-        </div>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      kubernetes 中利用lxcfs控制容器资源可见性 背景 Linux 利用 Cgroup 实现了对容器的资源限制，但在容器内部依然缺省挂载了宿主机上的 procfs 的 /proc 目录，其包含如：memin
-    </div>
-    <div class="read-more">
-      <a href="/post/lxcfs-kubernetes/" class="read-more-link">Read more</a>
     </div>
     
   </div>
@@ -600,8 +602,6 @@
 
             
             
-              
-            
 
           
           
@@ -610,12 +610,6 @@
         
 
         
-        
-          <li class="">
-            <a href="/page/6/">
-              6
-            </a>
-          </li>
         
 
       
@@ -992,6 +986,37 @@
 
       
 
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/19/">
+              19
+            </a>
+          </li>
+        
+
+      
+
       
       
       <li><a href="/page/15/">»</a></li>
@@ -999,7 +1024,7 @@
 
       
       
-      <li><a href="/page/18/">»»</a></li>
+      <li><a href="/page/19/">»»</a></li>
       
 
       </ul>

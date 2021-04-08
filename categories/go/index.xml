@@ -6,7 +6,25 @@
     <description>Recent content in go on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 08 Apr 2021 11:18:51 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Apr 2021 20:43:00 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go使用gojsonq库来查询Json</title>
+      <link>https://www.llmgo.cn/post/go-use-gojsonq-lib-query-json/</link>
+      <pubDate>Thu, 08 Apr 2021 20:43:00 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/go-use-gojsonq-lib-query-json/</guid>
+      <description>Go使用gojsonq库来查询Json 准备简单的数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 { &amp;#34;name&amp;#34;:&amp;#34;computers&amp;#34;, &amp;#34;description&amp;#34;:&amp;#34;List of computer products&amp;#34;, &amp;#34;prices&amp;#34;:[2400, 2100, 1200, 400.87, 89.90,</description>
+    </item>
+    
+    <item>
+      <title>使用接口的方式实现一个既可以往终端写日志也可以往文件写日志的简易日志库</title>
+      <link>https://www.llmgo.cn/post/use-interface-loglib/</link>
+      <pubDate>Thu, 08 Apr 2021 15:17:08 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/use-interface-loglib/</guid>
+      <description>使用接口的方式实现一个既可以往终端写日志也可以往文件写日志的简易日志库。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34</description>
+    </item>
+    
     <item>
       <title>使用pm2来管理go应用进程</title>
       <link>https://www.llmgo.cn/post/use-pm2-management-go-app/</link>
@@ -167,24 +185,6 @@
       
       <guid>https://www.llmgo.cn/post/go-cat-n/</guid>
       <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 package main import ( &amp;#34;bufio&amp;#34; &amp;#34;flag&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;io&amp;#34; &amp;#34;os&amp;#34; ) // 扩展 cat.go 例子，使用 flag 添加一</description>
-    </item>
-    
-    <item>
-      <title>go 实现cat命令</title>
-      <link>https://www.llmgo.cn/post/go-cat/</link>
-      <pubDate>Wed, 07 Apr 2021 10:42:48 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/post/go-cat/</guid>
-      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 package main import ( &amp;#34;bufio&amp;#34; &amp;#34;flag&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;io&amp;#34; &amp;#34;os&amp;#34; ) // 实现linux cat命令 func cat(r *bufio.Reader) { for { line, err := r.ReadBytes(&amp;#39;\n&amp;#39;)</description>
-    </item>
-    
-    <item>
-      <title>go 99乘法表</title>
-      <link>https://www.llmgo.cn/post/go-99/</link>
-      <pubDate>Wed, 07 Apr 2021 10:42:15 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/post/go-99/</guid>
-      <description>99 乘法表 1 2 3 4 5 6 7 8 9 10 11 12 13 14 package main import &amp;#34;fmt&amp;#34; func main() { // 打印99乘法表 for i := 1; i &amp;lt;= 9; i++ { for j := 1; j &amp;lt;= i; j++ { fmt.Printf(&amp;#34;%d * %d = %d\t&amp;#34;, j, i, i*j) } fmt.Println() } }</description>
     </item>
     
   </channel>
