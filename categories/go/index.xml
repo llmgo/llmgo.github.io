@@ -6,7 +6,16 @@
     <description>Recent content in go on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 07 Apr 2021 10:51:51 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Apr 2021 11:18:51 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用pm2来管理go应用进程</title>
+      <link>https://www.llmgo.cn/post/use-pm2-management-go-app/</link>
+      <pubDate>Thu, 08 Apr 2021 11:18:51 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/use-pm2-management-go-app/</guid>
+      <description>使用pm2来管理go应用进程 pm2是一个进程管理工具,可以用它来管理你的node进程，并查看node进程的状态，当然也支持性能监控，进程守护</description>
+    </item>
+    
     <item>
       <title>go 每日练习 01</title>
       <link>https://www.llmgo.cn/post/go-test001/</link>

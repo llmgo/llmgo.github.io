@@ -6,7 +6,16 @@
     <description>Recent content in go on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 07 Apr 2021 10:51:51 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Apr 2021 11:18:51 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用pm2来管理go应用进程</title>
+      <link>https://www.llmgo.cn/post/use-pm2-management-go-app/</link>
+      <pubDate>Thu, 08 Apr 2021 11:18:51 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/use-pm2-management-go-app/</guid>
+      <description>使用pm2来管理go应用进程 pm2是一个进程管理工具,可以用它来管理你的node进程，并查看node进程的状态，当然也支持性能监控，进程守护</description>
+    </item>
+    
     <item>
       <title>go 每日练习 01</title>
       <link>https://www.llmgo.cn/post/go-test001/</link>
@@ -176,15 +185,6 @@
       
       <guid>https://www.llmgo.cn/post/go-99/</guid>
       <description>99 乘法表 1 2 3 4 5 6 7 8 9 10 11 12 13 14 package main import &amp;#34;fmt&amp;#34; func main() { // 打印99乘法表 for i := 1; i &amp;lt;= 9; i++ { for j := 1; j &amp;lt;= i; j++ { fmt.Printf(&amp;#34;%d * %d = %d\t&amp;#34;, j, i, i*j) } fmt.Println() } }</description>
-    </item>
-    
-    <item>
-      <title>Go rand 的一点记录</title>
-      <link>https://www.llmgo.cn/post/go-rand/</link>
-      <pubDate>Tue, 06 Apr 2021 15:30:46 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/post/go-rand/</guid>
-      <description>rand 废话不多说，直接上代码 1 2 3 4 5 6 7 8 9 10 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;math/rand&amp;#34; ) func main() { fmt.Println(rand.Intn(100)) } 乍一看没问题 1 2 3 4 5 6 [liliming@llmTAT ~/mygo/code.llmgo.cn/temp 11:05:36]$ go run . 81 [liliming@llmTAT ~/mygo/code.llmgo.cn/temp 11:08:10]$ go run . 81 [liliming@llmTAT ~/mygo/code.llmgo.cn/temp 11:08:12]$ go run . 81 但是每</description>
     </item>
     
   </channel>
