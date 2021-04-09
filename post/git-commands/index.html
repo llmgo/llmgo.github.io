@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>git 常用命令 - 一个小运维的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="liliming" />
+  <meta name="description" content="Git 全局设置 1 2 git config --global user.name &amp;#34;Administrator&amp;#34; git config --global user.email &amp;#34;admin@example.com&amp;#34; 创建新版本库 1 2 3 4 5 6 git clone git@code.aliyun.com:llmgo/test.git cd test touch README.md git add README.md git commit -m &amp;#34;add README&amp;#34; git push -u origin master 已存在的文件夹或 Git 仓库 1 2 3 4 5 6 cd existing_folder git init" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+<link rel="canonical" href="https://www.llmgo.cn/post/git-commands/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.b3a8813c06e6d785beba22bf8264e174fa2cb3a396b22f9ba24e2c00c18aaf7f.css" integrity="sha256-s6iBPAbm14W&#43;uiK/gmThdPoss6OWsi&#43;bok4sAMGKr38=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="git 常用命令" />
+<meta property="og:description" content="Git 全局设置 1 2 git config --global user.name &#34;Administrator&#34; git config --global user.email &#34;admin@example.com&#34; 创建新版本库 1 2 3 4 5 6 git clone git@code.aliyun.com:llmgo/test.git cd test touch README.md git add README.md git commit -m &#34;add README&#34; git push -u origin master 已存在的文件夹或 Git 仓库 1 2 3 4 5 6 cd existing_folder git init" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.llmgo.cn/post/git-commands/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-09T14:08:17&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-09T14:08:17&#43;08:00" />
+
+<meta itemprop="name" content="git 常用命令">
+<meta itemprop="description" content="Git 全局设置 1 2 git config --global user.name &#34;Administrator&#34; git config --global user.email &#34;admin@example.com&#34; 创建新版本库 1 2 3 4 5 6 git clone git@code.aliyun.com:llmgo/test.git cd test touch README.md git add README.md git commit -m &#34;add README&#34; git push -u origin master 已存在的文件夹或 Git 仓库 1 2 3 4 5 6 cd existing_folder git init"><meta itemprop="datePublished" content="2021-04-09T14:08:17&#43;08:00" />
+<meta itemprop="dateModified" content="2021-04-09T14:08:17&#43;08:00" />
+<meta itemprop="wordCount" content="2290">
+<meta itemprop="keywords" content="git,linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="git 常用命令"/>
+<meta name="twitter:description" content="Git 全局设置 1 2 git config --global user.name &#34;Administrator&#34; git config --global user.email &#34;admin@example.com&#34; 创建新版本库 1 2 3 4 5 6 git clone git@code.aliyun.com:llmgo/test.git cd test touch README.md git add README.md git commit -m &#34;add README&#34; git push -u origin master 已存在的文件夹或 Git 仓库 1 2 3 4 5 6 cd existing_folder git init"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">不宜妄自菲薄</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/categories/">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://droppy.llmgo.cn/" rel="noopener" target="_blank">
+              个人网盘
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/about/">关于</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      不宜妄自菲薄
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://droppy.llmgo.cn/" rel="noopener" target="_blank">
+              个人网盘
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/about/">关于</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">git 常用命令</h1>
+      
+      <div class="post-meta">
+        <time datetime="2021-04-09" class="post-time">
+          2021-04-09
+        </time>
+        <div class="post-category">
+            <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+        <li><a href="#一新建代码库">一、新建代码库</a></li>
+        <li><a href="#二配置">二、配置</a></li>
+        <li><a href="#三增加删除文件">三、增加/删除文件</a></li>
+        <li><a href="#四代码提交">四、代码提交</a></li>
+        <li><a href="#五分支">五、分支</a></li>
+        <li><a href="#六标签">六、标签</a></li>
+        <li><a href="#七查看信息">七、查看信息</a></li>
+        <li><a href="#八远程同步">八、远程同步</a></li>
+        <li><a href="#九撤销">九、撤销</a></li>
+        <li><a href="#十其他">十、其他</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <h4 id="git-全局设置">Git 全局设置</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git config --global user.name &#34;Administrator&#34;
+git config --global user.email &#34;admin@example.com&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="创建新版本库">创建新版本库</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git clone git@code.aliyun.com:llmgo/test.git
+cd test
+touch README.md
+git add README.md
+git commit -m &#34;add README&#34;
+git push -u origin master
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="已存在的文件夹或-git-仓库">已存在的文件夹或 Git 仓库</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd existing_folder
+git init
+git remote add origin git@code.aliyun.com:llmgo/test.git
+git add .
+git commit
+git push -u origin master
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="一新建代码库">一、新建代码库</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 在当前目录新建一个Git代码库
+$ git init
+
+# 新建一个目录，将其初始化为Git代码库
+$ git init [project-name]
+
+# 下载一个项目和它的整个代码历史
+$ git clone [url]
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="二配置">二、配置</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Git的设置文件为.gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。
+
+# 显示当前的Git配置
+$ git config --list
+
+# 编辑Git配置文件
+$ git config -e [--global]
+
+# 设置提交代码时的用户信息
+$ git config [--global] user.name &#34;[name]&#34;
+$ git config [--global] user.email &#34;[email address]&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="三增加删除文件">三、增加/删除文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span class="lnt" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span class="lnt" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span class="lnt" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span class="lnt" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span class="lnt" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span class="lnt" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span class="lnt" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 添加指定文件到暂存区
+$ git add [file1] [file2] ...
+
+# 添加指定目录到暂存区，包括子目录
+$ git add [dir]
+
+# 添加当前目录的所有文件到暂存区
+$ git add .
+
+# 添加每个变化前，都会要求确认
+# 对于同一个文件的多处变化，可以实现分次提交
+$ git add -p
+
+# 删除工作区文件，并且将这次删除放入暂存区
+$ git rm [file1] [file2] ...
+
+# 停止追踪指定文件，但该文件会保留在工作区
+$ git rm --cached [file]
+
+# 改名文件，并且将这个改名放入暂存区
+$ git mv [file-original] [file-renamed]
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="四代码提交">四、代码提交</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span class="lnt" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span class="lnt" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span class="lnt" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span class="lnt" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 提交暂存区到仓库区
+$ git commit -m [message]
+
+# 提交暂存区的指定文件到仓库区
+$ git commit [file1] [file2] ... -m [message]
+
+# 提交工作区自上次commit之后的变化，直接到仓库区
+$ git commit -a
+
+# 提交时显示所有diff信息
+$ git commit -v
+
+# 使用一次新的commit，替代上一次提交
+# 如果代码没有任何新变化，则用来改写上一次commit的提交信息
+$ git commit --amend -m [message]
+
+# 重做上一次commit，并包括指定文件的新变化
+$ git commit --amend [file1] [file2] ...
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="五分支">五、分支</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span class="lnt" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span class="lnt" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span class="lnt" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span class="lnt" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span class="lnt" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span class="lnt" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span class="lnt" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span class="lnt" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span class="lnt" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span class="lnt" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span class="lnt" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span class="lnt" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span class="lnt" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span class="lnt" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span class="lnt" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span class="lnt" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span class="lnt" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span class="lnt" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
+</span><span class="lnt" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33">33</a>
+</span><span class="lnt" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34">34</a>
+</span><span class="lnt" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35">35</a>
+</span><span class="lnt" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36">36</a>
+</span><span class="lnt" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37">37</a>
+</span><span class="lnt" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38">38</a>
+</span><span class="lnt" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39">39</a>
+</span><span class="lnt" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40">40</a>
+</span><span class="lnt" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41">41</a>
+</span><span class="lnt" id="42"><a style="outline: none; text-decoration:none; color:inherit" href="#42">42</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 列出所有本地分支
+$ git branch
+
+# 列出所有远程分支
+$ git branch -r
+
+# 列出所有本地分支和远程分支
+$ git branch -a
+
+# 新建一个分支，但依然停留在当前分支
+$ git branch [branch-name]
+
+# 新建一个分支，并切换到该分支
+$ git checkout -b [branch]
+
+# 新建一个分支，指向指定commit
+$ git branch [branch] [commit]
+
+# 新建一个分支，与指定的远程分支建立追踪关系
+$ git branch --track [branch] [remote-branch]
+
+# 切换到指定分支，并更新工作区
+$ git checkout [branch-name]
+
+# 切换到上一个分支
+$ git checkout -
+
+# 建立追踪关系，在现有分支与指定的远程分支之间
+$ git branch --set-upstream [branch] [remote-branch]
+
+# 合并指定分支到当前分支
+$ git merge [branch]
+
+# 选择一个commit，合并进当前分支
+$ git cherry-pick [commit]
+
+# 删除分支
+$ git branch -d [branch-name]
+
+# 删除远程分支
+$ git push origin --delete [branch-name]
+$ git branch -dr [remote/branch]
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="六标签">六、标签</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span class="lnt" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span class="lnt" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span class="lnt" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span class="lnt" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span class="lnt" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span class="lnt" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span class="lnt" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span class="lnt" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span class="lnt" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span class="lnt" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span class="lnt" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span class="lnt" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 列出所有tag
+$ git tag
+
+# 新建一个tag在当前commit
+$ git tag [tag]
+
+# 新建一个tag在指定commit
+$ git tag [tag] [commit]
+
+# 删除本地tag
+$ git tag -d [tag]
+
+# 删除远程tag
+$ git push origin :refs/tags/[tagName]
+
+# 查看tag信息
+$ git show [tag]
+
+# 提交指定tag
+$ git push [remote] [tag]
+
+# 提交所有tag
+$ git push [remote] --tags
+
+# 新建一个分支，指向某个tag
+$ git checkout -b [branch] [tag]
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="七查看信息">七、查看信息</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span class="lnt" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span class="lnt" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span class="lnt" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span class="lnt" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span class="lnt" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span class="lnt" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span class="lnt" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span class="lnt" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span class="lnt" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span class="lnt" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span class="lnt" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span class="lnt" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span class="lnt" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span class="lnt" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span class="lnt" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span class="lnt" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span class="lnt" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span class="lnt" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
+</span><span class="lnt" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33">33</a>
+</span><span class="lnt" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34">34</a>
+</span><span class="lnt" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35">35</a>
+</span><span class="lnt" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36">36</a>
+</span><span class="lnt" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37">37</a>
+</span><span class="lnt" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38">38</a>
+</span><span class="lnt" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39">39</a>
+</span><span class="lnt" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40">40</a>
+</span><span class="lnt" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41">41</a>
+</span><span class="lnt" id="42"><a style="outline: none; text-decoration:none; color:inherit" href="#42">42</a>
+</span><span class="lnt" id="43"><a style="outline: none; text-decoration:none; color:inherit" href="#43">43</a>
+</span><span class="lnt" id="44"><a style="outline: none; text-decoration:none; color:inherit" href="#44">44</a>
+</span><span class="lnt" id="45"><a style="outline: none; text-decoration:none; color:inherit" href="#45">45</a>
+</span><span class="lnt" id="46"><a style="outline: none; text-decoration:none; color:inherit" href="#46">46</a>
+</span><span class="lnt" id="47"><a style="outline: none; text-decoration:none; color:inherit" href="#47">47</a>
+</span><span class="lnt" id="48"><a style="outline: none; text-decoration:none; color:inherit" href="#48">48</a>
+</span><span class="lnt" id="49"><a style="outline: none; text-decoration:none; color:inherit" href="#49">49</a>
+</span><span class="lnt" id="50"><a style="outline: none; text-decoration:none; color:inherit" href="#50">50</a>
+</span><span class="lnt" id="51"><a style="outline: none; text-decoration:none; color:inherit" href="#51">51</a>
+</span><span class="lnt" id="52"><a style="outline: none; text-decoration:none; color:inherit" href="#52">52</a>
+</span><span class="lnt" id="53"><a style="outline: none; text-decoration:none; color:inherit" href="#53">53</a>
+</span><span class="lnt" id="54"><a style="outline: none; text-decoration:none; color:inherit" href="#54">54</a>
+</span><span class="lnt" id="55"><a style="outline: none; text-decoration:none; color:inherit" href="#55">55</a>
+</span><span class="lnt" id="56"><a style="outline: none; text-decoration:none; color:inherit" href="#56">56</a>
+</span><span class="lnt" id="57"><a style="outline: none; text-decoration:none; color:inherit" href="#57">57</a>
+</span><span class="lnt" id="58"><a style="outline: none; text-decoration:none; color:inherit" href="#58">58</a>
+</span><span class="lnt" id="59"><a style="outline: none; text-decoration:none; color:inherit" href="#59">59</a>
+</span><span class="lnt" id="60"><a style="outline: none; text-decoration:none; color:inherit" href="#60">60</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 显示有变更的文件
+$ git status
+
+# 显示当前分支的版本历史
+$ git log
+
+# 显示commit历史，以及每次commit发生变更的文件
+$ git log --stat
+
+# 搜索提交历史，根据关键词
+$ git log -S [keyword]
+
+# 显示某个commit之后的所有变动，每个commit占据一行
+$ git log [tag] HEAD --pretty=format:%s
+
+# 显示某个commit之后的所有变动，其&#34;提交说明&#34;必须符合搜索条件
+$ git log [tag] HEAD --grep feature
+
+# 显示某个文件的版本历史，包括文件改名
+$ git log --follow [file]
+$ git whatchanged [file]
+
+# 显示指定文件相关的每一次diff
+$ git log -p [file]
+
+# 显示过去5次提交
+$ git log -5 --pretty --oneline
+
+# 显示所有提交过的用户，按提交次数排序
+$ git shortlog -sn
+
+# 显示指定文件是什么人在什么时间修改过
+$ git blame [file]
+
+# 显示暂存区和工作区的差异
+$ git diff
+
+# 显示暂存区和上一个commit的差异
+$ git diff --cached [file]
+
+# 显示工作区与当前分支最新commit之间的差异
+$ git diff HEAD
+
+# 显示两次提交之间的差异
+$ git diff [first-branch]...[second-branch]
+
+# 显示今天你写了多少行代码
+$ git diff --shortstat &#34;@{0 day ago}&#34;
+
+# 显示某次提交的元数据和内容变化
+$ git show [commit]
+
+# 显示某次提交发生变化的文件
+$ git show --name-only [commit]
+
+# 显示某次提交时，某个文件的内容
+$ git show [commit]:[filename]
+
+# 显示当前分支的最近几次提交
+$ git reflog
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="八远程同步">八、远程同步</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span class="lnt" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span class="lnt" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span class="lnt" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span class="lnt" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span class="lnt" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span class="lnt" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span class="lnt" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span class="lnt" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span class="lnt" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 下载远程仓库的所有变动
+$ git fetch [remote]
+
+# 显示所有远程仓库
+$ git remote -v
+
+# 显示某个远程仓库的信息
+$ git remote show [remote]
+
+# 增加一个新的远程仓库，并命名
+$ git remote add [shortname] [url]
+
+# 取回远程仓库的变化，并与本地分支合并
+$ git pull [remote] [branch]
+
+# 上传本地指定分支到远程仓库
+$ git push [remote] [branch]
+
+# 强行推送当前分支到远程仓库，即使有冲突
+$ git push [remote] --force
+
+# 推送所有分支到远程仓库
+$ git push [remote] --all
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="九撤销">九、撤销</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span class="lnt" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span class="lnt" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span class="lnt" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span class="lnt" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span class="lnt" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span class="lnt" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span class="lnt" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span class="lnt" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span class="lnt" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span class="lnt" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span class="lnt" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span class="lnt" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span class="lnt" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span class="lnt" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span class="lnt" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span class="lnt" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span class="lnt" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 恢复暂存区的指定文件到工作区
+$ git checkout [file]
+
+# 恢复某个commit的指定文件到暂存区和工作区
+$ git checkout [commit] [file]
+
+# 恢复暂存区的所有文件到工作区
+$ git checkout .
+
+# 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
+$ git reset [file]
+
+# 重置暂存区与工作区，与上一次commit保持一致
+$ git reset --hard
+
+# 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
+$ git reset [commit]
+
+# 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
+$ git reset --hard [commit]
+
+# 重置当前HEAD为指定commit，但保持暂存区和工作区不变
+$ git reset --keep [commit]
+
+# 新建一个commit，用来撤销指定commit
+# 后者的所有变化都将被前者抵消，并且应用到当前分支
+$ git revert [commit]
+
+# 暂时将未提交的变化移除，稍后再移入
+$ git stash
+$ git stash pop
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="十其他">十、其他</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 生成一个可供发布的压缩包
+$ git archive
+
+# 免密pull/push代码
+git config --global credential.helper &#39;store --file ~/.my-credentials&#39;
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">liliming</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2021-04-09
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://www.llmgo.cn/tags/git/">git</a>
+          <a href="https://www.llmgo.cn/tags/linux/">linux</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/go-pointer/">
+            <span class="next-text nav-default">go 基础之指针</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+
+
+<a href="https://www.llmgo.cn/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2018 -
+    2021
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        liliming
+        
+      </span>
+      <span class="division">|</span>
+      <span class="beian">
+        <a class="beian-link" href="https://beian.miit.gov.cn/">京ICP备18035378号-1</a>
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -6,7 +6,16 @@
     <description>Recent content in linux on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 07 Apr 2021 11:08:33 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Apr 2021 14:08:17 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>git 常用命令</title>
+      <link>https://www.llmgo.cn/post/git-commands/</link>
+      <pubDate>Fri, 09 Apr 2021 14:08:17 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/git-commands/</guid>
+      <description>Git 全局设置 1 2 git config --global user.name &amp;#34;Administrator&amp;#34; git config --global user.email &amp;#34;admin@example.com&amp;#34; 创建新版本库 1 2 3 4 5 6 git clone git@code.aliyun.com:llmgo/test.git cd test touch README.md git add README.md git commit -m &amp;#34;add README&amp;#34; git push -u origin master 已存在的文件夹或 Git 仓库 1 2 3 4 5 6 cd existing_folder git init</description>
+    </item>
+    
     <item>
       <title>Java 应用cpu占用高排查思路</title>
       <link>https://www.llmgo.cn/post/java-project-high-cpu-usage/</link>
