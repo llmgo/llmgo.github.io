@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Archive - 一个小运维的博客</title>
+  <title>教你使用阿里云构建海外镜像 - 一个小运维的博客</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="liliming" />
-  <meta name="description" content="Hugo theme jane example site." />
+  <meta name="description" content="教你使用阿里云构建海外镜像 我们平时有时候需要拉取国外的镜像，但是非常慢，或者非常大，容易失败，这里可以使用阿里云的免费容器镜像仓库&#43;代码仓库" />
+
   <meta name="keywords" content="Hugo, theme, jane" />
 
 
@@ -34,8 +35,8 @@
 <meta name="generator" content="Hugo 0.82.0" />
 
 
-<link rel="canonical" href="https://www.llmgo.cn/post/" />
-<link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="一个小运维的博客" />
+<link rel="canonical" href="https://www.llmgo.cn/post/use-aliyun-build-image/" />
+
 
 
 
@@ -58,15 +59,20 @@
 
 
 
-<meta property="og:title" content="Posts" />
-<meta property="og:description" content="Hugo theme jane example site." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.llmgo.cn/post/" />
+<meta property="og:title" content="教你使用阿里云构建海外镜像" />
+<meta property="og:description" content="教你使用阿里云构建海外镜像 我们平时有时候需要拉取国外的镜像，但是非常慢，或者非常大，容易失败，这里可以使用阿里云的免费容器镜像仓库&#43;代码仓库" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.llmgo.cn/post/use-aliyun-build-image/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-09T17:22:26&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-09T17:22:26&#43;08:00" />
 
-<meta itemprop="name" content="Posts">
-<meta itemprop="description" content="Hugo theme jane example site."><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
-<meta name="twitter:description" content="Hugo theme jane example site."/>
+<meta itemprop="name" content="教你使用阿里云构建海外镜像">
+<meta itemprop="description" content="教你使用阿里云构建海外镜像 我们平时有时候需要拉取国外的镜像，但是非常慢，或者非常大，容易失败，这里可以使用阿里云的免费容器镜像仓库&#43;代码仓库"><meta itemprop="datePublished" content="2021-04-09T17:22:26&#43;08:00" />
+<meta itemprop="dateModified" content="2021-04-09T17:22:26&#43;08:00" />
+<meta itemprop="wordCount" content="256">
+<meta itemprop="keywords" content="docker," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="教你使用阿里云构建海外镜像"/>
+<meta name="twitter:description" content="教你使用阿里云构建海外镜像 我们平时有时候需要拉取国外的镜像，但是非常慢，或者非常大，容易失败，这里可以使用阿里云的免费容器镜像仓库&#43;代码仓库"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -244,7 +250,7 @@
 
       </li>
     
-        <li class="menu-item active">
+        <li class="menu-item">
         
           
           
@@ -325,167 +331,154 @@
     <main id="main" class="main bg-llight">
       <div class="content-wrapper">
         <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">教你使用阿里云构建海外镜像</h1>
+      
+      <div class="post-meta">
+        <time datetime="2021-04-09" class="post-time">
+          2021-04-09
+        </time>
+        <div class="post-category">
+            <a href="https://www.llmgo.cn/categories/docker/"> docker </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <h1 id="教你使用阿里云构建海外镜像">教你使用阿里云构建海外镜像</h1>
+<p>我们平时有时候需要拉取国外的镜像，但是非常慢，或者非常大，容易失败，这里可以使用阿里云的免费容器镜像仓库+代码仓库来免费构建镜像。</p>
+<ol>
+<li>进入阿里云容器镜像服务个人版（免费）</li>
+</ol>
+<p><img src="http://image.llmgo.cn/img/image-20210409171203625.png" alt="image-20210409171203625"></p>
+<ol start="2">
+<li>创建名称空间</li>
+</ol>
+<p><img src="http://image.llmgo.cn/img/image-20210409171242796.png" alt="image-20210409171242796"></p>
+<ol start="3">
+<li>创建镜像仓库</li>
+</ol>
+<p><img src="http://image.llmgo.cn/img/image-20210409171425174.png" alt="image-20210409171425174"></p>
+<p>这里我们选择的是阿里云的代码仓库，可以自己创建一个，然后里面只需要放一个Dockerfile文件就行，</p>
+<p>比如我们想拉取的是gitlab的镜像，我们的Dockerfile就可以这样写。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> sameersbn/gitlab:12.9.5</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="http://image.llmgo.cn/img/image-20210409171454559.png" alt="image-20210409171454559"></p>
+<ol start="4">
+<li>设置构建规则</li>
+</ol>
+<p><img src="http://image.llmgo.cn/img/image-20210409171749648.png" alt="image-20210409171749648"></p>
+<p><img src="http://image.llmgo.cn/img/image-20210409171820640.png" alt="image-20210409171820640"></p>
+<ol start="5">
+<li>构建</li>
+</ol>
+<p><img src="http://image.llmgo.cn/img/image-20210409171856745.png" alt="image-20210409171856745"></p>
+<ol start="6">
+<li>同步镜像</li>
+</ol>
+<p><img src="http://image.llmgo.cn/img/image-20210409172023318.png" alt="image-20210409172023318"></p>
+<p>这里我们就完成了，就可以使用阿里云的镜像仓库的地址来获取我们的海外镜像了，是不是很简单。</p>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">liliming</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2021-04-09
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://www.llmgo.cn/tags/docker/">docker</a>
           
-<section id="archive" class="archive">
-    
-      <div class="collection-title">
-        <h2 class="archive-year">2021</h2>
-      </div>
+        </div>
 
-    <div class="archive-post">
-      <time datetime="2021-04-06" class="archive-post-time">
-        2021-04-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/redis-in-kubernetes/" class="archive-post-link">
-          在Kubernetes上部署Redis集群
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-06" class="archive-post-time">
-        2021-04-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/go-get-localhost-ipv4/" class="archive-post-link">
-          Go语言获取本机的IPv4地址
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-06" class="archive-post-time">
-        2021-04-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/go-marshal-anonymous-structure/" class="archive-post-link">
-          Go语言Json.marshal嵌套匿名结构体
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-06" class="archive-post-time">
-        2021-04-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/go-use-viper-parse-ini/" class="archive-post-link">
-          Go使用第三方库viper来解析ini文件
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-06" class="archive-post-time">
-        2021-04-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/go-mail/" class="archive-post-link">
-          Go 语言发送邮件
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-06" class="archive-post-time">
-        2021-04-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/go-channel/" class="archive-post-link">
-          Go 协程
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-06" class="archive-post-time">
-        2021-04-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/go-rand/" class="archive-post-link">
-          Go rand 的一点记录
-        </a>
-      </span>
-    </div>
-    
-      <div class="collection-title">
-        <h2 class="archive-year">2018</h2>
-      </div>
-
-    <div class="archive-post">
-      <time datetime="2018-03-01" class="archive-post-time">
-        2018-03-01
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/go-tail/" class="archive-post-link">
-          Go语言如何实现tail命令的功能
-        </a>
-      </span>
-    </div></section>
-
-
-
-
-
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-  <nav class="pagination">
-    <ul>
       
-      <li >
-        <a href="/post/">1</a>
-      </li>
-      
-      <li >
-        <a href="/post/page/2/">2</a>
-      </li>
-      
-      <li >
-        <a href="/post/page/3/">3</a>
-      </li>
-      
-      <li >
-        <a href="/post/page/4/">4</a>
-      </li>
-      
-      <li >
-        <a href="/post/page/5/">5</a>
-      </li>
-      
-      <li  class="active" >
-        <a href="/post/page/6/">6</a>
-      </li>
-      
-    </ul>
-  </nav>
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/git-commands/">
+            <span class="next-text nav-default">git 常用命令</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
 
   
   
 
+  
+  
 
+  
 
+  
+  
 
+  
+
+  
+
+  
+
+    
+
+  
 
         </div>
       </div>
