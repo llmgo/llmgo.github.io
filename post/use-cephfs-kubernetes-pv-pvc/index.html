@@ -69,7 +69,7 @@
 <meta itemprop="name" content="在 kubernetes 上使用CephFS作为文件存储">
 <meta itemprop="description" content="在 kubernetes 上使用CephFS作为文件存储 最近想使用cephfs来代替nfs来作为共享存储，这里来记录一下方法，这里主要是使用pv，pvc的模式。 前"><meta itemprop="datePublished" content="2021-04-12T19:25:55&#43;08:00" />
 <meta itemprop="dateModified" content="2021-04-12T19:25:55&#43;08:00" />
-<meta itemprop="wordCount" content="557">
+<meta itemprop="wordCount" content="448">
 <meta itemprop="keywords" content="kubernetes,ceph," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在 kubernetes 上使用CephFS作为文件存储"/>
 <meta name="twitter:description" content="在 kubernetes 上使用CephFS作为文件存储 最近想使用cephfs来代替nfs来作为共享存储，这里来记录一下方法，这里主要是使用pv，pvc的模式。 前"/>
@@ -373,10 +373,6 @@
 <li>ceph 集群（14.2.16）</li>
 <li>kubernetes集群 (1.19)</li>
 </ul>
-<ol>
-<li>使用cephfs-with-secret &amp; ceph-secret</li>
-</ol>
-<p>接下来使用 cephfs-with-secret 和 ceph-secret 方式，这种方式跟上边直接使 admin.secret 文件认证最大的区别就是使用 k8s secret 对象，该 secret 对象用于 k8s volume 插件通过 cephx 认证访问 ceph 存储集群。不过要提一下的是，k8s secret 认证 key 需要使用 base64 编码。</p>
 <p>获取 Ceph ceph.client.admin.keyring 并生成 secret key</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

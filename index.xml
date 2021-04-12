@@ -43,10 +43,6 @@
 &lt;li&gt;ceph 集群（14.2.16）&lt;/li&gt;
 &lt;li&gt;kubernetes集群 (1.19)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;使用cephfs-with-secret &amp;amp; ceph-secret&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;接下来使用 cephfs-with-secret 和 ceph-secret 方式，这种方式跟上边直接使 admin.secret 文件认证最大的区别就是使用 k8s secret 对象，该 secret 对象用于 k8s volume 插件通过 cephx 认证访问 ceph 存储集群。不过要提一下的是，k8s secret 认证 key 需要使用 base64 编码。&lt;/p&gt;
 &lt;p&gt;获取 Ceph ceph.client.admin.keyring 并生成 secret key&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
