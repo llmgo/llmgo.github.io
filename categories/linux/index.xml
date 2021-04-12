@@ -6,14 +6,14 @@
     <description>Recent content in linux on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 12 Apr 2021 20:13:22 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Apr 2021 20:43:50 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>github加速</title>
+      <title>Github 加速</title>
       <link>https://www.llmgo.cn/post/accelerate-github/</link>
-      <pubDate>Mon, 12 Apr 2021 20:13:22 +0800</pubDate>
+      <pubDate>Mon, 12 Apr 2021 20:43:50 +0800</pubDate>
       
       <guid>https://www.llmgo.cn/post/accelerate-github/</guid>
-      <description>Github 域名 https://github.com 加速域名一 https://github.com.cnpmjs.org 加速域名二 https://gitclone.com 原链接 1 git clone https://github.com/llmgo/config-face.git 方法一： 1 git clone https://github.com.cnpmjs.org/llmgo/config-face.git 方法二： 1 2 git config --global url.&amp;#34;https://github.com/&amp;#34;.insteadOf https://github.com.cnpmjs.org/ git clone https://github.com/llmgo/config-face.git 推荐使用加速域名1，第二个域名需要使用git2.0</description>
+      <description>Github 加速 我们有时候pull Github 代码的时候太慢了，极大的影响了效率，这里我给大家推荐几个加速的方法。 这里感谢以下两个网站提供的加速 https://github.com.cnpmjs.org https://gitclone.com (只支持gi</description>
     </item>
     
     <item>
