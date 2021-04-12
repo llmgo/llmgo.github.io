@@ -51,7 +51,7 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ ceph auth get-key client.admin &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;base64
-&lt;span class=&#34;nv&#34;&gt;QVFEMDFWVmFWdnp6TFJBQWFUVVJ5VVp3STlBZDN1WVlGUkwrVkE9PQ&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;QVFEMDFWVmFWdnp6TFJBQWFUVVJ5VVp3STlBZDJJJJlGUkwrVkE9PQ&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;修改 ceph-secret.yaml 文件中，key 字段替换成上边生成的字符串。&lt;/p&gt;
@@ -73,7 +73,7 @@
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;metadata:
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;  name: ceph-secret
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;data:
-&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;  key: QVFEV2d6TmdtSU9iRHhBQVYyOTRpY1Urb1F5UEdTa2lub2lJc2c9PQ==
+&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;  key: QVFEV2d6TmdtSU9iRHhBQVYyOTRpY1UrbJJJdTa2lub2lJc2c9PQ==
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;EOF&lt;/span&gt;  
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
@@ -133,9 +133,9 @@ ceph-secret   Opaque   &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;      2d23h
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;    - ReadWriteMany
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;  cephfs:
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;    monitors:
-&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;      - 10.64.15.11:6789
-&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;      - 10.64.15.12:6789
-&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;      - 10.64.15.13:6789
+&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;      - 17.94.15.11:6789
+&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;      - 17.94.15.12:6789
+&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;      - 17.94.15.13:6789
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;    path: /mnt/logs
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;    user: admin
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;    secretRef:

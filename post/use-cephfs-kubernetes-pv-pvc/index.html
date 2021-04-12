@@ -381,7 +381,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">$ ceph auth get-key client.admin <span class="p">|</span>base64
-<span class="nv">QVFEMDFWVmFWdnp6TFJBQWFUVVJ5VVp3STlBZDN1WVlGUkwrVkE9PQ</span><span class="o">==</span>
+<span class="nv">QVFEMDFWVmFWdnp6TFJBQWFUVVJ5VVp3STlBZDJJJJlGUkwrVkE9PQ</span><span class="o">==</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>修改 ceph-secret.yaml 文件中，key 字段替换成上边生成的字符串。</p>
@@ -403,7 +403,7 @@
 </span><span class="s">metadata:
 </span><span class="s">  name: ceph-secret
 </span><span class="s">data:
-</span><span class="s">  key: QVFEV2d6TmdtSU9iRHhBQVYyOTRpY1Urb1F5UEdTa2lub2lJc2c9PQ==
+</span><span class="s">  key: QVFEV2d6TmdtSU9iRHhBQVYyOTRpY1UrbJJJdTa2lub2lJc2c9PQ==
 </span><span class="s">EOF</span>  
 </code></pre></td></tr></table>
 </div>
@@ -463,9 +463,9 @@ ceph-secret   Opaque   <span class="m">1</span>      2d23h
 </span><span class="s">    - ReadWriteMany
 </span><span class="s">  cephfs:
 </span><span class="s">    monitors:
-</span><span class="s">      - 10.64.15.11:6789
-</span><span class="s">      - 10.64.15.12:6789
-</span><span class="s">      - 10.64.15.13:6789
+</span><span class="s">      - 17.94.15.11:6789
+</span><span class="s">      - 17.94.15.12:6789
+</span><span class="s">      - 17.94.15.13:6789
 </span><span class="s">    path: /mnt/logs
 </span><span class="s">    user: admin
 </span><span class="s">    secretRef:
