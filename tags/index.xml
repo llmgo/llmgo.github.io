@@ -6,7 +6,25 @@
     <description>Recent content in Tags on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 09 Apr 2021 17:22:26 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Apr 2021 19:25:55 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ceph</title>
+      <link>https://www.llmgo.cn/tags/ceph/</link>
+      <pubDate>Mon, 12 Apr 2021 19:25:55 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/tags/ceph/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://www.llmgo.cn/tags/kubernetes/</link>
+      <pubDate>Mon, 12 Apr 2021 19:25:55 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>docker</title>
       <link>https://www.llmgo.cn/tags/docker/</link>
@@ -89,15 +107,6 @@
     </item>
     
     <item>
-      <title>kubernetes</title>
-      <link>https://www.llmgo.cn/tags/kubernetes/</link>
-      <pubDate>Wed, 07 Apr 2021 11:04:47 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/tags/kubernetes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>helm</title>
       <link>https://www.llmgo.cn/tags/helm/</link>
       <pubDate>Wed, 07 Apr 2021 10:59:23 +0800</pubDate>
@@ -175,15 +184,6 @@
       <pubDate>Wed, 07 Apr 2021 10:26:23 +0800</pubDate>
       
       <guid>https://www.llmgo.cn/tags/nginx/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>dev</title>
-      <link>https://www.llmgo.cn/tags/dev/</link>
-      <pubDate>Tue, 06 Apr 2021 19:33:49 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/tags/dev/</guid>
       <description></description>
     </item>
     

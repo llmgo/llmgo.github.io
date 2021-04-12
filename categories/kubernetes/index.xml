@@ -6,7 +6,16 @@
     <description>Recent content in kubernetes on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 07 Apr 2021 11:01:52 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Apr 2021 19:25:55 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在 kubernetes 上使用CephFS作为文件存储</title>
+      <link>https://www.llmgo.cn/post/use-cephfs-kubernetes-pv-pvc/</link>
+      <pubDate>Mon, 12 Apr 2021 19:25:55 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/use-cephfs-kubernetes-pv-pvc/</guid>
+      <description>在 kubernetes 上使用CephFS作为文件存储 最近想使用cephfs来代替nfs来作为共享存储，这里来记录一下方法，这里主要是使用pv，pvc的模式。 前</description>
+    </item>
+    
     <item>
       <title>kubernetes svc externalTrafficPolicy 字段</title>
       <link>https://www.llmgo.cn/post/kubernetes-externaltrafficpolicy/</link>
