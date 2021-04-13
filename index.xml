@@ -1833,7 +1833,7 @@ git config --global credential.helper &amp;#39;store --file ~/.my-credentials&am
 wget https://nodejs.org/dist/v14.16.0/node-v14.16.0-linux-x64.tar.xz
 tar xf node-v14.16.0-linux-x64.tar.xz -C /data1
 ln -s /data1/node-v14.16.0-linux-x64 /data1/node
-cat &lt;span class=&#34;s&#34;&gt;&amp;lt;&amp;lt;EOF&amp;gt;&amp;gt; /etc/profile
+cat &lt;span class=&#34;s&#34;&gt;&amp;lt;&amp;lt;&amp;#39;EOF&amp;#39;&amp;gt;&amp;gt; /etc/profile
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;# Nodejs
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;export NODEJS_HOME=/data1/node
 &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;export PATH=$NODEJS_HOME/bin:$PATH
