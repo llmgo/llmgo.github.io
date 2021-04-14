@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>日志切割神器logrotate - 一个小运维的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="liliming" />
+  <meta name="description" content="日志切割神器logrotate [toc] logrotate 是一个 linux 系统日志的管理工具。可以对单个日志文件或者某个目录下的文件按时间 / 大小进行切割，压缩操作；指定日志" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+<link rel="canonical" href="https://www.llmgo.cn/post/logrotate/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.b3a8813c06e6d785beba22bf8264e174fa2cb3a396b22f9ba24e2c00c18aaf7f.css" integrity="sha256-s6iBPAbm14W&#43;uiK/gmThdPoss6OWsi&#43;bok4sAMGKr38=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="日志切割神器logrotate" />
+<meta property="og:description" content="日志切割神器logrotate [toc] logrotate 是一个 linux 系统日志的管理工具。可以对单个日志文件或者某个目录下的文件按时间 / 大小进行切割，压缩操作；指定日志" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.llmgo.cn/post/logrotate/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-14T16:01:56&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-14T16:01:56&#43;08:00" />
+
+<meta itemprop="name" content="日志切割神器logrotate">
+<meta itemprop="description" content="日志切割神器logrotate [toc] logrotate 是一个 linux 系统日志的管理工具。可以对单个日志文件或者某个目录下的文件按时间 / 大小进行切割，压缩操作；指定日志"><meta itemprop="datePublished" content="2021-04-14T16:01:56&#43;08:00" />
+<meta itemprop="dateModified" content="2021-04-14T16:01:56&#43;08:00" />
+<meta itemprop="wordCount" content="3036">
+<meta itemprop="keywords" content="linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="日志切割神器logrotate"/>
+<meta name="twitter:description" content="日志切割神器logrotate [toc] logrotate 是一个 linux 系统日志的管理工具。可以对单个日志文件或者某个目录下的文件按时间 / 大小进行切割，压缩操作；指定日志"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">不宜妄自菲薄</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/categories/">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/about/">关于</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      不宜妄自菲薄
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/about/">关于</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">日志切割神器logrotate</h1>
+      
+      <div class="post-meta">
+        <time datetime="2021-04-14" class="post-time">
+          2021-04-14
+        </time>
+        <div class="post-category">
+            <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#logrotate-运行机制">logrotate 运行机制</a></li>
+    <li><a href="#logrotate-原理">logrotate 原理</a>
+      <ul>
+        <li><a href="#linux-文件操作机制">Linux 文件操作机制</a></li>
+        <li><a href="#create">create</a></li>
+        <li><a href="#copytruncate">copytruncate</a></li>
+      </ul>
+    </li>
+    <li><a href="#配置-logrotate">配置 logrotate</a></li>
+    <li><a href="#运行logrotate">运行logrotate</a>
+      <ul>
+        <li><a href="#crontab-定时">crontab 定时</a></li>
+        <li><a href="#配置文件指定">配置文件指定</a></li>
+        <li><a href="#手动">手动</a></li>
+      </ul>
+    </li>
+    <li><a href="#常见配置参数">常见配置参数</a></li>
+    <li><a href="#原文链接">原文链接</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+
+    
+    <div class="post-content">
+      <h1 id="日志切割神器logrotate">日志切割神器logrotate</h1>
+<p>[toc]</p>
+<p>logrotate 是一个 linux 系统日志的管理工具。可以对单个日志文件或者某个目录下的文件按时间 / 大小进行切割，压缩操作；指定日志保存数量；还可以在切割之后运行自定义命令。</p>
+<p>logrotate 是基于 crontab 运行的，所以这个时间点是由 crontab 控制的，具体可以查询 crontab 的配置文件 /etc/anacrontab。 系统会按照计划的频率运行 logrotate，通常是每天。在大多数的 Linux 发行版本上，计划每天运行的脚本位于 /etc/cron.daily/logrotate。</p>
+<p>主流 Linux 发行版上都默认安装有 logrotate 包，如果你的 linux 系统中找不到 logrotate, 可以使用 apt-get 或 yum 命令来安装。</p>
+<h2 id="logrotate-运行机制">logrotate 运行机制</h2>
+<p>logrotate 在很多 Linux 发行版上都是默认安装的。系统会定时运行 logrotate，一般是每天一次。系统是这么实现按天执行的。crontab 会每天定时执行 /etc/cron.daily 目录下的脚本，而这个目录下有个文件叫 logrotate。在 centos 上脚本内容是这样的：</p>
+<p>系统自带 cron task：<code>/etc/cron.daily/logrotate</code>，每天运行一次。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9">9</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/cron.daily/logrotate
+<span class="c1">#!/bin/sh</span>
+
+/usr/sbin/logrotate -s /var/lib/logrotate/logrotate.status /etc/logrotate.conf
+<span class="nv">EXITVALUE</span><span class="o">=</span><span class="nv">$?</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$EXITVALUE</span> !<span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    /usr/bin/logger -t logrotate <span class="s2">&#34;ALERT exited abnormally with [</span><span class="nv">$EXITVALUE</span><span class="s2">]&#34;</span>
+<span class="k">fi</span>
+<span class="nb">exit</span> <span class="m">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到这个脚本主要做的事就是以 <code>/etc/logrotate.conf</code> 为配置文件执行了 logrotate。就是这样实现了每天执行一次 logrotate。</p>
+<p>因为我的系统执行 <code>/etc/cron.daily</code> 目录下的脚本不是我想滚动日志的时间，所以我把 <code>/etc/cron.daily/logrotate</code> 拷了出来，改了一下 logrotate 配置文件的路径，然后在 crontab 里加上一条指定时间执行这个脚本的记录，自定义周期滚动日志就大功告成了。这种自定义的方式有两点要注意：</p>
+<ol>
+<li>配置文件里一定要配置 <code>rotate 文件数目</code> 这个参数。如果不配置默认是 0 个，也就是只允许存在一份日志，刚切分出来的日志会马上被删除。多么痛的领悟，说多了都是泪。</li>
+<li>执行 logrotate 命令最好加 <code>-f</code> 参数，不然有时候配置文件修改的内容不生效。</li>
+</ol>
+<p>很多程序的会用到 logrotate 滚动日志，比如 nginx。它们安装后，会在 <code>/etc/logrotate.d</code> 这个目录下增加自己的 logrotate 的配置文件。logrotate 什么时候执行 <code>/etc/logrotate.d</code> 下的配置呢？看到 <code>/etc/logrotate.conf</code> 里这行，一切就不言而喻了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">include /etc/logrotate.d
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="logrotate-原理">logrotate 原理</h2>
+<p>logrotate 是怎么做到滚动日志时不影响程序正常的日志输出呢？logrotate 提供了两种解决方案。</p>
+<ol>
+<li>create</li>
+<li>copytruncate</li>
+</ol>
+<h3 id="linux-文件操作机制">Linux 文件操作机制</h3>
+<p>介绍一下相关的 Linux 下的文件操作机制。</p>
+<p>Linux 文件系统里文件和文件名的关系如下图。</p>
+<p><a href="https://raw.githubusercontent.com/wsgzao/storage-public/master/img/20191106155554.png"><img src="https://raw.githubusercontent.com/wsgzao/storage-public/master/img/20191106155554.png" alt="img"></a></p>
+<p>目录也是文件，文件里存着文件名和对应的 inode 编号。通过这个 inode 编号可以查到文件的元数据和文件内容。文件的元数据有引用计数、操作权限、拥有者 ID、创建时间、最后修改时间等等。文件件名并不在元数据里而是在目录文件中。因此文件改名、移动，都不会修改文件，而是修改目录文件。</p>
+<p>借《UNIX 环境高级编程》里的图说一下进程打开文件的机制。</p>
+<p><a href="https://raw.githubusercontent.com/wsgzao/storage-public/master/img/20191106155617.png"><img src="https://raw.githubusercontent.com/wsgzao/storage-public/master/img/20191106155617.png" alt="img"></a></p>
+<p>进程每新打开一个文件，系统会分配一个新的文件描述符给这个文件。文件描述符对应着一个文件表。表里面存着文件的状态信息（<code>O_APPEND</code>/<code>O_CREAT</code>/<code>O_DIRECT</code>…）、当前文件位置和文件的 inode 信息。系统会为每个进程创建独立的文件描述符和文件表，不同进程是不会共用同一个文件表。正因为如此，不同进程可以同时用不同的状态操作同一个文件的不同位置。文件表中存的是 inode 信息而不是文件路径，所以文件路径发生改变不会影响文件操作。</p>
+<h3 id="create">create</h3>
+<p>这也就是默认的方案，可以通过 create 命令配置文件的权限和属组设置；这个方案的思路是重命名原日志文件，创建新的日志文件。详细步骤如下：</p>
+<ol>
+<li>重命名正在输出日志文件，因为重命名只修改目录以及文件的名称，而进程操作文件使用的是 inode，所以并不影响原程序继续输出日志。</li>
+<li>创建新的日志文件，文件名和原日志文件一样，注意，此时只是文件名称一样，而 inode 编号不同，原程序输出的日志还是往原日志文件输出。</li>
+<li>最后通过某些方式通知程序，重新打开日志文件；由于重新打开日志文件会用到文件路径而非 inode 编号，所以打开的是新的日志文件。</li>
+</ol>
+<p>如上也就是 logrotate 的默认操作方式，也就是 mv+create 执行完之后，通知应用重新在新文件写入即可。mv+create 成本都比较低，几乎是原子操作，如果应用支持重新打开日志文件，如 syslog, nginx, mysql 等，那么这是最好的方式。</p>
+<p>不过，有些程序并不支持这种方式，压根没有提供重新打开日志的接口；而如果重启应用程序，必然会降低可用性，为此引入了如下方式。</p>
+<h3 id="copytruncate">copytruncate</h3>
+<p>该方案是把正在输出的日志拷 (copy) 一份出来，再清空 (trucate) 原来的日志；详细步骤如下：</p>
+<ol>
+<li>将当前正在输出的日志文件复制为目标文件，此时程序仍然将日志输出到原来文件中，此时，原文件名也没有变。</li>
+<li>清空日志文件，原程序仍然还是输出到预案日志文件中，因为清空文件只把文件的内容删除了，而 inode 并没改变，后续日志的输出仍然写入该文件中。</li>
+</ol>
+<p>如上所述，对于 copytruncate 也就是先复制一份文件，然后清空原有文件。</p>
+<p>通常来说，清空操作比较快，但是如果日志文件太大，那么复制就会比较耗时，从而可能导致部分日志丢失。不过这种方式不需要应用程序的支持即可。</p>
+<h2 id="配置-logrotate">配置 logrotate</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">vim /etc/logrotate.d/log-file 
+/var/log/log-file <span class="o">{</span>
+    monthly
+    rotate <span class="m">5</span>
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create <span class="m">644</span> root root
+    postrotate
+        /usr/bin/killall -HUP rsyslogd
+    endscript
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th><strong>配置参数</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>monthly</strong></td>
+<td>日志文件将按月轮循。其它可用值为&rsquo;daily'，&lsquo;weekly&rsquo;或者&rsquo;yearly&rsquo;。</td>
+</tr>
+<tr>
+<td><strong>rotate 5</strong></td>
+<td>一次将存储5个归档日志。对于第六个归档，时间最久的归档将被删除。</td>
+</tr>
+<tr>
+<td><strong>compress</strong></td>
+<td>在轮循任务完成后，已轮循的归档将使用gzip进行压缩。</td>
+</tr>
+<tr>
+<td><strong>delaycompress</strong></td>
+<td>总是与compress选项一起用，delaycompress选项指示logrotate不要将最近的归档压缩，压缩将在下一次轮循周期进行。这在你或任何软件仍然需要读取最新归档时很有用。</td>
+</tr>
+<tr>
+<td><strong>missingok</strong></td>
+<td>在日志轮循期间，任何错误将被忽略，例如“文件无法找到”之类的错误。</td>
+</tr>
+<tr>
+<td><strong>notifempty</strong></td>
+<td>如果日志文件为空，轮循不会进行。</td>
+</tr>
+<tr>
+<td><strong>create 644 root root</strong></td>
+<td>以指定的权限创建全新的日志文件，同时logrotate也会重命名原始日志文件。</td>
+</tr>
+<tr>
+<td><strong>postrotate/endscript</strong></td>
+<td>在所有其它指令完成后，postrotate和endscript里面指定的命令将被执行。在这种情况下，rsyslogd 进程将立即再次读取其配置并继续运行。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="运行logrotate">运行logrotate</h2>
+<h3 id="crontab-定时">crontab 定时</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ crontab -e
+*/30 * * * * /usr/sbin/logrotate /etc/logrotate.d/rsyslog &gt; /dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="配置文件指定">配置文件指定</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">yearly
+weekly
+dayly
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="手动">手动</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ logrorate -f xxx
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="常见配置参数">常见配置参数</h2>
+<ul>
+<li>daily ：指定转储周期为每天</li>
+<li>weekly ：指定转储周期为每周</li>
+<li>monthly ：指定转储周期为每月</li>
+<li>rotate count ：指定日志文件删除之前转储的次数，0 指没有备份，5 指保留 5 个备份</li>
+<li>tabooext [+] list：让 logrotate 不转储指定扩展名的文件，缺省的扩展名是：.rpm-orig, .rpmsave, v, 和～</li>
+<li>missingok：在日志轮循期间，任何错误将被忽略，例如 “文件无法找到” 之类的错误。</li>
+<li>size size：当日志文件到达指定的大小时才转储，bytes (缺省) 及 KB (sizek) 或 MB (sizem)</li>
+<li>compress： 通过 gzip 压缩转储以后的日志</li>
+<li>nocompress： 不压缩</li>
+<li>copytruncate：用于还在打开中的日志文件，把当前日志备份并截断</li>
+<li>nocopytruncate： 备份日志文件但是不截断</li>
+<li>create mode owner group ： 转储文件，使用指定的文件模式创建新的日志文件</li>
+<li>nocreate： 不建立新的日志文件</li>
+<li>delaycompress： 和 compress 一起使用时，转储的日志文件到下一次转储时才压缩</li>
+<li>nodelaycompress： 覆盖 delaycompress 选项，转储同时压缩。</li>
+<li>errors address ： 专储时的错误信息发送到指定的 Email 地址</li>
+<li>ifempty ：即使是空文件也转储，这个是 logrotate 的缺省选项。</li>
+<li>notifempty ：如果是空文件的话，不转储</li>
+<li>mail address ： 把转储的日志文件发送到指定的 E-mail 地址</li>
+<li>nomail ： 转储时不发送日志文件</li>
+<li>olddir directory：储后的日志文件放入指定的目录，必须和当前日志文件在同一个文件系统</li>
+<li>noolddir： 转储后的日志文件和当前日志文件放在同一个目录下</li>
+<li>prerotate/endscript： 在转储以前需要执行的命令可以放入这个对，这两个关键字必须单独成行</li>
+</ul>
+<hr>
+<h2 id="原文链接">原文链接</h2>
+<ul>
+<li><a href="https://wsgzao.github.io/post/logrotate/">https://wsgzao.github.io/post/logrotate/</a></li>
+<li><a href="https://www.cnblogs.com/clsn/p/8428257.html">https://www.cnblogs.com/clsn/p/8428257.html</a></li>
+</ul>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">liliming</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2021-04-14
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://www.llmgo.cn/tags/linux/">linux</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/go-sample-websocket/">
+            <span class="next-text nav-default">golang 使用websocket简单使用</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+
+
+<a href="https://www.llmgo.cn/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2018 -
+    2021
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        liliming
+        
+      </span>
+      <span class="division">|</span>
+      <span class="beian">
+        <a class="beian-link" href="https://beian.miit.gov.cn/">京ICP备18035378号-1</a>
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

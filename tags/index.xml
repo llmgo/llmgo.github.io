@@ -6,22 +6,22 @@
     <description>Recent content in Tags on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 13 Apr 2021 16:16:17 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 14 Apr 2021 16:01:56 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linux</title>
+      <link>https://www.llmgo.cn/tags/linux/</link>
+      <pubDate>Wed, 14 Apr 2021 16:01:56 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/tags/linux/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>go</title>
       <link>https://www.llmgo.cn/tags/go/</link>
       <pubDate>Tue, 13 Apr 2021 16:16:17 +0800</pubDate>
       
       <guid>https://www.llmgo.cn/tags/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>linux</title>
-      <link>https://www.llmgo.cn/tags/linux/</link>
-      <pubDate>Mon, 12 Apr 2021 20:43:50 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/tags/linux/</guid>
       <description></description>
     </item>
     

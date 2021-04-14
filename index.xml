@@ -6,7 +6,7 @@
     <description>Recent content on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 13 Apr 2021 16:16:17 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 14 Apr 2021 16:01:56 +0800</lastBuildDate>
     
         <atom:link href="https://www.llmgo.cn/index.xml" rel="self" type="application/rss+xml" />
     
@@ -27,6 +27,238 @@
 &lt;li&gt;&lt;a href=&#34;https://downgit.llmgo.cn/#/home&#34;&gt;DownGit&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mholt.github.io/json-to-go/&#34;&gt;json-to-go&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mholt.github.io/curl-to-go/&#34;&gt;curl-to-go&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>日志切割神器logrotate</title>
+      <link>https://www.llmgo.cn/post/logrotate/</link>
+      <pubDate>Wed, 14 Apr 2021 16:01:56 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/logrotate/</guid>
+      
+        <description>&lt;h1 id=&#34;日志切割神器logrotate&#34;&gt;日志切割神器logrotate&lt;/h1&gt;
+&lt;p&gt;[toc]&lt;/p&gt;
+&lt;p&gt;logrotate 是一个 linux 系统日志的管理工具。可以对单个日志文件或者某个目录下的文件按时间 / 大小进行切割，压缩操作；指定日志保存数量；还可以在切割之后运行自定义命令。&lt;/p&gt;
+&lt;p&gt;logrotate 是基于 crontab 运行的，所以这个时间点是由 crontab 控制的，具体可以查询 crontab 的配置文件 /etc/anacrontab。 系统会按照计划的频率运行 logrotate，通常是每天。在大多数的 Linux 发行版本上，计划每天运行的脚本位于 /etc/cron.daily/logrotate。&lt;/p&gt;
+&lt;p&gt;主流 Linux 发行版上都默认安装有 logrotate 包，如果你的 linux 系统中找不到 logrotate, 可以使用 apt-get 或 yum 命令来安装。&lt;/p&gt;
+&lt;h2 id=&#34;logrotate-运行机制&#34;&gt;logrotate 运行机制&lt;/h2&gt;
+&lt;p&gt;logrotate 在很多 Linux 发行版上都是默认安装的。系统会定时运行 logrotate，一般是每天一次。系统是这么实现按天执行的。crontab 会每天定时执行 /etc/cron.daily 目录下的脚本，而这个目录下有个文件叫 logrotate。在 centos 上脚本内容是这样的：&lt;/p&gt;
+&lt;p&gt;系统自带 cron task：&lt;code&gt;/etc/cron.daily/logrotate&lt;/code&gt;，每天运行一次。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;2&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#2&#34;&gt;2&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;3&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#3&#34;&gt;3&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;4&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#4&#34;&gt;4&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;5&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#5&#34;&gt;5&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;6&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#6&#34;&gt;6&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;7&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#7&#34;&gt;7&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;8&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#8&#34;&gt;8&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;9&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#9&#34;&gt;9&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ cat /etc/cron.daily/logrotate
+&lt;span class=&#34;c1&#34;&gt;#!/bin/sh&lt;/span&gt;
+
+/usr/sbin/logrotate -s /var/lib/logrotate/logrotate.status /etc/logrotate.conf
+&lt;span class=&#34;nv&#34;&gt;EXITVALUE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$EXITVALUE&lt;/span&gt; !&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+    /usr/bin/logger -t logrotate &lt;span class=&#34;s2&#34;&gt;&amp;#34;ALERT exited abnormally with [&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$EXITVALUE&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;]&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;可以看到这个脚本主要做的事就是以 &lt;code&gt;/etc/logrotate.conf&lt;/code&gt; 为配置文件执行了 logrotate。就是这样实现了每天执行一次 logrotate。&lt;/p&gt;
+&lt;p&gt;因为我的系统执行 &lt;code&gt;/etc/cron.daily&lt;/code&gt; 目录下的脚本不是我想滚动日志的时间，所以我把 &lt;code&gt;/etc/cron.daily/logrotate&lt;/code&gt; 拷了出来，改了一下 logrotate 配置文件的路径，然后在 crontab 里加上一条指定时间执行这个脚本的记录，自定义周期滚动日志就大功告成了。这种自定义的方式有两点要注意：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;配置文件里一定要配置 &lt;code&gt;rotate 文件数目&lt;/code&gt; 这个参数。如果不配置默认是 0 个，也就是只允许存在一份日志，刚切分出来的日志会马上被删除。多么痛的领悟，说多了都是泪。&lt;/li&gt;
+&lt;li&gt;执行 logrotate 命令最好加 &lt;code&gt;-f&lt;/code&gt; 参数，不然有时候配置文件修改的内容不生效。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;很多程序的会用到 logrotate 滚动日志，比如 nginx。它们安装后，会在 &lt;code&gt;/etc/logrotate.d&lt;/code&gt; 这个目录下增加自己的 logrotate 的配置文件。logrotate 什么时候执行 &lt;code&gt;/etc/logrotate.d&lt;/code&gt; 下的配置呢？看到 &lt;code&gt;/etc/logrotate.conf&lt;/code&gt; 里这行，一切就不言而喻了。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;include /etc/logrotate.d
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;logrotate-原理&#34;&gt;logrotate 原理&lt;/h2&gt;
+&lt;p&gt;logrotate 是怎么做到滚动日志时不影响程序正常的日志输出呢？logrotate 提供了两种解决方案。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;create&lt;/li&gt;
+&lt;li&gt;copytruncate&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;linux-文件操作机制&#34;&gt;Linux 文件操作机制&lt;/h3&gt;
+&lt;p&gt;介绍一下相关的 Linux 下的文件操作机制。&lt;/p&gt;
+&lt;p&gt;Linux 文件系统里文件和文件名的关系如下图。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://raw.githubusercontent.com/wsgzao/storage-public/master/img/20191106155554.png&#34;&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wsgzao/storage-public/master/img/20191106155554.png&#34; alt=&#34;img&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;目录也是文件，文件里存着文件名和对应的 inode 编号。通过这个 inode 编号可以查到文件的元数据和文件内容。文件的元数据有引用计数、操作权限、拥有者 ID、创建时间、最后修改时间等等。文件件名并不在元数据里而是在目录文件中。因此文件改名、移动，都不会修改文件，而是修改目录文件。&lt;/p&gt;
+&lt;p&gt;借《UNIX 环境高级编程》里的图说一下进程打开文件的机制。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://raw.githubusercontent.com/wsgzao/storage-public/master/img/20191106155617.png&#34;&gt;&lt;img src=&#34;https://raw.githubusercontent.com/wsgzao/storage-public/master/img/20191106155617.png&#34; alt=&#34;img&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;进程每新打开一个文件，系统会分配一个新的文件描述符给这个文件。文件描述符对应着一个文件表。表里面存着文件的状态信息（&lt;code&gt;O_APPEND&lt;/code&gt;/&lt;code&gt;O_CREAT&lt;/code&gt;/&lt;code&gt;O_DIRECT&lt;/code&gt;…）、当前文件位置和文件的 inode 信息。系统会为每个进程创建独立的文件描述符和文件表，不同进程是不会共用同一个文件表。正因为如此，不同进程可以同时用不同的状态操作同一个文件的不同位置。文件表中存的是 inode 信息而不是文件路径，所以文件路径发生改变不会影响文件操作。&lt;/p&gt;
+&lt;h3 id=&#34;create&#34;&gt;create&lt;/h3&gt;
+&lt;p&gt;这也就是默认的方案，可以通过 create 命令配置文件的权限和属组设置；这个方案的思路是重命名原日志文件，创建新的日志文件。详细步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;重命名正在输出日志文件，因为重命名只修改目录以及文件的名称，而进程操作文件使用的是 inode，所以并不影响原程序继续输出日志。&lt;/li&gt;
+&lt;li&gt;创建新的日志文件，文件名和原日志文件一样，注意，此时只是文件名称一样，而 inode 编号不同，原程序输出的日志还是往原日志文件输出。&lt;/li&gt;
+&lt;li&gt;最后通过某些方式通知程序，重新打开日志文件；由于重新打开日志文件会用到文件路径而非 inode 编号，所以打开的是新的日志文件。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如上也就是 logrotate 的默认操作方式，也就是 mv+create 执行完之后，通知应用重新在新文件写入即可。mv+create 成本都比较低，几乎是原子操作，如果应用支持重新打开日志文件，如 syslog, nginx, mysql 等，那么这是最好的方式。&lt;/p&gt;
+&lt;p&gt;不过，有些程序并不支持这种方式，压根没有提供重新打开日志的接口；而如果重启应用程序，必然会降低可用性，为此引入了如下方式。&lt;/p&gt;
+&lt;h3 id=&#34;copytruncate&#34;&gt;copytruncate&lt;/h3&gt;
+&lt;p&gt;该方案是把正在输出的日志拷 (copy) 一份出来，再清空 (trucate) 原来的日志；详细步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将当前正在输出的日志文件复制为目标文件，此时程序仍然将日志输出到原来文件中，此时，原文件名也没有变。&lt;/li&gt;
+&lt;li&gt;清空日志文件，原程序仍然还是输出到预案日志文件中，因为清空文件只把文件的内容删除了，而 inode 并没改变，后续日志的输出仍然写入该文件中。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如上所述，对于 copytruncate 也就是先复制一份文件，然后清空原有文件。&lt;/p&gt;
+&lt;p&gt;通常来说，清空操作比较快，但是如果日志文件太大，那么复制就会比较耗时，从而可能导致部分日志丢失。不过这种方式不需要应用程序的支持即可。&lt;/p&gt;
+&lt;h2 id=&#34;配置-logrotate&#34;&gt;配置 logrotate&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt; 1&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;2&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#2&#34;&gt; 2&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;3&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#3&#34;&gt; 3&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;4&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#4&#34;&gt; 4&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;5&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#5&#34;&gt; 5&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;6&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#6&#34;&gt; 6&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;7&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#7&#34;&gt; 7&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;8&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#8&#34;&gt; 8&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;9&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#9&#34;&gt; 9&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;10&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#10&#34;&gt;10&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;11&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#11&#34;&gt;11&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;12&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#12&#34;&gt;12&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;13&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#13&#34;&gt;13&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;vim /etc/logrotate.d/log-file 
+/var/log/log-file &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    monthly
+    rotate &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create &lt;span class=&#34;m&#34;&gt;644&lt;/span&gt; root root
+    postrotate
+        /usr/bin/killall -HUP rsyslogd
+    endscript
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;配置参数&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;monthly&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;日志文件将按月轮循。其它可用值为&amp;rsquo;daily&#39;，&amp;lsquo;weekly&amp;rsquo;或者&amp;rsquo;yearly&amp;rsquo;。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;rotate 5&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;一次将存储5个归档日志。对于第六个归档，时间最久的归档将被删除。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;compress&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;在轮循任务完成后，已轮循的归档将使用gzip进行压缩。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;delaycompress&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;总是与compress选项一起用，delaycompress选项指示logrotate不要将最近的归档压缩，压缩将在下一次轮循周期进行。这在你或任何软件仍然需要读取最新归档时很有用。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;missingok&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;在日志轮循期间，任何错误将被忽略，例如“文件无法找到”之类的错误。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;notifempty&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;如果日志文件为空，轮循不会进行。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;create 644 root root&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;以指定的权限创建全新的日志文件，同时logrotate也会重命名原始日志文件。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;postrotate/endscript&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;在所有其它指令完成后，postrotate和endscript里面指定的命令将被执行。在这种情况下，rsyslogd 进程将立即再次读取其配置并继续运行。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;运行logrotate&#34;&gt;运行logrotate&lt;/h2&gt;
+&lt;h3 id=&#34;crontab-定时&#34;&gt;crontab 定时&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;2&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#2&#34;&gt;2&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;3&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#3&#34;&gt;3&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ crontab -e
+*/30 * * * * /usr/sbin/logrotate /etc/logrotate.d/rsyslog &amp;gt; /dev/null 2&amp;gt;&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;配置文件指定&#34;&gt;配置文件指定&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;2&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#2&#34;&gt;2&lt;/a&gt;
+&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;3&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#3&#34;&gt;3&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;yearly
+weekly
+dayly
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;手动&#34;&gt;手动&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ logrorate -f xxx
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;常见配置参数&#34;&gt;常见配置参数&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;daily ：指定转储周期为每天&lt;/li&gt;
+&lt;li&gt;weekly ：指定转储周期为每周&lt;/li&gt;
+&lt;li&gt;monthly ：指定转储周期为每月&lt;/li&gt;
+&lt;li&gt;rotate count ：指定日志文件删除之前转储的次数，0 指没有备份，5 指保留 5 个备份&lt;/li&gt;
+&lt;li&gt;tabooext [+] list：让 logrotate 不转储指定扩展名的文件，缺省的扩展名是：.rpm-orig, .rpmsave, v, 和～&lt;/li&gt;
+&lt;li&gt;missingok：在日志轮循期间，任何错误将被忽略，例如 “文件无法找到” 之类的错误。&lt;/li&gt;
+&lt;li&gt;size size：当日志文件到达指定的大小时才转储，bytes (缺省) 及 KB (sizek) 或 MB (sizem)&lt;/li&gt;
+&lt;li&gt;compress： 通过 gzip 压缩转储以后的日志&lt;/li&gt;
+&lt;li&gt;nocompress： 不压缩&lt;/li&gt;
+&lt;li&gt;copytruncate：用于还在打开中的日志文件，把当前日志备份并截断&lt;/li&gt;
+&lt;li&gt;nocopytruncate： 备份日志文件但是不截断&lt;/li&gt;
+&lt;li&gt;create mode owner group ： 转储文件，使用指定的文件模式创建新的日志文件&lt;/li&gt;
+&lt;li&gt;nocreate： 不建立新的日志文件&lt;/li&gt;
+&lt;li&gt;delaycompress： 和 compress 一起使用时，转储的日志文件到下一次转储时才压缩&lt;/li&gt;
+&lt;li&gt;nodelaycompress： 覆盖 delaycompress 选项，转储同时压缩。&lt;/li&gt;
+&lt;li&gt;errors address ： 专储时的错误信息发送到指定的 Email 地址&lt;/li&gt;
+&lt;li&gt;ifempty ：即使是空文件也转储，这个是 logrotate 的缺省选项。&lt;/li&gt;
+&lt;li&gt;notifempty ：如果是空文件的话，不转储&lt;/li&gt;
+&lt;li&gt;mail address ： 把转储的日志文件发送到指定的 E-mail 地址&lt;/li&gt;
+&lt;li&gt;nomail ： 转储时不发送日志文件&lt;/li&gt;
+&lt;li&gt;olddir directory：储后的日志文件放入指定的目录，必须和当前日志文件在同一个文件系统&lt;/li&gt;
+&lt;li&gt;noolddir： 转储后的日志文件和当前日志文件放在同一个目录下&lt;/li&gt;
+&lt;li&gt;prerotate/endscript： 在转储以前需要执行的命令可以放入这个对，这两个关键字必须单独成行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;原文链接&#34;&gt;原文链接&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://wsgzao.github.io/post/logrotate/&#34;&gt;https://wsgzao.github.io/post/logrotate/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/clsn/p/8428257.html&#34;&gt;https://www.cnblogs.com/clsn/p/8428257.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
       
@@ -2694,116 +2926,6 @@ data:
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_34111790/article/details/88741714&#34;&gt;https://blog.csdn.net/weixin_34111790/article/details/88741714&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-      
-    </item>
-    
-    <item>
-      <title>go 每日练习 01</title>
-      <link>https://www.llmgo.cn/post/go-test001/</link>
-      <pubDate>Wed, 07 Apr 2021 10:51:51 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/post/go-test001/</guid>
-      
-        <description>&lt;hr&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt; 1&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;2&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#2&#34;&gt; 2&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;3&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#3&#34;&gt; 3&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;4&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#4&#34;&gt; 4&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;5&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#5&#34;&gt; 5&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;6&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#6&#34;&gt; 6&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;7&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#7&#34;&gt; 7&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;8&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#8&#34;&gt; 8&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;9&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#9&#34;&gt; 9&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;10&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#10&#34;&gt;10&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;11&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#11&#34;&gt;11&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;12&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#12&#34;&gt;12&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;13&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#13&#34;&gt;13&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;14&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#14&#34;&gt;14&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;15&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#15&#34;&gt;15&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;16&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#16&#34;&gt;16&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;17&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#17&#34;&gt;17&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;18&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#18&#34;&gt;18&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;19&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#19&#34;&gt;19&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;20&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#20&#34;&gt;20&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;21&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#21&#34;&gt;21&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;22&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#22&#34;&gt;22&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;23&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#23&#34;&gt;23&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;24&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#24&#34;&gt;24&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;25&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#25&#34;&gt;25&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;26&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#26&#34;&gt;26&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;27&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#27&#34;&gt;27&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;28&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#28&#34;&gt;28&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;29&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#29&#34;&gt;29&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;30&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#30&#34;&gt;30&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;31&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#31&#34;&gt;31&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;32&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#32&#34;&gt;32&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;33&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#33&#34;&gt;33&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;34&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#34&#34;&gt;34&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;35&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#35&#34;&gt;35&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;36&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#36&#34;&gt;36&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;37&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#37&#34;&gt;37&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;38&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#38&#34;&gt;38&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;39&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#39&#34;&gt;39&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;40&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#40&#34;&gt;40&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;41&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#41&#34;&gt;41&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;42&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#42&#34;&gt;42&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;43&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#43&#34;&gt;43&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;44&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#44&#34;&gt;44&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;45&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#45&#34;&gt;45&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;46&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#46&#34;&gt;46&lt;/a&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;main&lt;/span&gt;
-
-&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
-	&lt;span class=&#34;s&#34;&gt;&amp;#34;bufio&amp;#34;&lt;/span&gt;
-	&lt;span class=&#34;s&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
-	&lt;span class=&#34;s&#34;&gt;&amp;#34;log&amp;#34;&lt;/span&gt;
-	&lt;span class=&#34;s&#34;&gt;&amp;#34;os&amp;#34;&lt;/span&gt;
-	&lt;span class=&#34;s&#34;&gt;&amp;#34;strings&amp;#34;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-
-&lt;span class=&#34;cm&#34;&gt;/*
-&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;编写一个程序，从键盘读取输入。当用户输入 &amp;#39;S&amp;#39; 的时候表示输入结束，这时程序输出 3 个数字：
-&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;i) 输入的字符的个数，包括空格，但不包括 &amp;#39;\r&amp;#39; 和 &amp;#39;\n&amp;#39;
-&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;ii) 输入的单词的个数
-&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;iii) 输入的行数
-&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;*/&lt;/span&gt;
-
-&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-	&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
-		&lt;span class=&#34;nx&#34;&gt;count&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
-	&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-	&lt;span class=&#34;nx&#34;&gt;reader&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;bufio&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;NewReader&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Stdin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-	&lt;span class=&#34;nx&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;reader&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;ReadString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;&amp;#39;S&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-	&lt;span class=&#34;c1&#34;&gt;// text = strings.TrimSpace(text)
-&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-		&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Fatal&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-	&lt;span class=&#34;nx&#34;&gt;newText&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-	&lt;span class=&#34;nx&#34;&gt;str1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;strings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Replace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;newText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;\r&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-	&lt;span class=&#34;nx&#34;&gt;str2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;strings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Replace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;str1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-	&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;str2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-		&lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
-	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-	&lt;span class=&#34;nx&#34;&gt;wordNum&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;strings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;newText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-
-	&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;_&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;range&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;newText&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-		&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-			&lt;span class=&#34;nx&#34;&gt;count&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;
-		&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-	&lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;输入字符的个数：%d\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;str2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-	&lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;输入的单词的个数：%d\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;wordNum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-	&lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;输入的行数：%d\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;count&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-
-&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
       
     </item>
     
