@@ -69,7 +69,7 @@
 <meta itemprop="name" content="git 常用命令">
 <meta itemprop="description" content="Git 全局设置 1 2 git config --global user.name &#34;Administrator&#34; git config --global user.email &#34;admin@example.com&#34; 创建新版本库 1 2 3 4 5 6 git clone git@code.aliyun.com:llmgo/test.git cd test touch README.md git add README.md git commit -m &#34;add README&#34; git push -u origin master 已存在的文件夹或 Git 仓库 1 2 3 4 5 6 cd existing_folder git init"><meta itemprop="datePublished" content="2021-04-09T14:08:17&#43;08:00" />
 <meta itemprop="dateModified" content="2021-04-09T14:08:17&#43;08:00" />
-<meta itemprop="wordCount" content="2290">
+<meta itemprop="wordCount" content="2316">
 <meta itemprop="keywords" content="git,linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="git 常用命令"/>
 <meta name="twitter:description" content="Git 全局设置 1 2 git config --global user.name &#34;Administrator&#34; git config --global user.email &#34;admin@example.com&#34; 创建新版本库 1 2 3 4 5 6 git clone git@code.aliyun.com:llmgo/test.git cd test touch README.md git add README.md git commit -m &#34;add README&#34; git push -u origin master 已存在的文件夹或 Git 仓库 1 2 3 4 5 6 cd existing_folder git init"/>
@@ -942,6 +942,9 @@ $ git stash pop
 </span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
 </span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
 </span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-fallback" data-lang="fallback"># 生成一个可供发布的压缩包
@@ -949,6 +952,9 @@ $ git archive
 
 # 免密pull/push代码
 git config --global credential.helper &#39;store --file ~/.my-credentials&#39;
+
+# git强制覆盖本地命令
+git fetch --all &amp;&amp; git reset --hard origin/master &amp;&amp; git pull
 </code></pre></td></tr></table>
 </div>
 </div>
