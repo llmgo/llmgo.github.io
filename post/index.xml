@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 22 Apr 2021 18:26:31 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Apr 2021 15:20:02 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用caddy作为文件服务器</title>
+      <link>https://www.llmgo.cn/post/use-caddy-as-fileserver/</link>
+      <pubDate>Mon, 26 Apr 2021 15:20:02 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/use-caddy-as-fileserver/</guid>
+      <description>使用caddy作为文件服务器 对比nginx优势 界面比nginx好看一万倍 自动https证书 配置简单一万倍 废话不多说，开始 安装caddy https://caddyserver.com/download https://github.com/caddyserver/caddy/releases/ 1</description>
+    </item>
+    
     <item>
       <title>go构建约束问题</title>
       <link>https://www.llmgo.cn/post/go-build-constraint-problem/</link>
@@ -176,15 +185,6 @@
       
       <guid>https://www.llmgo.cn/post/kubernetes-externaltrafficpolicy/</guid>
       <description>externalTrafficPolicy 简介 [toc] 一、 什么是externalTrafficPolicy 如果服务需要将外部流量路由到 本地节点或者集群级别的端点，即 service type 为LoadBala</description>
-    </item>
-    
-    <item>
-      <title>helm 优雅的使用configmap</title>
-      <link>https://www.llmgo.cn/post/helm-use-configmap/</link>
-      <pubDate>Wed, 07 Apr 2021 10:59:23 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/post/helm-use-configmap/</guid>
-      <description>helm 使用 configmap 假如我们有一个配置文件config.json目录结构如下 1 2 3 4 5 6 7 8 9 10 11 $ tree . ├── Chart.yaml ├── config │ └── config.json ├── templates │ ├── configmap.yaml │ └</description>
     </item>
     
   </channel>

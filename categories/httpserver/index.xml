@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>httpserver on 一个小运维的博客</title>
+    <link>https://www.llmgo.cn/categories/httpserver/</link>
+    <description>Recent content in httpserver on 一个小运维的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 26 Apr 2021 15:20:02 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/httpserver/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用caddy作为文件服务器</title>
+      <link>https://www.llmgo.cn/post/use-caddy-as-fileserver/</link>
+      <pubDate>Mon, 26 Apr 2021 15:20:02 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/use-caddy-as-fileserver/</guid>
+      <description>使用caddy作为文件服务器 对比nginx优势 界面比nginx好看一万倍 自动https证书 配置简单一万倍 废话不多说，开始 安装caddy https://caddyserver.com/download https://github.com/caddyserver/caddy/releases/ 1</description>
+    </item>
+    
+  </channel>
+</rss>
