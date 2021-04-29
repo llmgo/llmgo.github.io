@@ -6,7 +6,16 @@
     <description>Recent content in linux on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 14 Apr 2021 16:01:56 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Apr 2021 15:25:21 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>好用的文件服务器</title>
+      <link>https://www.llmgo.cn/post/easy-to-use-file-servermd/</link>
+      <pubDate>Thu, 29 Apr 2021 15:25:21 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/easy-to-use-file-servermd/</guid>
+      <description>好用的文件服务器 这里记录一下好用的三个文件服务器 https://github.com/filebrowser/filebrowser https://github.com/silverwind/droppy http://iscute.cn/chfs</description>
+    </item>
+    
     <item>
       <title>日志切割神器logrotate</title>
       <link>https://www.llmgo.cn/post/logrotate/</link>
