@@ -69,7 +69,7 @@
 <meta itemprop="name" content="使用caddy作为文件服务器">
 <meta itemprop="description" content="使用caddy作为文件服务器 对比nginx优势 界面比nginx好看一万倍 自动https证书 配置简单一万倍 废话不多说，开始 安装caddy https://caddyserver.com/download https://github.com/caddyserver/caddy/releases/ 1"><meta itemprop="datePublished" content="2021-04-26T15:20:02&#43;08:00" />
 <meta itemprop="dateModified" content="2021-04-26T15:20:02&#43;08:00" />
-<meta itemprop="wordCount" content="124">
+<meta itemprop="wordCount" content="148">
 <meta itemprop="keywords" content="caddy," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="使用caddy作为文件服务器"/>
 <meta name="twitter:description" content="使用caddy作为文件服务器 对比nginx优势 界面比nginx好看一万倍 自动https证书 配置简单一万倍 废话不多说，开始 安装caddy https://caddyserver.com/download https://github.com/caddyserver/caddy/releases/ 1"/>
@@ -356,22 +356,38 @@ mv caddy_linux_adm64 /usr/local/bin/caddy
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
-</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
-</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
-</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
-</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
-</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
-</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
-</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span class="lnt" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span class="lnt" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">cat <span class="s">&lt;&lt;EOF&gt; Caddyfile
 </span><span class="s">https://download.llmgo.cn {
 </span><span class="s">    file_server {
 </span><span class="s">        root /root/
-</span><span class="s">            browse
-</span><span class="s">        }
+</span><span class="s">        browse
+</span><span class="s">        hide .git
+</span><span class="s">    }
+</span><span class="s">    header {
+</span><span class="s">         Cache-Control no-cache
+</span><span class="s">         Content-Transfer-Encoding binary
+</span><span class="s">         Content-Type &#34;text/plain; charset=utf-8&#34;
+</span><span class="s">         X-Content-Type-Options nosniff
+</span><span class="s">         Content-Disposition attachment
+</span><span class="s">    }        
 </span><span class="s">}
 </span><span class="s">EOF</span>
 </code></pre></td></tr></table>
