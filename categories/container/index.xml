@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>container on 一个小运维的博客</title>
+    <link>https://www.llmgo.cn/categories/container/</link>
+    <description>Recent content in container on 一个小运维的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 08 May 2021 17:11:24 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/container/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>buildah 简单使用</title>
+      <link>https://www.llmgo.cn/post/buildah-simple-to-use/</link>
+      <pubDate>Sat, 08 May 2021 17:11:24 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/buildah-simple-to-use/</guid>
+      <description>buildah 简单使用 buildah 构建镜像的优势 兼容Dockerfile 不依赖docker daemon 下载buildah 1 yum install -y buildah 构建镜像 1 buildah bud -t harbor.example.com/library/app:v1 -f Dockerfile . 登陆 1 buildah login --tls-verify=false harbor.example.com 推送</description>
+    </item>
+    
+  </channel>
+</rss>

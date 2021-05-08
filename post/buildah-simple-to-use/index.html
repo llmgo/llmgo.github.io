@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>一个小运维的博客</title>
+  <title>buildah 简单使用 - 一个小运维的博客</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="liliming" />
-  <meta name="description" content="Hugo theme jane example site." />
+  <meta name="description" content="buildah 简单使用 buildah 构建镜像的优势 兼容Dockerfile 不依赖docker daemon 下载buildah 1 yum install -y buildah 构建镜像 1 buildah bud -t harbor.example.com/library/app:v1 -f Dockerfile . 登陆 1 buildah login --tls-verify=false harbor.example.com 推送" />
+
   <meta name="keywords" content="Hugo, theme, jane" />
 
 
@@ -34,8 +35,8 @@
 <meta name="generator" content="Hugo 0.82.0" />
 
 
-<link rel="canonical" href="https://www.llmgo.cn/" />
-<link href="/index.xml" rel="alternate" type="application/rss+xml" title="一个小运维的博客" />
+<link rel="canonical" href="https://www.llmgo.cn/post/buildah-simple-to-use/" />
+
 
 
 
@@ -58,15 +59,20 @@
 
 
 
-<meta property="og:title" content="一个小运维的博客" />
-<meta property="og:description" content="Hugo theme jane example site." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.llmgo.cn/" />
+<meta property="og:title" content="buildah 简单使用" />
+<meta property="og:description" content="buildah 简单使用 buildah 构建镜像的优势 兼容Dockerfile 不依赖docker daemon 下载buildah 1 yum install -y buildah 构建镜像 1 buildah bud -t harbor.example.com/library/app:v1 -f Dockerfile . 登陆 1 buildah login --tls-verify=false harbor.example.com 推送" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.llmgo.cn/post/buildah-simple-to-use/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-08T17:11:24&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-08T17:11:24&#43;08:00" />
 
-<meta itemprop="name" content="一个小运维的博客">
-<meta itemprop="description" content="Hugo theme jane example site."><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="一个小运维的博客"/>
-<meta name="twitter:description" content="Hugo theme jane example site."/>
+<meta itemprop="name" content="buildah 简单使用">
+<meta itemprop="description" content="buildah 简单使用 buildah 构建镜像的优势 兼容Dockerfile 不依赖docker daemon 下载buildah 1 yum install -y buildah 构建镜像 1 buildah bud -t harbor.example.com/library/app:v1 -f Dockerfile . 登陆 1 buildah login --tls-verify=false harbor.example.com 推送"><meta itemprop="datePublished" content="2021-05-08T17:11:24&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-08T17:11:24&#43;08:00" />
+<meta itemprop="wordCount" content="82">
+<meta itemprop="keywords" content="container," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="buildah 简单使用"/>
+<meta name="twitter:description" content="buildah 简单使用 buildah 构建镜像的优势 兼容Dockerfile 不依赖docker daemon 下载buildah 1 yum install -y buildah 构建镜像 1 buildah bud -t harbor.example.com/library/app:v1 -f Dockerfile . 登陆 1 buildah login --tls-verify=false harbor.example.com 推送"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -214,7 +220,7 @@
   <ul id="menu" class="menu">
     
     
-        <li class="menu-item active">
+        <li class="menu-item">
         
           
           
@@ -283,738 +289,182 @@
     <main id="main" class="main bg-llight">
       <div class="content-wrapper">
         <div id="content" class="content container">
-          
-<section id="posts" class="posts">
-  
-  
+          <article class="post bg-white">
     
-  
-  
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
+    <header class="post-header">
+      <h1 class="post-title">buildah 简单使用</h1>
       
-      <a class="post-link" href="/post/go-test008/">go 每日练习 08</a>
-    </h1>
+      <div class="post-meta">
+        <time datetime="2021-05-08" class="post-time">
+          2021-05-08
+        </time>
+        <div class="post-category">
+            <a href="https://www.llmgo.cn/categories/container/"> container </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
     
-    <div class="post-meta">
-      <time datetime="2021-04-07" class="post-time">
-        2021-04-07
-      </time>
-      <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/go/"> go </a>
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+
+
+    
+    <div class="post-content">
+      <h1 id="buildah-简单使用">buildah 简单使用</h1>
+<p>buildah 构建镜像的优势</p>
+<ul>
+<li>兼容Dockerfile</li>
+<li>不依赖docker daemon</li>
+</ul>
+<ol start="0">
+<li>下载buildah</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">yum install -y buildah
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>构建镜像</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">buildah bud -t harbor.example.com/library/app:v1 -f Dockerfile .
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>登陆</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">buildah login --tls-verify<span class="o">=</span><span class="nb">false</span> harbor.example.com
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>推送</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">buildah push --tls-verify<span class="o">=</span><span class="nb">false</span> harbor.example.com/library/app:v1
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>查看</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">buildah images
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<ul>
+<li><a href="https://github.com/containers/buildah/">https://github.com/containers/buildah/</a></li>
+<li><a href="https://buildah.io/">https://buildah.io/</a></li>
+</ul>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">liliming</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2021-05-08
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://www.llmgo.cn/tags/container/">container</a>
           
         </div>
+
       
-      
-      
-    </div>
-  </header>
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/easy-to-use-file-servermd/">
+            <span class="next-text nav-default">好用的文件服务器</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
   
-  <div class="post-content">
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
     
-    <div class="post-summary">
-      1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 package main import ( &#34;io&#34; &#34;os&#34; ) // 实现复制文件 func copyFile(dstName, srcName string) (written int64, err error) { src, err := os.Open(srcName) if err != nil { return } defer src.Close() dst, err := os.Create(dstName)
-    </div>
-    <div class="read-more">
-      <a href="/post/go-test008/" class="read-more-link">Read more</a>
-    </div>
-    
-  </div>
-</article>
 
   
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/post/go-test009/">go 每日练习 09</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2021-04-07" class="post-time">
-        2021-04-07
-      </time>
-      <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/go/"> go </a>
-          
-        </div>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 package main import ( &#34;fmt&#34; &#34;io/ioutil&#34; &#34;os&#34; &#34;strings&#34; ) // 实现cat文件 func fileCat(file string) (err error) { text, err := ioutil.ReadFile(file) if err != nil { return } fmt.Println(strings.TrimSpace(string(text))) return
-    </div>
-    <div class="read-more">
-      <a href="/post/go-test009/" class="read-more-link">Read more</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/post/go-test010/">go 每日练习 10</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2021-04-07" class="post-time">
-        2021-04-07
-      </time>
-      <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/go/"> go </a>
-          
-        </div>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 package main import ( &#34;fmt&#34; &#34;io&#34; &#34;os&#34; ) func fileCat(file string) { f, err := os.Open(file) if err != nil { panic(err) } // tmp := make([]byte, 128) var tmp []byte n, err := f.Read(tmp) if err != nil { panic(err)
-    </div>
-    <div class="read-more">
-      <a href="/post/go-test010/" class="read-more-link">Read more</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-</section>
-
-
-
-
-
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
-    <nav class="pagination">
-      <ul>
-
-      
-      
-      <li><a href="/">««</a></li>
-      
-
-      
-      
-      <li><a href="/page/10/">«</a></li>
-      
-
-      
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-
-          
-
-        
-        
-
-        
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-
-          
-
-        
-        
-
-        
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-
-          
-
-        
-        
-
-        
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-
-          
-
-        
-        
-
-        
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="">
-            <a href="/page/5/">
-              5
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="">
-            <a href="/page/6/">
-              6
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="">
-            <a href="/page/7/">
-              7
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="">
-            <a href="/page/8/">
-              8
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="">
-            <a href="/page/9/">
-              9
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="">
-            <a href="/page/10/">
-              10
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="active">
-            <a href="/page/11/">
-              11
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="">
-            <a href="/page/12/">
-              12
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="">
-            <a href="/page/13/">
-              13
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="">
-            <a href="/page/14/">
-              14
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="">
-            <a href="/page/15/">
-              15
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="">
-            <a href="/page/16/">
-              16
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-              
-            
-
-          
-
-        
-        
-
-        
-        
-          <li class="">
-            <a href="/page/17/">
-              17
-            </a>
-          </li>
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-
-          
-
-        
-        
-
-        
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-
-          
-
-        
-        
-
-        
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-
-          
-
-        
-        
-
-        
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-
-          
-
-        
-        
-
-        
-        
-
-      
-
-        
-
-        
-        
-
-          
-          
-          
-
-            
-
-          
-
-        
-        
-
-        
-        
-
-      
-
-      
-      
-      <li><a href="/page/12/">»</a></li>
-      
-
-      
-      
-      <li><a href="/page/22/">»»</a></li>
-      
-
-      </ul>
-    </nav>
-  
-
-
-
-
 
         </div>
       </div>

@@ -6,7 +6,7 @@
     <description>Recent content on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 29 Apr 2021 15:25:21 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 08 May 2021 17:11:24 +0800</lastBuildDate>
     
         <atom:link href="https://www.llmgo.cn/index.xml" rel="self" type="application/rss+xml" />
     
@@ -27,6 +27,83 @@
 &lt;li&gt;&lt;a href=&#34;https://downgit.llmgo.cn/#/home&#34;&gt;DownGit&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mholt.github.io/json-to-go/&#34;&gt;json-to-go&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mholt.github.io/curl-to-go/&#34;&gt;curl-to-go&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>buildah 简单使用</title>
+      <link>https://www.llmgo.cn/post/buildah-simple-to-use/</link>
+      <pubDate>Sat, 08 May 2021 17:11:24 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/buildah-simple-to-use/</guid>
+      
+        <description>&lt;h1 id=&#34;buildah-简单使用&#34;&gt;buildah 简单使用&lt;/h1&gt;
+&lt;p&gt;buildah 构建镜像的优势&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;兼容Dockerfile&lt;/li&gt;
+&lt;li&gt;不依赖docker daemon&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;0&#34;&gt;
+&lt;li&gt;下载buildah&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;yum install -y buildah
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;构建镜像&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;buildah bud -t harbor.example.com/library/app:v1 -f Dockerfile .
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;登陆&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;buildah login --tls-verify&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt; harbor.example.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;推送&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;buildah push --tls-verify&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt; harbor.example.com/library/app:v1
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;查看&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;buildah images
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/containers/buildah/&#34;&gt;https://github.com/containers/buildah/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://buildah.io/&#34;&gt;https://buildah.io/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
       
@@ -2708,55 +2785,6 @@ cd pinpoint-docker
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
-      
-    </item>
-    
-    <item>
-      <title>spring cloud gateway访问不了注册的地址</title>
-      <link>https://www.llmgo.cn/post/spring-cloud-gateway-name-or-service-not-known/</link>
-      <pubDate>Wed, 07 Apr 2021 11:04:47 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/post/spring-cloud-gateway-name-or-service-not-known/</guid>
-      
-        <description>&lt;h1 id=&#34;spring-cloud-gateway-报错-name-or-service-not-known&#34;&gt;spring cloud gateway 报错 Name or service not known&lt;/h1&gt;
-&lt;p&gt;是这样的，eureka、gateway和普通的微服务在本地是OK的，&lt;/p&gt;
-&lt;p&gt;部署到k8s后，通过gateway访问某个微服务就报错了。&lt;/p&gt;
-&lt;p&gt;用的是serviceId的方式，在eureka界面也能看到各个微服务都是在线的，没有问题，但就是通过gateway的路由访问时会报错。&lt;/p&gt;
-&lt;p&gt;解决方案如下：&lt;/p&gt;
-&lt;p&gt;在微服务里加上这个配置：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt;1&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;2&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#2&#34;&gt;2&lt;/a&gt;
-&lt;/span&gt;&lt;span class=&#34;lnt&#34; id=&#34;3&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#3&#34;&gt;3&lt;/a&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;nt&#34;&gt;eureka&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;instance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;preferIpAddress&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;然后在项目里的配置文件application.properties文件中添加了&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34; id=&#34;1&#34;&gt;&lt;a style=&#34;outline: none; text-decoration:none; color:inherit&#34; href=&#34;#1&#34;&gt;1&lt;/a&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;eureka.instance.preferIpAddress = true
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;之后重新构建服务就好了。&lt;/p&gt;
-&lt;p&gt;不过eureka的界面显示的还是cotnainer name，但是点击它的超链接已经是ip了。&lt;/p&gt;
-&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.jianshu.com/p/e178e50f4e27&#34;&gt;https://www.jianshu.com/p/e178e50f4e27&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://docs.spring.io/spring-cloud-netflix/docs/2.2.5.RELEASE/reference/html/&#34;&gt;https://docs.spring.io/spring-cloud-netflix/docs/2.2.5.RELEASE/reference/html/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.sunshanpeng.com/2019/09/17/%E5%9C%A8k8s%E4%B8%AD%E4%BD%BF%E7%94%A8eureka%E7%9A%84%E5%87%A0%E7%A7%8D%E5%A7%BF%E5%8A%BF/#%E4%BD%BF%E7%94%A8Service%E7%9A%84Cluster-IP%E6%B3%A8%E5%86%8C&#34;&gt;https://www.sunshanpeng.com/2019/09/17/%E5%9C%A8k8s%E4%B8%AD%E4%BD%BF%E7%94%A8eureka%E7%9A%84%E5%87%A0%E7%A7%8D%E5%A7%BF%E5%8A%BF/#%E4%BD%BF%E7%94%A8Service%E7%9A%84Cluster-IP%E6%B3%A8%E5%86%8C&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/xishuai/p/spring-cloud-eureka-prefer-ip-address.html&#34;&gt;https://www.cnblogs.com/xishuai/p/spring-cloud-eureka-prefer-ip-address.html&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/56335136/unknownhostexception-in-kubernetes&#34;&gt;https://stackoverflow.com/questions/56335136/unknownhostexception-in-kubernetes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/uzxin/p/13690300.html&#34;&gt;https://www.cnblogs.com/uzxin/p/13690300.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
       
     </item>
     
