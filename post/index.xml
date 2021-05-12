@@ -6,7 +6,17 @@
     <description>Recent content in Posts on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 12 May 2021 10:54:48 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 May 2021 16:36:06 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang sync.WaitGroup 的用法
+</title>
+      <link>https://www.llmgo.cn/post/usage-of-golang-sync-waitgroup/</link>
+      <pubDate>Wed, 12 May 2021 16:36:06 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/usage-of-golang-sync-waitgroup/</guid>
+      <description>Golang sync.WaitGroup 的用法 介绍 经常会看到一下代码 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;time&amp;#34; ) func main(){ for i := 0; i &amp;lt; 100 ; i++{ go fmt.Println(i) } time.Sleep(time.Second) } 主线程为了等待goroutine都运</description>
+    </item>
+    
     <item>
       <title>两数之和（leetcode）Go语言版本</title>
       <link>https://www.llmgo.cn/post/two-sum-go/</link>
@@ -176,15 +186,6 @@
       
       <guid>https://www.llmgo.cn/post/java-project-high-cpu-usage/</guid>
       <description>Java 项目CPU占用高排查 [toc] 一、分析问题 cpu占用高一般来说是项目本身自发导致的，自发包括定时任务和死循环，而具体哪一段代码也确定不了， 现在我们</description>
-    </item>
-    
-    <item>
-      <title>pinpoint 告警配置</title>
-      <link>https://www.llmgo.cn/post/pinpoint-alert-config/</link>
-      <pubDate>Wed, 07 Apr 2021 11:06:08 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/post/pinpoint-alert-config/</guid>
-      <description>Pinpoint 告警配置 新建一个组，添加2个成员 组必须是以数字构成 选择告警 添加告警 告警类型 以下规则中，请求是当前应用发送出去的，当前应用是请求的发起者。 类</description>
     </item>
     
   </channel>

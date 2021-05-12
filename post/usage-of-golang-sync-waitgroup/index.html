@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>helm 优雅的使用configmap - 一个小运维的博客</title>
+  <title>Golang sync.WaitGroup 的用法
+ - 一个小运维的博客</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +24,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="liliming" />
-  <meta name="description" content="helm 使用 configmap 假如我们有一个配置文件config.json目录结构如下 1 2 3 4 5 6 7 8 9 10 11 $ tree . ├── Chart.yaml ├── config │ └── config.json ├── templates │ ├── configmap.yaml │ └" />
+  <meta name="description" content="Golang sync.WaitGroup 的用法 介绍 经常会看到一下代码 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;time&amp;#34; ) func main(){ for i := 0; i &amp;lt; 100 ; i&#43;&#43;{ go fmt.Println(i) } time.Sleep(time.Second) } 主线程为了等待goroutine都运" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -35,7 +36,7 @@
 <meta name="generator" content="Hugo 0.82.0" />
 
 
-<link rel="canonical" href="https://www.llmgo.cn/post/helm-use-configmap/" />
+<link rel="canonical" href="https://www.llmgo.cn/post/usage-of-golang-sync-waitgroup/" />
 
 
 
@@ -59,20 +60,23 @@
 
 
 
-<meta property="og:title" content="helm 优雅的使用configmap" />
-<meta property="og:description" content="helm 使用 configmap 假如我们有一个配置文件config.json目录结构如下 1 2 3 4 5 6 7 8 9 10 11 $ tree . ├── Chart.yaml ├── config │ └── config.json ├── templates │ ├── configmap.yaml │ └" />
+<meta property="og:title" content="Golang sync.WaitGroup 的用法
+" />
+<meta property="og:description" content="Golang sync.WaitGroup 的用法 介绍 经常会看到一下代码 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import ( &#34;fmt&#34; &#34;time&#34; ) func main(){ for i := 0; i &lt; 100 ; i&#43;&#43;{ go fmt.Println(i) } time.Sleep(time.Second) } 主线程为了等待goroutine都运" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.llmgo.cn/post/helm-use-configmap/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-04-07T10:59:23&#43;08:00" />
-<meta property="article:modified_time" content="2021-04-07T10:59:23&#43;08:00" />
+<meta property="og:url" content="https://www.llmgo.cn/post/usage-of-golang-sync-waitgroup/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-12T16:36:06&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-12T16:36:06&#43;08:00" />
 
-<meta itemprop="name" content="helm 优雅的使用configmap">
-<meta itemprop="description" content="helm 使用 configmap 假如我们有一个配置文件config.json目录结构如下 1 2 3 4 5 6 7 8 9 10 11 $ tree . ├── Chart.yaml ├── config │ └── config.json ├── templates │ ├── configmap.yaml │ └"><meta itemprop="datePublished" content="2021-04-07T10:59:23&#43;08:00" />
-<meta itemprop="dateModified" content="2021-04-07T10:59:23&#43;08:00" />
-<meta itemprop="wordCount" content="311">
-<meta itemprop="keywords" content="helm,kubernetes," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="helm 优雅的使用configmap"/>
-<meta name="twitter:description" content="helm 使用 configmap 假如我们有一个配置文件config.json目录结构如下 1 2 3 4 5 6 7 8 9 10 11 $ tree . ├── Chart.yaml ├── config │ └── config.json ├── templates │ ├── configmap.yaml │ └"/>
+<meta itemprop="name" content="Golang sync.WaitGroup 的用法
+">
+<meta itemprop="description" content="Golang sync.WaitGroup 的用法 介绍 经常会看到一下代码 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import ( &#34;fmt&#34; &#34;time&#34; ) func main(){ for i := 0; i &lt; 100 ; i&#43;&#43;{ go fmt.Println(i) } time.Sleep(time.Second) } 主线程为了等待goroutine都运"><meta itemprop="datePublished" content="2021-05-12T16:36:06&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-12T16:36:06&#43;08:00" />
+<meta itemprop="wordCount" content="1048">
+<meta itemprop="keywords" content="go," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Golang sync.WaitGroup 的用法
+"/>
+<meta name="twitter:description" content="Golang sync.WaitGroup 的用法 介绍 经常会看到一下代码 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import ( &#34;fmt&#34; &#34;time&#34; ) func main(){ for i := 0; i &lt; 100 ; i&#43;&#43;{ go fmt.Println(i) } time.Sleep(time.Second) } 主线程为了等待goroutine都运"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -292,14 +296,15 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">helm 优雅的使用configmap</h1>
+      <h1 class="post-title">Golang sync.WaitGroup 的用法
+</h1>
       
       <div class="post-meta">
-        <time datetime="2021-04-07" class="post-time">
-          2021-04-07
+        <time datetime="2021-05-12" class="post-time">
+          2021-05-12
         </time>
         <div class="post-category">
-            <a href="https://www.llmgo.cn/categories/kubernetes/"> kubernetes </a>
+            <a href="https://www.llmgo.cn/categories/go/"> go </a>
             
           </div>
         
@@ -317,15 +322,26 @@
 <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#注意事项">注意事项</a>
+      <ul>
+        <li><a href="#1-计数器不能是负数">1. 计数器不能是负数</a></li>
+        <li><a href="#2-waitgroup对象不是一个引用类型">2. WaitGroup对象不是一个引用类型</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
 
 
     
     <div class="post-content">
-      <h1 id="helm-使用-configmap">helm 使用 configmap</h1>
-<p>假如我们有一个配置文件<code>config.json</code>目录结构如下</p>
+      <h1 id="golang-syncwaitgroup-的用法">Golang sync.WaitGroup 的用法</h1>
+<h2 id="介绍">介绍</h2>
+<p>经常会看到一下代码</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -339,43 +355,65 @@
 </span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
 </span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
 </span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ tree 
-.
-├── Chart.yaml
-├── config
-│   └── config.json
-├── templates
-│   ├── configmap.yaml
-│   └── deployment.yaml
-└── values.yaml
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
-<span class="m">2</span> directories, <span class="m">5</span> files
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+        <span class="k">go</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><ol>
-<li>使用<code>Asconfig</code></li>
-</ol>
+</div><p>主线程为了等待goroutine都运行完毕，不得不在程序的末尾使用<code>time.Sleep()</code> 来睡眠一段时间，等待其他线程充分运行。对于简单的代码，100个for循环可以在1秒之内运行完毕，<code>time.Sleep()</code> 也可以达到想要的效果。</p>
+<p>但是对于实际生活的大多数场景来说，1秒是不够的，并且大部分时候我们都无法预知for循环内代码运行时间的长短。这时候就不能使用<code>time.Sleep()</code> 来完成等待操作了。</p>
+<p>可以考虑使用管道来完成上述操作：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
-</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
-</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
-</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
-</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
-</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Release.Name }}-configmap
-data:
-{{ (.Files.Glob &#34;config/config.json&#34;).AsConfig | indent 2 }}
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">c</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">bool</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="k">go</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+            <span class="nx">c</span> <span class="o">&lt;-</span> <span class="kc">true</span>
+        <span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="o">&lt;-</span><span class="nx">c</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>输出</p>
+</div><p>首先可以肯定的是使用管道是能达到我们的目的的，而且不但能达到目的，还能十分完美的达到目的。</p>
+<p>但是管道在这里显得有些大材小用，因为它被设计出来不仅仅只是在这里用作简单的同步处理，在这里使用管道实际上是不合适的。而且假设我们有一万、十万甚至更多的for循环，也要申请同样数量大小的管道出来，对内存也是不小的开销。</p>
+<p>对于这种情况，go语言中有一个其他的工具<code>sync.WaitGroup</code> 能更加方便的帮助我们达到这个目的。</p>
+<p><code>WaitGroup</code> 对象内部有一个计数器，最初从0开始，它有三个方法：<code>Add(), Done(), Wait()</code> 用来控制计数器的数量。<code>Add(n)</code> 把计数器设置为<code>n</code> ，<code>Done()</code> 每次把计数器<code>-1</code> ，<code>wait()</code> 会阻塞代码的运行，直到计数器地值减为0。</p>
+<p>使用<code>WaitGroup</code> 将上述代码可以修改为：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -391,79 +429,23 @@ data:
 </span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">---
-# Source: fizz/templates/configmap.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: RELEASE-NAME-configmap
-data:
-  config.json: |-
-    {
-      &#34;name&#34;: &#34;fizz&#34;
-    }
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">wg</span> <span class="o">:=</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span><span class="p">{}</span>
+    <span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="k">go</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+            <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+        <span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>如果有多个文件，可以用<code>config/*</code></p>
-<ol start="2">
-<li>使用<code>files.lines</code></li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
-</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
-</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
-</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
-</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
-</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
-</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
-</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
-</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9">9</a>
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: <span class="o">{{</span> .Release.Name <span class="o">}}</span>-configmap
-data:
-  config.json: <span class="p">|</span>-
-  <span class="o">{{</span>- range .Files.Lines <span class="s2">&#34;config/config.json&#34;</span> <span class="o">}}</span>
-    <span class="o">{{</span> . <span class="o">}}</span>
-  <span class="o">{{</span>- end <span class="o">}}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>输出</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
-</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
-</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
-</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
-</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
-</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
-</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
-</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
-</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
-</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
-</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">---
-# Source: fizz/templates/configmap.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: RELEASE-NAME-configmap
-data:
-  config.json: |-
-    {
-      &#34;name&#34;: &#34;fizz&#34;
-    }
-</code></pre></td></tr></table>
-</div>
-</div><ol start="3">
-<li>使用<code>files.get</code></li>
-</ol>
+</div><p>这里首先把<code>wg</code> 计数设置为100， 每个for循环运行完毕都把计数器减一，主函数中使用<code>Wait()</code> 一直阻塞，直到wg为零——也就是所有的100个for循环都运行完毕。相对于使用管道来说，<code>WaitGroup</code> 轻巧了许多。</p>
+<h2 id="注意事项">注意事项</h2>
+<h3 id="1-计数器不能是负数">1. 计数器不能是负数</h3>
+<p>我们不能使用<code>Add()</code> 给<code>wg</code> 设置一个负值，否则代码将会报错：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
@@ -475,16 +457,18 @@ data:
 </span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: <span class="o">{{</span> .Release.Name <span class="o">}}</span>-configmap
-data:
-  config.json:
-    <span class="o">{{</span>- .Files.Get <span class="s2">&#34;config/config.json&#34;</span> <span class="p">|</span> <span class="nb">printf</span> <span class="s2">&#34;%s&#34;</span> <span class="p">|</span> nindent <span class="m">4</span> <span class="o">}}</span>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">panic</span><span class="p">:</span> <span class="nx">sync</span><span class="p">:</span> <span class="nx">negative</span> <span class="nx">WaitGroup</span> <span class="nx">counter</span>
+
+<span class="nx">goroutine</span> <span class="mi">1</span> <span class="p">[</span><span class="nx">running</span><span class="p">]:</span>
+<span class="nx">sync</span><span class="p">.(</span><span class="o">*</span><span class="nx">WaitGroup</span><span class="p">).</span><span class="nf">Add</span><span class="p">(</span><span class="mh">0xc042008230</span><span class="p">,</span> <span class="mh">0xffffffffffffff9c</span><span class="p">)</span>
+    <span class="nx">D</span><span class="p">:</span><span class="o">/</span><span class="nx">Go</span><span class="o">/</span><span class="nx">src</span><span class="o">/</span><span class="nx">sync</span><span class="o">/</span><span class="nx">waitgroup</span><span class="p">.</span><span class="k">go</span><span class="p">:</span><span class="mi">75</span> <span class="o">+</span><span class="mh">0x1d0</span>
+<span class="nx">main</span><span class="p">.</span><span class="nf">main</span><span class="p">()</span>
+    <span class="nx">D</span><span class="p">:</span><span class="o">/</span><span class="nx">code</span><span class="o">/</span><span class="k">go</span><span class="o">/</span><span class="nx">src</span><span class="o">/</span><span class="nx">test</span><span class="o">-</span><span class="nx">src</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="nx">Package</span><span class="o">/</span><span class="nx">sync</span><span class="o">/</span><span class="nx">waitgroup</span><span class="o">/</span><span class="nx">main</span><span class="p">.</span><span class="k">go</span><span class="p">:</span><span class="mi">10</span> <span class="o">+</span><span class="mh">0x54</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>输出</p>
+</div><p>同样使用<code>Done()</code> 也要特别注意不要把计数器设置成负数了。</p>
+<h3 id="2-waitgroup对象不是一个引用类型">2. WaitGroup对象不是一个引用类型</h3>
+<p>WaitGroup对象不是一个引用类型，在通过函数传值的时候需要使用地址：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -498,26 +482,29 @@ data:
 </span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
 </span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
 </span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">---
-<span class="c1"># Source: fizz/templates/configmap.yaml</span>
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: RELEASE-NAME-configmap
-data:
-  config.json:
-    <span class="o">{</span>
-      <span class="s2">&#34;name&#34;</span>: <span class="s2">&#34;fizz&#34;</span>
-    <span class="o">}</span>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">func main() {
+    wg := sync.WaitGroup{}
+    wg.Add(100)
+    for i := 0; i &lt; 100; i++ {
+        go f(i, &amp;wg)
+    }
+    wg.Wait()
+}
+
+// 一定要通过指针传值，不然进程会进入死锁状态
+func f(i int, wg *sync.WaitGroup) { 
+    fmt.Println(i)
+    wg.Done()
+}
 </code></pre></td></tr></table>
 </div>
 </div><hr>
-<ul>
-<li><a href="https://helm.sh/zh/docs/chart_template_guide/accessing_files/">https://helm.sh/zh/docs/chart_template_guide/accessing_files/</a></li>
-<li><a href="https://blog.csdn.net/weixin_34111790/article/details/88741714">https://blog.csdn.net/weixin_34111790/article/details/88741714</a></li>
-</ul>
+<p>原文：https://studygolang.com/articles/12972</p>
 
     </div>
 
@@ -531,7 +518,7 @@ data:
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-      2021-04-07
+      2021-05-12
       
     </span>
   </p>
@@ -548,30 +535,16 @@ data:
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://www.llmgo.cn/tags/helm/">helm</a>
-          <a href="https://www.llmgo.cn/tags/kubernetes/">kubernetes</a>
+          <a href="https://www.llmgo.cn/tags/go/">go</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/kubernetes-externaltrafficpolicy/">
-            
-            <i class="iconfont">
-              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
-  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="18" height="18">
-  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
-</svg>
-
-            </i>
-            <span class="prev-text nav-default">kubernetes svc externalTrafficPolicy 字段</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
         
-          <a class="next" href="/post/go-test001/">
-            <span class="next-text nav-default">go 每日练习 01</span>
+          <a class="next" href="/post/two-sum-go/">
+            <span class="next-text nav-default">两数之和（leetcode）Go语言版本</span>
             <span class="prev-text nav-mobile">Next</span>
             
             <i class="iconfont">

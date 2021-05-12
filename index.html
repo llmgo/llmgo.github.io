@@ -98,13 +98,6 @@
         
           
           
-            <a class="menu-item-link" href="https://www.llmgo.cn/search/">搜索</a>
-          
-        
-      </li><li class="mobile-menu-item">
-        
-          
-          
             <a class="menu-item-link" href="https://www.llmgo.cn/">主页</a>
           
         
@@ -221,17 +214,6 @@
   <ul id="menu" class="menu">
     
     
-        <li class="menu-item">
-        
-          
-          
-            <a class="menu-item-link" href="https://www.llmgo.cn/search/">搜索</a>
-          
-
-        
-
-      </li>
-    
         <li class="menu-item active">
         
           
@@ -313,6 +295,41 @@
   <header class="post-header">
     <h1 class="post-title">
       
+      <a class="post-link" href="/post/usage-of-golang-sync-waitgroup/">Golang sync.WaitGroup 的用法
+</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2021-05-12" class="post-time">
+        2021-05-12
+      </time>
+      <div class="post-category">
+          <a href="https://www.llmgo.cn/categories/go/"> go </a>
+          
+        </div>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      Golang sync.WaitGroup 的用法 介绍 经常会看到一下代码 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import ( &#34;fmt&#34; &#34;time&#34; ) func main(){ for i := 0; i &lt; 100 ; i++{ go fmt.Println(i) } time.Sleep(time.Second) } 主线程为了等待goroutine都运
+    </div>
+    <div class="read-more">
+      <a href="/post/usage-of-golang-sync-waitgroup/" class="read-more-link">Read more</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
       <a class="post-link" href="/post/two-sum-go/">两数之和（leetcode）Go语言版本</a>
     </h1>
     
@@ -371,40 +388,6 @@
     </div>
     <div class="read-more">
       <a href="/post/use-gojq-lib-parse-json/" class="read-more-link">Read more</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/post/buildah-simple-to-use/">buildah 简单使用</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2021-05-08" class="post-time">
-        2021-05-08
-      </time>
-      <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/container/"> container </a>
-          
-        </div>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      buildah 简单使用 buildah 构建镜像的优势 兼容Dockerfile 不依赖docker daemon 下载buildah 1 yum install -y buildah 构建镜像 1 buildah bud -t harbor.example.com/library/app:v1 -f Dockerfile . 登陆 1 buildah login --tls-verify=false harbor.example.com 推送
-    </div>
-    <div class="read-more">
-      <a href="/post/buildah-simple-to-use/" class="read-more-link">Read more</a>
     </div>
     
   </div>
