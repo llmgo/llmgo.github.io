@@ -313,6 +313,40 @@
   <header class="post-header">
     <h1 class="post-title">
       
+      <a class="post-link" href="/post/go-test009/">go 每日练习 09</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2021-04-07" class="post-time">
+        2021-04-07
+      </time>
+      <div class="post-category">
+          <a href="https://www.llmgo.cn/categories/go/"> go </a>
+          
+        </div>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 package main import ( &#34;fmt&#34; &#34;io/ioutil&#34; &#34;os&#34; &#34;strings&#34; ) // 实现cat文件 func fileCat(file string) (err error) { text, err := ioutil.ReadFile(file) if err != nil { return } fmt.Println(strings.TrimSpace(string(text))) return
+    </div>
+    <div class="read-more">
+      <a href="/post/go-test009/" class="read-more-link">Read more</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
       <a class="post-link" href="/post/go-test010/">go 每日练习 10</a>
     </h1>
     
@@ -371,40 +405,6 @@
     </div>
     <div class="read-more">
       <a href="/post/go-test011/" class="read-more-link">Read more</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/post/go-simple-http/">go 运行简单http服务器</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2021-04-07" class="post-time">
-        2021-04-07
-      </time>
-      <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/go/"> go </a>
-          
-        </div>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      简单的http服务器 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 package main import ( &#34;fmt&#34; &#34;net/http&#34; ) // 实现一个简单的http服务 func main() { http.HandleFunc(&#34;/&#34;, func(w http.ResponseWriter, r *http.Request) { fmt.Fprintf(w, &#34;hello , you&#39;ve requestend: %v\n&#34;, r.URL.Path) }) http.ListenAndServe(&#34;:8080&#34;, nil) }
-    </div>
-    <div class="read-more">
-      <a href="/post/go-simple-http/" class="read-more-link">Read more</a>
     </div>
     
   </div>

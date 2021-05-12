@@ -6,7 +6,16 @@
     <description>Recent content in go on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 10 May 2021 20:55:14 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 May 2021 10:54:48 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>两数之和（leetcode）Go语言版本</title>
+      <link>https://www.llmgo.cn/post/two-sum-go/</link>
+      <pubDate>Wed, 12 May 2021 10:54:48 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/two-sum-go/</guid>
+      <description>两数之和（leetcode）Go语言版本 https://leetcode-cn.com/problems/two-sum solution 1 1 2 3 4 5 6 7 8 9 10 11 12 13 func twoSum(nums []int, target int) []int { count := len(nums) var arr []int for i := 0; i &amp;lt; count; i++ { for j := i + 1; j &amp;lt; count; j++ { if</description>
+    </item>
+    
     <item>
       <title>Go使用gojq来解析json</title>
       <link>https://www.llmgo.cn/post/use-gojq-lib-parse-json/</link>
@@ -176,15 +185,6 @@
       
       <guid>https://www.llmgo.cn/post/go-simple-http/</guid>
       <description>简单的http服务器 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;net/http&amp;#34; ) // 实现一个简单的http服务 func main() { http.HandleFunc(&amp;#34;/&amp;#34;, func(w http.ResponseWriter, r *http.Request) { fmt.Fprintf(w, &amp;#34;hello , you&amp;#39;ve requestend: %v\n&amp;#34;, r.URL.Path) }) http.ListenAndServe(&amp;#34;:8080&amp;#34;, nil) }</description>
-    </item>
-    
-    <item>
-      <title>go 执行linux命令</title>
-      <link>https://www.llmgo.cn/post/go-os-exec/</link>
-      <pubDate>Wed, 07 Apr 2021 10:45:44 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/post/go-os-exec/</guid>
-      <description>Go使用os/exec执行命令 Go可以非常方便地执行外部程序，让我们开始探索之旅吧。 执行命令并且获取输出1 1 2 3 4 5 6 7 8 func methodOne() { cmd := &amp;#34;cat go.mod&amp;#34; stdout, err</description>
     </item>
     
   </channel>
