@@ -6,7 +6,17 @@
     <description>Recent content in Posts on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 12 May 2021 16:36:06 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 13 May 2021 19:57:39 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kubernetes 重启的几种方法
+</title>
+      <link>https://www.llmgo.cn/post/the-way-restart-kubernetes/</link>
+      <pubDate>Thu, 13 May 2021 19:57:39 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/the-way-restart-kubernetes/</guid>
+      <description>kubernetes 重启的几种方法 方法1 1 2 kubectl scale deployment XXXX --replicas=0 -n &amp;lt;NAMESPACE&amp;gt; kubectl scale deployment XXXX --replicas=1 -n &amp;lt;NAMESPACE&amp;gt; 方法2 1 kubectl delete pod &amp;lt;POD_NAME&amp;gt; -n &amp;lt;NAMESPACE&amp;gt; 方法3 1 kubectl get pod &amp;lt;POD_NAME&amp;gt; -n &amp;lt;NAMESPACE&amp;gt; -o yaml | kubectl replace --force -f - 方法4 Kubernetes 1.15开始才有 1 kubectl rollout</description>
+    </item>
+    
     <item>
       <title>Golang sync.WaitGroup 的用法
 </title>
@@ -177,15 +187,6 @@
       
       <guid>https://www.llmgo.cn/post/jenkins-webhook-autobuild/</guid>
       <description>Jenkins WebHook 自动构建 [toc] 1. 安装 Gitlab Hook 插件 需要安装两个插件： Gitlab Hook GitLab 2. Jenkins Job设置自动构建 点击右下角的ADCANCED,构建一个Secret token 3. Gitlab 设置web</description>
-    </item>
-    
-    <item>
-      <title>Java 应用cpu占用高排查思路</title>
-      <link>https://www.llmgo.cn/post/java-project-high-cpu-usage/</link>
-      <pubDate>Wed, 07 Apr 2021 11:08:33 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/post/java-project-high-cpu-usage/</guid>
-      <description>Java 项目CPU占用高排查 [toc] 一、分析问题 cpu占用高一般来说是项目本身自发导致的，自发包括定时任务和死循环，而具体哪一段代码也确定不了， 现在我们</description>
     </item>
     
   </channel>

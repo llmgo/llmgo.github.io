@@ -6,7 +6,17 @@
     <description>Recent content in kubernetes on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 12 Apr 2021 19:25:55 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 13 May 2021 19:57:39 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kubernetes 重启的几种方法
+</title>
+      <link>https://www.llmgo.cn/post/the-way-restart-kubernetes/</link>
+      <pubDate>Thu, 13 May 2021 19:57:39 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/the-way-restart-kubernetes/</guid>
+      <description>kubernetes 重启的几种方法 方法1 1 2 kubectl scale deployment XXXX --replicas=0 -n &amp;lt;NAMESPACE&amp;gt; kubectl scale deployment XXXX --replicas=1 -n &amp;lt;NAMESPACE&amp;gt; 方法2 1 kubectl delete pod &amp;lt;POD_NAME&amp;gt; -n &amp;lt;NAMESPACE&amp;gt; 方法3 1 kubectl get pod &amp;lt;POD_NAME&amp;gt; -n &amp;lt;NAMESPACE&amp;gt; -o yaml | kubectl replace --force -f - 方法4 Kubernetes 1.15开始才有 1 kubectl rollout</description>
+    </item>
+    
     <item>
       <title>在 kubernetes 上使用CephFS作为文件存储</title>
       <link>https://www.llmgo.cn/post/use-cephfs-kubernetes-pv-pvc/</link>
