@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>kubernetes 重启的几种方法
+  <title>利用gopsutil库来获取mac内存信息
  - 一个小运维的博客</title>
   
 
@@ -24,7 +24,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="liliming" />
-  <meta name="description" content="kubernetes 重启的几种方法 方法1 1 2 kubectl scale deployment XXXX --replicas=0 -n &amp;lt;NAMESPACE&amp;gt; kubectl scale deployment XXXX --replicas=1 -n &amp;lt;NAMESPACE&amp;gt; 方法2 1 kubectl delete pod &amp;lt;POD_NAME&amp;gt; -n &amp;lt;NAMESPACE&amp;gt; 方法3 1 kubectl get pod &amp;lt;POD_NAME&amp;gt; -n &amp;lt;NAMESPACE&amp;gt; -o yaml | kubectl replace --force -f - 方法4 Kubernetes 1.15开始才有 1 kubectl rollout" />
+  <meta name="description" content="利用gopsutil库来获取mac内存信息 由于mac上没有free命令来查看内存使用，所以可以利用gopsutil来获取内存信息来展示 代码：" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -36,7 +36,7 @@
 <meta name="generator" content="Hugo 0.82.0" />
 
 
-<link rel="canonical" href="https://www.llmgo.cn/post/the-way-restart-kubernetes/" />
+<link rel="canonical" href="https://www.llmgo.cn/post/use-gopsutil-lib-get-mem-info/" />
 
 
 
@@ -60,23 +60,23 @@
 
 
 
-<meta property="og:title" content="kubernetes 重启的几种方法
+<meta property="og:title" content="利用gopsutil库来获取mac内存信息
 " />
-<meta property="og:description" content="kubernetes 重启的几种方法 方法1 1 2 kubectl scale deployment XXXX --replicas=0 -n &lt;NAMESPACE&gt; kubectl scale deployment XXXX --replicas=1 -n &lt;NAMESPACE&gt; 方法2 1 kubectl delete pod &lt;POD_NAME&gt; -n &lt;NAMESPACE&gt; 方法3 1 kubectl get pod &lt;POD_NAME&gt; -n &lt;NAMESPACE&gt; -o yaml | kubectl replace --force -f - 方法4 Kubernetes 1.15开始才有 1 kubectl rollout" />
+<meta property="og:description" content="利用gopsutil库来获取mac内存信息 由于mac上没有free命令来查看内存使用，所以可以利用gopsutil来获取内存信息来展示 代码：" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.llmgo.cn/post/the-way-restart-kubernetes/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-05-13T19:57:39&#43;08:00" />
-<meta property="article:modified_time" content="2021-05-13T19:57:39&#43;08:00" />
+<meta property="og:url" content="https://www.llmgo.cn/post/use-gopsutil-lib-get-mem-info/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-18T19:31:55&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-18T19:31:55&#43;08:00" />
 
-<meta itemprop="name" content="kubernetes 重启的几种方法
+<meta itemprop="name" content="利用gopsutil库来获取mac内存信息
 ">
-<meta itemprop="description" content="kubernetes 重启的几种方法 方法1 1 2 kubectl scale deployment XXXX --replicas=0 -n &lt;NAMESPACE&gt; kubectl scale deployment XXXX --replicas=1 -n &lt;NAMESPACE&gt; 方法2 1 kubectl delete pod &lt;POD_NAME&gt; -n &lt;NAMESPACE&gt; 方法3 1 kubectl get pod &lt;POD_NAME&gt; -n &lt;NAMESPACE&gt; -o yaml | kubectl replace --force -f - 方法4 Kubernetes 1.15开始才有 1 kubectl rollout"><meta itemprop="datePublished" content="2021-05-13T19:57:39&#43;08:00" />
-<meta itemprop="dateModified" content="2021-05-13T19:57:39&#43;08:00" />
-<meta itemprop="wordCount" content="72">
-<meta itemprop="keywords" content="kubernetes," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="kubernetes 重启的几种方法
+<meta itemprop="description" content="利用gopsutil库来获取mac内存信息 由于mac上没有free命令来查看内存使用，所以可以利用gopsutil来获取内存信息来展示 代码："><meta itemprop="datePublished" content="2021-05-18T19:31:55&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-18T19:31:55&#43;08:00" />
+<meta itemprop="wordCount" content="178">
+<meta itemprop="keywords" content="go," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="利用gopsutil库来获取mac内存信息
 "/>
-<meta name="twitter:description" content="kubernetes 重启的几种方法 方法1 1 2 kubectl scale deployment XXXX --replicas=0 -n &lt;NAMESPACE&gt; kubectl scale deployment XXXX --replicas=1 -n &lt;NAMESPACE&gt; 方法2 1 kubectl delete pod &lt;POD_NAME&gt; -n &lt;NAMESPACE&gt; 方法3 1 kubectl get pod &lt;POD_NAME&gt; -n &lt;NAMESPACE&gt; -o yaml | kubectl replace --force -f - 方法4 Kubernetes 1.15开始才有 1 kubectl rollout"/>
+<meta name="twitter:description" content="利用gopsutil库来获取mac内存信息 由于mac上没有free命令来查看内存使用，所以可以利用gopsutil来获取内存信息来展示 代码："/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -296,15 +296,15 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">kubernetes 重启的几种方法
+      <h1 class="post-title">利用gopsutil库来获取mac内存信息
 </h1>
       
       <div class="post-meta">
-        <time datetime="2021-05-13" class="post-time">
-          2021-05-13
+        <time datetime="2021-05-18" class="post-time">
+          2021-05-18
         </time>
         <div class="post-category">
-            <a href="https://www.llmgo.cn/categories/kubernetes/"> kubernetes </a>
+            <a href="https://www.llmgo.cn/categories/go/"> go </a>
             
           </div>
         
@@ -329,46 +329,82 @@
 
     
     <div class="post-content">
-      <h1 id="kubernetes-重启的几种方法">kubernetes 重启的几种方法</h1>
-<p>方法1</p>
+      <h1 id="利用gopsutil库来获取mac内存信息">利用gopsutil库来获取mac内存信息</h1>
+<p>由于mac上没有free命令来查看内存使用，所以可以利用<code>gopsutil</code>来获取内存信息来展示</p>
+<p>代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span class="lnt" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span class="lnt" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span class="lnt" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span class="lnt" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span class="lnt" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span class="lnt" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span class="lnt" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span class="lnt" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span class="lnt" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span class="lnt" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+   <span class="s">&#34;fmt&#34;</span>
+   <span class="s">&#34;strconv&#34;</span>
+
+   <span class="s">&#34;github.com/shirou/gopsutil/v3/mem&#34;</span>
+   <span class="c1">// &#34;github.com/shirou/gopsutil/mem&#34;  // to use v2
+</span><span class="c1"></span><span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+   <span class="nx">v</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">mem</span><span class="p">.</span><span class="nf">VirtualMemory</span><span class="p">()</span>
+
+   <span class="nx">max</span> <span class="o">:=</span> <span class="mi">20</span>
+   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%-&#34;</span><span class="o">+</span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">max</span><span class="p">)</span><span class="o">+</span><span class="s">&#34;s %.0fG\n&#34;</span><span class="p">,</span> <span class="s">&#34;Total:&#34;</span><span class="p">,</span> <span class="nb">float64</span><span class="p">(</span><span class="nx">v</span><span class="p">.</span><span class="nx">Total</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="p">))</span>
+   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%-&#34;</span><span class="o">+</span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">max</span><span class="p">)</span><span class="o">+</span><span class="s">&#34;s %.1fG\n&#34;</span><span class="p">,</span> <span class="s">&#34;Free:&#34;</span><span class="p">,</span> <span class="nb">float64</span><span class="p">(</span><span class="nx">v</span><span class="p">.</span><span class="nx">Free</span><span class="p">)</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="p">)</span>
+   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%-&#34;</span><span class="o">+</span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">max</span><span class="p">)</span><span class="o">+</span><span class="s">&#34;s %.2f%%\n&#34;</span><span class="p">,</span> <span class="s">&#34;Used:&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">.</span><span class="nx">UsedPercent</span><span class="p">)</span>
+   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%-&#34;</span><span class="o">+</span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">max</span><span class="p">)</span><span class="o">+</span><span class="s">&#34;s %vG\n&#34;</span><span class="p">,</span> <span class="s">&#34;Active:&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">.</span><span class="nx">Active</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="p">)</span>
+   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%-&#34;</span><span class="o">+</span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">max</span><span class="p">)</span><span class="o">+</span><span class="s">&#34;s %vG\n&#34;</span><span class="p">,</span> <span class="s">&#34;Inactive:&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">.</span><span class="nx">Inactive</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="p">)</span>
+   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%-&#34;</span><span class="o">+</span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">max</span><span class="p">)</span><span class="o">+</span><span class="s">&#34;s %vG\n&#34;</span><span class="p">,</span> <span class="s">&#34;Wired:&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">.</span><span class="nx">Wired</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="p">)</span>
+
+   <span class="c1">// convert to JSON. String() is also implemented
+</span><span class="c1"></span>   <span class="c1">//fmt.Println(v)
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结果：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kubectl scale deployment XXXX --replicas<span class="o">=</span><span class="m">0</span> -n &lt;NAMESPACE&gt;
-kubectl scale deployment XXXX --replicas<span class="o">=</span><span class="m">1</span> -n &lt;NAMESPACE&gt;
-</code></pre></td></tr></table>
-</div>
-</div><p>方法2</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kubectl delete pod &lt;POD_NAME&gt; -n &lt;NAMESPACE&gt;
-</code></pre></td></tr></table>
-</div>
-</div><p>方法3</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kubectl get pod &lt;POD_NAME&gt; -n  &lt;NAMESPACE&gt; -o yaml <span class="p">|</span> kubectl replace --force -f -
-</code></pre></td></tr></table>
-</div>
-</div><p>方法4</p>
-<blockquote>
-<p>Kubernetes 1.15开始才有</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kubectl rollout restart &lt;YOUR_DEPLOYMENT_NAME&gt;
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ go run . 
+Total:               32G
+Free:                0.8G
+Used:                53.95%
+Active:              14G
+Inactive:            13G
+Wired:               2G
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -384,7 +420,7 @@ kubectl scale deployment XXXX --replicas<span class="o">=</span><span class="m">
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-      2021-05-13
+      2021-05-18
       
     </span>
   </p>
@@ -401,30 +437,16 @@ kubectl scale deployment XXXX --replicas<span class="o">=</span><span class="m">
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://www.llmgo.cn/tags/kubernetes/">kubernetes</a>
+          <a href="https://www.llmgo.cn/tags/go/">go</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/use-gopsutil-lib-get-mem-info/">
-            
-            <i class="iconfont">
-              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
-  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="18" height="18">
-  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
-</svg>
-
-            </i>
-            <span class="prev-text nav-default">利用gopsutil库来获取mac内存信息
-</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
         
-          <a class="next" href="/post/usage-of-golang-sync-waitgroup/">
-            <span class="next-text nav-default">Golang sync.WaitGroup 的用法
+          <a class="next" href="/post/the-way-restart-kubernetes/">
+            <span class="next-text nav-default">kubernetes 重启的几种方法
 </span>
             <span class="prev-text nav-mobile">Next</span>
             
