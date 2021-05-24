@@ -6,7 +6,17 @@
     <description>Recent content in Posts on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 18 May 2021 19:31:55 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 May 2021 17:20:18 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>harbor exporter
+</title>
+      <link>https://www.llmgo.cn/post/harbor_exporter/</link>
+      <pubDate>Mon, 24 May 2021 17:20:18 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/harbor_exporter/</guid>
+      <description>harbor exporter https://github.com/c4po/harbor_exporter https://github.com/zhangguanzhang/harbor_exporter 我更喜欢第一个 现在harbor2.2.0以后配置文件可以启用metrics https://goharbor.io/docs/2.2.0/administration/metrics/</description>
+    </item>
+    
     <item>
       <title>利用gopsutil库来获取mac内存信息
 </title>
@@ -179,15 +189,6 @@
       
       <guid>https://www.llmgo.cn/post/use-pm2-management-go-app/</guid>
       <description>使用pm2来管理go应用进程 pm2是一个进程管理工具,可以用它来管理你的node进程，并查看node进程的状态，当然也支持性能监控，进程守护</description>
-    </item>
-    
-    <item>
-      <title>Jenkins 利用Build Name and Description Setter插件在build history输出信息</title>
-      <link>https://www.llmgo.cn/post/jenkins-output-infomation-in-buildhistory/</link>
-      <pubDate>Wed, 07 Apr 2021 11:11:53 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/post/jenkins-output-infomation-in-buildhistory/</guid>
-      <description>Jenkins 利用Build Name and Description Setter插件在build history输出信息 插件名称：Build Name and Description Setter Pipeline语法 1 2 3 4 5 6 7 stage(&amp;#34;Initialization&amp;#34;) { steps</description>
     </item>
     
   </channel>
