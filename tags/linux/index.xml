@@ -6,7 +6,17 @@
     <description>Recent content in linux on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 29 Apr 2021 15:25:21 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 May 2021 17:31:19 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>systemd 启动时报错 Permission denied
+</title>
+      <link>https://www.llmgo.cn/post/systemd-startup-permission-denied/</link>
+      <pubDate>Tue, 25 May 2021 17:31:19 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/systemd-startup-permission-denied/</guid>
+      <description>systemd 启动时报错 Permission denied 文件权限正确，但是通过 systemd启动时仍然报 Permission denied 错误。 1 2 May 25 17:19:33 rocky-linux systemd[36839]: stargz-snapshotter.service: Failed to execute command: Permission denied May 25 17:19:33 rocky-linux systemd[36839]: stargz-snapshotter.service: Failed at step EXEC spawning /usr/local/bin/containerd-stargz 解决方案 是 SELinux 搞</description>
+    </item>
+    
     <item>
       <title>好用的文件服务器</title>
       <link>https://www.llmgo.cn/post/easy-to-use-file-servermd/</link>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Archive - 一个小运维的博客</title>
+  <title>一个小运维的博客</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -34,8 +34,8 @@
 <meta name="generator" content="Hugo 0.82.0" />
 
 
-<link rel="canonical" href="https://www.llmgo.cn/post/" />
-<link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="一个小运维的博客" />
+<link rel="canonical" href="https://www.llmgo.cn/" />
+<link href="/index.xml" rel="alternate" type="application/rss+xml" title="一个小运维的博客" />
 
 
 
@@ -58,14 +58,14 @@
 
 
 
-<meta property="og:title" content="Posts" />
+<meta property="og:title" content="一个小运维的博客" />
 <meta property="og:description" content="Hugo theme jane example site." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.llmgo.cn/post/" />
+<meta property="og:url" content="https://www.llmgo.cn/" />
 
-<meta itemprop="name" content="Posts">
+<meta itemprop="name" content="一个小运维的博客">
 <meta itemprop="description" content="Hugo theme jane example site."><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:title" content="一个小运维的博客"/>
 <meta name="twitter:description" content="Hugo theme jane example site."/>
 
 <!--[if lte IE 9]>
@@ -214,7 +214,7 @@
   <ul id="menu" class="menu">
     
     
-        <li class="menu-item">
+        <li class="menu-item active">
         
           
           
@@ -225,7 +225,7 @@
 
       </li>
     
-        <li class="menu-item active">
+        <li class="menu-item">
         
           
           
@@ -284,130 +284,84 @@
       <div class="content-wrapper">
         <div id="content" class="content container">
           
-<section id="archive" class="archive">
+<section id="posts" class="posts">
+  
+  
     
-      <div class="collection-title">
-        <h2 class="archive-year">2021</h2>
-      </div>
-
-    <div class="archive-post">
-      <time datetime="2021-04-08" class="archive-post-time">
-        2021-04-08
+  
+  
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      <a class="post-link" href="/post/go-get-localhost-ipv4/">Go语言获取本机的IPv4地址</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2021-04-06" class="post-time">
+        2021-04-06
       </time>
-      <span class="archive-post-title">
-        <a href="/post/use-interface-loglib/" class="archive-post-link">
-          使用接口的方式实现一个既可以往终端写日志也可以往文件写日志的简易日志库
-        </a>
-      </span>
+      <div class="post-category">
+          <a href="https://www.llmgo.cn/categories/golang/"> golang </a>
+          <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
+          
+        </div>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      Go语言获取本机的IPv4地址 获取本机ipv4地址 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 package main import ( &#34;fmt&#34; &#34;net&#34; &#34;os&#34; ) func main() { ips, err := net.LookupIP(os.Getenv(&#34;HOSTNAME&#34;)) if err != nil { panic(err) } for _,
+    </div>
+    <div class="read-more">
+      <a href="/post/go-get-localhost-ipv4/" class="read-more-link">Read more</a>
     </div>
     
+  </div>
+</article>
 
-    <div class="archive-post">
-      <time datetime="2021-04-08" class="archive-post-time">
-        2021-04-08
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      <a class="post-link" href="/post/go-tail/">Go语言如何实现tail命令的功能</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-03-01" class="post-time">
+        2018-03-01
       </time>
-      <span class="archive-post-title">
-        <a href="/post/use-pm2-management-go-app/" class="archive-post-link">
-          使用pm2来管理go应用进程
-        </a>
-      </span>
+      <div class="post-category">
+          <a href="https://www.llmgo.cn/categories/golang/"> golang </a>
+          <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
+          
+        </div>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      Go语言如何实现tail命令的功能 大体上来说，要用Go 语言（或是其它的什么编程语言）来实现 tail -f 命令的功能，大致方法和逻辑不外乎： 直接调用ta
+    </div>
+    <div class="read-more">
+      <a href="/post/go-tail/" class="read-more-link">Read more</a>
     </div>
     
+  </div>
+</article>
 
-    <div class="archive-post">
-      <time datetime="2021-04-07" class="archive-post-time">
-        2021-04-07
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/jenkins-output-infomation-in-buildhistory/" class="archive-post-link">
-          Jenkins 利用Build Name and Description Setter插件在build history输出信息
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-07" class="archive-post-time">
-        2021-04-07
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/jenkins-webhook-autobuild/" class="archive-post-link">
-          Jenkins WebHook 自动构建
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-07" class="archive-post-time">
-        2021-04-07
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/java-project-high-cpu-usage/" class="archive-post-link">
-          Java 应用cpu占用高排查思路
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-07" class="archive-post-time">
-        2021-04-07
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/pinpoint-alert-config/" class="archive-post-link">
-          pinpoint 告警配置
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-07" class="archive-post-time">
-        2021-04-07
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/pinpoint-install/" class="archive-post-link">
-          apm 软件pinpoint 安装
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-07" class="archive-post-time">
-        2021-04-07
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/spring-cloud-gateway-name-or-service-not-known/" class="archive-post-link">
-          spring cloud gateway访问不了注册的地址
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-07" class="archive-post-time">
-        2021-04-07
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/spring-boot-proj-prob/" class="archive-post-link">
-          spring boot 项目设置相关探测
-        </a>
-      </span>
-    </div>
-    
-
-    <div class="archive-post">
-      <time datetime="2021-04-07" class="archive-post-time">
-        2021-04-07
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/kubernetes-externaltrafficpolicy/" class="archive-post-link">
-          kubernetes svc externalTrafficPolicy 字段
-        </a>
-      </span>
-    </div></section>
+  
+</section>
 
 
 
@@ -429,45 +383,710 @@
 
   
   
-  <nav class="pagination">
-    <ul>
+
+    <nav class="pagination">
+      <ul>
+
       
-      <li >
-        <a href="/post/">1</a>
-      </li>
       
-      <li >
-        <a href="/post/page/2/">2</a>
-      </li>
+      <li><a href="/">««</a></li>
       
-      <li  class="active" >
-        <a href="/post/page/3/">3</a>
-      </li>
-      
-      <li >
-        <a href="/post/page/4/">4</a>
-      </li>
-      
-      <li >
-        <a href="/post/page/5/">5</a>
-      </li>
-      
-      <li >
-        <a href="/post/page/6/">6</a>
-      </li>
-      
-      <li >
-        <a href="/post/page/7/">7</a>
-      </li>
-      
-      <li >
-        <a href="/post/page/8/">8</a>
-      </li>
-      
-    </ul>
-  </nav>
 
-  
+      
+      
+      <li><a href="/page/24/">«</a></li>
+      
+
+      
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/13/">
+              13
+            </a>
+          </li>
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/14/">
+              14
+            </a>
+          </li>
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/15/">
+              15
+            </a>
+          </li>
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/16/">
+              16
+            </a>
+          </li>
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/17/">
+              17
+            </a>
+          </li>
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/18/">
+              18
+            </a>
+          </li>
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/19/">
+              19
+            </a>
+          </li>
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/20/">
+              20
+            </a>
+          </li>
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/21/">
+              21
+            </a>
+          </li>
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/22/">
+              22
+            </a>
+          </li>
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/23/">
+              23
+            </a>
+          </li>
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/24/">
+              24
+            </a>
+          </li>
+        
+
+      
+
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="active">
+            <a href="/page/25/">
+              25
+            </a>
+          </li>
+        
+
+      
+
+      
+      
+
+      
+      
+
+      </ul>
+    </nav>
   
 
 

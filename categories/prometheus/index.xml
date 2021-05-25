@@ -6,7 +6,17 @@
     <description>Recent content in prometheus on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 24 May 2021 17:20:18 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/prometheus/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 May 2021 17:36:31 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/prometheus/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>prometheus 通过命令热加载
+</title>
+      <link>https://www.llmgo.cn/post/prometheus-reload/</link>
+      <pubDate>Mon, 24 May 2021 17:36:31 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/prometheus-reload/</guid>
+      <description>prometheus 通过命令热加载 1 2 $ curl -XPOST localhost:9090/-/reload Lifecycle API is not enabled. 添加--web.enable-lifecycle参数 1 2 3 4 5 Type=simple User=prometheus ExecStart=/data1/prometheus/prometheus --config.file=/data1/prometheus/prometheus.yml --storage.tsdb.path=/data1/prometheus/data --web.enable-lifecycle ExecReload=/bin/kill -HUP Restart=on-failure</description>
+    </item>
+    
     <item>
       <title>harbor exporter
 </title>
