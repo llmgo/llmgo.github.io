@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>WireGuard 的搭建使用与配置详解
+ - 一个小运维的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="liliming" />
+  <meta name="description" content="WireGuard 的搭建使用与配置详解 一、快速开始 1. 安装 centos 7 1 2 3 4 5 6 7 8 $ yum install epel-release https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm $ yum install yum-plugin-elrepo $ yum install kmod-wireguard wireguard-tools # 如果你使用的是非标准内核，需要安装 DKMS 包 $ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm $ curl" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+<link rel="canonical" href="https://www.llmgo.cn/post/wireguard-docs-practice/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.b3a8813c06e6d785beba22bf8264e174fa2cb3a396b22f9ba24e2c00c18aaf7f.css" integrity="sha256-s6iBPAbm14W&#43;uiK/gmThdPoss6OWsi&#43;bok4sAMGKr38=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="WireGuard 的搭建使用与配置详解
+" />
+<meta property="og:description" content="WireGuard 的搭建使用与配置详解 一、快速开始 1. 安装 centos 7 1 2 3 4 5 6 7 8 $ yum install epel-release https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm $ yum install yum-plugin-elrepo $ yum install kmod-wireguard wireguard-tools # 如果你使用的是非标准内核，需要安装 DKMS 包 $ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm $ curl" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.llmgo.cn/post/wireguard-docs-practice/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-28T16:41:16&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-28T16:41:16&#43;08:00" />
+
+<meta itemprop="name" content="WireGuard 的搭建使用与配置详解
+">
+<meta itemprop="description" content="WireGuard 的搭建使用与配置详解 一、快速开始 1. 安装 centos 7 1 2 3 4 5 6 7 8 $ yum install epel-release https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm $ yum install yum-plugin-elrepo $ yum install kmod-wireguard wireguard-tools # 如果你使用的是非标准内核，需要安装 DKMS 包 $ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm $ curl"><meta itemprop="datePublished" content="2021-05-28T16:41:16&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-28T16:41:16&#43;08:00" />
+<meta itemprop="wordCount" content="7069">
+<meta itemprop="keywords" content="wireguard," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="WireGuard 的搭建使用与配置详解
+"/>
+<meta name="twitter:description" content="WireGuard 的搭建使用与配置详解 一、快速开始 1. 安装 centos 7 1 2 3 4 5 6 7 8 $ yum install epel-release https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm $ yum install yum-plugin-elrepo $ yum install kmod-wireguard wireguard-tools # 如果你使用的是非标准内核，需要安装 DKMS 包 $ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm $ curl"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">不宜妄自菲薄</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/categories/">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/about/">关于</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      不宜妄自菲薄
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/about/">关于</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">WireGuard 的搭建使用与配置详解
+</h1>
+      
+      <div class="post-meta">
+        <time datetime="2021-05-28" class="post-time">
+          2021-05-28
+        </time>
+        <div class="post-category">
+            <a href="https://www.llmgo.cn/categories/wireguard/"> wireguard </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一快速开始">一、快速开始</a>
+      <ul>
+        <li><a href="#1-安装">1. 安装</a></li>
+        <li><a href="#2-开启ip地址转发">2. 开启IP地址转发</a></li>
+        <li><a href="#3-编写配置文件">3. 编写配置文件</a></li>
+        <li><a href="#4-相关命令">4. 相关命令</a></li>
+        <li><a href="#5-一键安装">5. 一键安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#二配置详解">二、配置详解</a>
+      <ul>
+        <li><a href="#interface">[Interface]</a></li>
+        <li><a href="#peer">[Peer]</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-高级特性">3. 高级特性</a>
+      <ul>
+        <li><a href="#ipv6">IPv6</a></li>
+        <li><a href="#转发所有流量">转发所有流量</a></li>
+        <li><a href="#nat-to-nat-连接">NAT-to-NAT 连接</a></li>
+        <li><a href="#动态分配子网-ip">动态分配子网 IP</a></li>
+        <li><a href="#奇技淫巧">奇技淫巧</a></li>
+        <li><a href="#容器化">容器化</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+
+    
+    <div class="post-content">
+      <h1 id="wireguard-的搭建使用与配置详解">WireGuard 的搭建使用与配置详解</h1>
+<h2 id="一快速开始">一、快速开始</h2>
+<h3 id="1-安装">1. 安装</h3>
+<p><a href="https://www.wireguard.com/install/#centos-7-module-plus-module-kmod-module-dkms-tools">centos 7</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ yum install epel-release https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
+$ yum install yum-plugin-elrepo
+$ yum install kmod-wireguard wireguard-tools
+
+<span class="c1"># 如果你使用的是非标准内核，需要安装 DKMS 包</span>
+$ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ curl -o /etc/yum.repos.d/jdoss-wireguard-epel-7.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-7/jdoss-wireguard-epel-7.repo
+$ yum install wireguard-dkms wireguard-tools
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2-开启ip地址转发">2. 开启IP地址转发</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ cat <span class="s">&lt;&lt;&#39;EOF&#39;&gt;&gt; /etc/sysctl.conf
+</span><span class="s">net.ipv4.ip_forward = 1
+</span><span class="s">net.ipv4.conf.all.proxy_arp = 1
+</span><span class="s">EOF</span>
+$ sysctl -p /etc/sysctl.conf
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="3-编写配置文件">3. 编写配置文件</h3>
+<p>配置文件的默认路径是 <code>/etc/wireguard/wg0.conf</code>。</p>
+<h4 id="中继服务器配置">中继服务器配置</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /etc/wireguard/
+wg genkey <span class="p">|</span> tee relay-private.key <span class="p">|</span> wg pubkey &gt; relay-public.key
+cat <span class="s">&lt;&lt;EOF&gt; wg0.conf 
+</span><span class="s">[Interface]
+</span><span class="s">PrivateKey = $(cat relay-private.key)
+</span><span class="s">Address = 5.5.5.1/24
+</span><span class="s">PostUp   = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+</span><span class="s">PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+</span><span class="s">ListenPort = 52021
+</span><span class="s">EOF</span>
+systemctl restart wg-quick@wg0 // 或 wg-quick down wg0 <span class="o">&amp;&amp;</span> wg-quick up wg0
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="peer节点配置">Peer节点配置</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /etc/wireguard/
+wg genkey <span class="p">|</span> tee peer1-private.key <span class="p">|</span> wg pubkey &gt; peer1-public.key
+cat <span class="s">&lt;&lt;&#39;EOF&#39;&gt; wg0.conf
+</span><span class="s">[Interface]
+</span><span class="s">PrivateKey = $(cat peer1-private.key)
+</span><span class="s">Address = 5.5.5.2/24 # 内网IP地址
+</span><span class="s">
+</span><span class="s">[Peer]
+</span><span class="s">PublicKey = &lt;中继节点公钥&gt;
+</span><span class="s">Endpoint = &lt;中继节点IP:端口&gt;
+</span><span class="s">AllowedIPs = 0.0.0.0/0
+</span><span class="s">PersistentKeepalive = 30
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>再次配置中继节点Peer信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cat <span class="s">&lt;&lt;EOF&gt;&gt; wg0.conf
+</span><span class="s">[Peer]
+</span><span class="s">PublicKey = &lt;Peer节点Pubkey&gt;
+</span><span class="s">AllowedIPs = 5.5.5.2/32
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>重启</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">systemctl restart wg-quick@wg0
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="4-相关命令">4. 相关命令</h3>
+<table>
+<thead>
+<tr>
+<th>注释</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查看VPN接口信息</td>
+<td>wg show</td>
+</tr>
+<tr>
+<td>启动/停止</td>
+<td>wg-quick up wg0 / wg-quick down wg0</td>
+</tr>
+<tr>
+<td>启动/停止 VPN 网络接口</td>
+<td>ip link set wg0 up / ip link set wg0 down</td>
+</tr>
+<tr>
+<td>注册/注销VPN网络接口</td>
+<td>ip link add dev wg0 type wireguard / ip link delete dev wg0</td>
+</tr>
+<tr>
+<td>注册/注销 本地 VPN 地址</td>
+<td>ip address add dev wg0 192.0.2.3/32 / ip address delete dev wg0 192.0.2.3/32</td>
+</tr>
+<tr>
+<td>添加/删除 VPN 路由</td>
+<td>ip route add 192.0.2.3/32 dev wg0 / ip route delete 192.0.2.3/32 dev wg0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-一键安装">5. 一键安装</h3>
+<p><a href="https://github.com/angristan/wireguard-install">https://github.com/angristan/wireguard-install</a></p>
+<h2 id="二配置详解">二、配置详解</h2>
+<p>WireGuard 使用 <a href="https://zh.wikipedia.org/wiki/INI%E6%96%87%E4%BB%B6">INI</a> 语法作为其配置文件格式。配置文件可以放在任何路径下，但必须通过绝对路径引用。默认路径是 <code>/etc/wireguard/wg0.conf</code>。</p>
+<p>配置文件的命名形式必须为 <code>${WireGuard 接口的名称}.conf</code>。通常情况下 WireGuard 接口名称以 <code>wg</code> 为前缀，并从 <code>0</code> 开始编号，但你也可以使用其他名称，只要符合正则表达式 <code>^[a-zA-Z0-9_=+.-]{1,15}$</code> 就行。</p>
+<p>你可以选择使用 <code>wg</code> 命令来手动配置 VPN，但一般建议使用 <code>wg-quick</code>，它提供了更强大和用户友好的配置体验，可以通过配置文件来管理配置。</p>
+<p>下面是一个配置文件示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span class="lnt" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span class="lnt" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span class="lnt" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span class="lnt" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span class="lnt" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Interface]</span>
+<span class="c1"># Name = node1.example.tld</span>
+<span class="na">Address</span> <span class="o">=</span> <span class="s">192.0.2.3/32</span>
+<span class="na">ListenPort</span> <span class="o">=</span> <span class="s">51820</span>
+<span class="na">PrivateKey</span> <span class="o">=</span> <span class="s">localPrivateKeyAbcAbcAbc=</span>
+<span class="na">DNS</span> <span class="o">=</span> <span class="s">1.1.1.1,8.8.8.8</span>
+<span class="na">Table</span> <span class="o">=</span> <span class="s">12345</span>
+<span class="na">MTU</span> <span class="o">=</span> <span class="s">1500</span>
+<span class="na">PreUp</span> <span class="o">=</span> <span class="s">/bin/example arg1 arg2 %i</span>
+<span class="na">PostUp</span> <span class="o">=</span> <span class="s">/bin/example arg1 arg2 %i</span>
+<span class="na">PreDown</span> <span class="o">=</span> <span class="s">/bin/example arg1 arg2 %i</span>
+<span class="na">PostDown</span> <span class="o">=</span> <span class="s">/bin/example arg1 arg2 %i</span>
+
+<span class="k">[Peer]</span>
+<span class="c1"># Name = node2-node.example.tld</span>
+<span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">192.0.2.1/24</span>
+<span class="na">Endpoint</span> <span class="o">=</span> <span class="s">node1.example.tld:51820</span>
+<span class="na">PublicKey</span> <span class="o">=</span> <span class="s">remotePublicKeyAbcAbcAbc=</span>
+<span class="na">PersistentKeepalive</span> <span class="o">=</span> <span class="s">25</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="interface">[Interface]</h3>
+<p>这一节定义本地 VPN 配置。例如：</p>
+<ul>
+<li>
+<p>本地节点是客户端，只路由自身的流量，只暴露一个 IP。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Interface]</span>
+<span class="c1"># Name = phone.example-vpn.dev</span>
+<span class="na">Address</span> <span class="o">=</span> <span class="s">192.0.2.5/32</span>
+<span class="na">PrivateKey</span> <span class="o">=</span> <span class="s">&lt;private key for phone.example-vpn.dev&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>本地节点是中继服务器，它可以将流量转发到其他对等节点（peer），并公开整个 VPN 子网的路由。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Interface]</span>
+<span class="c1"># Name = public-server1.example-vpn.tld</span>
+<span class="na">Address</span> <span class="o">=</span> <span class="s">192.0.2.1/24</span>
+<span class="na">ListenPort</span> <span class="o">=</span> <span class="s">51820</span>
+<span class="na">PrivateKey</span> <span class="o">=</span> <span class="s">&lt;private key for public-server1.example-vpn.tld&gt;</span>
+<span class="na">DNS</span> <span class="o">=</span> <span class="s">1.1.1.1</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="--name">① # Name</h4>
+<p>这是 <code>INI</code> 语法中的标准注释，用于展示该配置部分属于哪个节点。这部分配置会被 WireGuard 完全忽略，对 VPN 的行为没有任何影响。</p>
+<h4 id="-address">② Address</h4>
+<p>定义本地节点应该对哪个地址范围进行路由。如果是常规的客户端，则将其设置为节点本身的单个 IP（使用 CIDR 指定，例如 192.0.2.3/32）；如果是中继服务器，则将其设置为可路由的子网范围。</p>
+<p>例如：</p>
+<ul>
+<li>常规客户端，只路由自身的流量：<code>Address = 192.0.2.3/32</code></li>
+<li>中继服务器，可以将流量转发到其他对等节点（peer）：<code>Address = 192.0.2.1/24</code></li>
+<li>也可以指定多个子网或 IPv6 子网：<code>Address = 192.0.2.1/24,2001:DB8::/64</code></li>
+</ul>
+<h4 id="-listenport">③ ListenPort</h4>
+<p>当本地节点是中继服务器时，需要通过该参数指定端口来监听传入 VPN 连接，默认端口号是 <code>51820</code>。常规客户端不需要此选项。</p>
+<h4 id="-privatekey">④ PrivateKey</h4>
+<p>本地节点的私钥，所有节点（包括中继服务器）都必须设置。不可与其他服务器共用。</p>
+<p>私钥可通过命令 <code>wg genkey &gt; example.key</code> 来生成。</p>
+<h4 id="-dns">⑤ DNS</h4>
+<p>通过 DHCP 向客户端宣告 DNS 服务器。客户端将会使用这里指定的 DNS 服务器来处理 VPN 子网中的 DNS 请求，但也可以在系统中覆盖此选项。例如：</p>
+<ul>
+<li>如果不配置则使用系统默认 DNS</li>
+<li>可以指定单个 DNS：<code>DNS = 1.1.1.1</code></li>
+<li>也可以指定多个 DNS：<code>DNS = 1.1.1.1,8.8.8.8</code></li>
+</ul>
+<h4 id="-table">⑥ Table</h4>
+<p>定义 VPN 子网使用的路由表，默认不需要设置。该参数有两个特殊的值需要注意：</p>
+<ul>
+<li><strong>Table = off</strong> : 禁止创建路由</li>
+<li><strong>Table = auto（默认值）</strong> : 将路由添加到系统默认的 table 中，并启用对默认路由的特殊处理。</li>
+</ul>
+<p>例如：<code>Table = 1234</code></p>
+<h4 id="-mtu">⑦ MTU</h4>
+<p>定义连接到对等节点（peer）的 <code>MTU</code>（Maximum Transmission Unit，最大传输单元），默认不需要设置，一般由系统自动确定。</p>
+<h4 id="-preup">⑧ PreUp</h4>
+<p>启动 VPN 接口之前运行的命令。这个选项可以指定多次，按顺序执行。</p>
+<p>例如：</p>
+<ul>
+<li>添加路由：<code>PreUp = ip rule add ipproto tcp dport 22 table 1234</code></li>
+</ul>
+<h4 id="-postup">⑨ PostUp</h4>
+<p>启动 VPN 接口之后运行的命令。这个选项可以指定多次，按顺序执行。</p>
+<p>例如：</p>
+<ul>
+<li>
+<p>从文件或某个命令的输出中读取配置值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">PostUp</span> <span class="o">=</span> <span class="s">wg set %i private-key /etc/wireguard/wg0.key &lt;(some command here)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>添加一行日志到文件中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">PostUp</span> <span class="o">=</span> <span class="s">echo &#34;$(date +%s) WireGuard Started&#34; &gt;&gt; /var/log/wireguard.log</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>调用 WebHook：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">PostUp</span> <span class="o">=</span> <span class="s">curl https://events.example.dev/wireguard/started/?key=abcdefg</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>添加路由：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">PostUp</span> <span class="o">=</span> <span class="s">ip rule add ipproto tcp dport 22 table 1234</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>添加 iptables 规则，启用数据包转发：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">PostUp</span> <span class="o">=</span> <span class="s">iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>强制 WireGuard 重新解析对端域名的 IP 地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">PostUp</span> <span class="o">=</span> <span class="s">resolvectl domain %i &#34;~.&#34;; resolvectl dns %i 192.0.2.1; resolvectl dnssec %i yes</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="-predown">⑩ PreDown</h4>
+<p>停止 VPN 接口之前运行的命令。这个选项可以指定多次，按顺序执行。</p>
+<p>例如：</p>
+<ul>
+<li>
+<p>添加一行日志到文件中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">PreDown</span> <span class="o">=</span> <span class="s">echo &#34;$(date +%s) WireGuard Going Down&#34; &gt;&gt; /var/log/wireguard.log</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>调用 WebHook：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">PreDown</span> <span class="o">=</span> <span class="s">curl https://events.example.dev/wireguard/stopping/?key=abcdefg</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="-postdown">⑪ PostDown</h4>
+<p>停止 VPN 接口之后运行的命令。这个选项可以指定多次，按顺序执行。</p>
+<p>例如：</p>
+<ul>
+<li>
+<p>添加一行日志到文件中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">PostDown</span> <span class="o">=</span> <span class="s">echo &#34;$(date +%s) WireGuard Going Down&#34; &gt;&gt; /var/log/wireguard.log</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>调用 WebHook：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">PostDown</span> <span class="o">=</span> <span class="s">curl https://events.example.dev/wireguard/stopping/?key=abcdefg</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>删除 iptables 规则，关闭数据包转发：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">PostDown</span> <span class="o">=</span> <span class="s">iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="peer">[Peer]</h3>
+<p>定义能够为一个或多个地址路由流量的对等节点（peer）的 VPN 设置。对等节点（peer）可以是将流量转发到其他对等节点（peer）的中继服务器，也可以是通过公网或内网直连的客户端。</p>
+<p>中继服务器必须将所有的客户端定义为对等节点（peer），除了中继服务器之外，其他客户端都不能将位于 NAT 后面的节点定义为对等节点（peer），因为路由不可达。对于那些只为自己路由流量的客户端，只需将中继服务器作为对等节点（peer），以及其他需要直接访问的节点。</p>
+<p>举个例子，在下面的配置中，<code>public-server1</code> 作为中继服务器，其他的客户端有的是直连，有的位于 NAT 后面：</p>
+<ul>
+<li>
+<p><code>public-server1</code>（中继服务器）</p>
+<p>[peer] : <code>public-server2</code>, <code>home-server</code>, <code>laptop</code>, <code>phone</code></p>
+</li>
+<li>
+<p><code>public-server2</code>（直连客户端）</p>
+<p>[peer] : <code>public-server1</code></p>
+</li>
+<li>
+<p><code>home-server</code>（客户端位于 NAT 后面）</p>
+<p>[peer] : <code>public-server1</code>, <code>public-server2</code></p>
+</li>
+<li>
+<p><code>laptop</code>（客户端位于 NAT 后面）</p>
+<p>[peer] : <code>public-server1</code>, <code>public-server2</code></p>
+</li>
+<li>
+<p><code>phone</code>（客户端位于 NAT 后面）</p>
+<p>[peer] : <code>public-server1</code>, <code>public-server2</code></p>
+</li>
+</ul>
+<p>配置示例：</p>
+<ul>
+<li>
+<p>对等节点（peer）是路由可达的客户端，只为自己路由流量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Peer]</span>
+<span class="c1"># Name = public-server2.example-vpn.dev</span>
+<span class="na">Endpoint</span> <span class="o">=</span> <span class="s">public-server2.example-vpn.dev:51820</span>
+<span class="na">PublicKey</span> <span class="o">=</span> <span class="s">&lt;public key for public-server2.example-vpn.dev&gt;</span>
+<span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">192.0.2.2/32</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对等节点（peer）是位于 NAT 后面的客户端，只为自己路由流量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Peer]</span>
+<span class="c1"># Name = home-server.example-vpn.dev</span>
+<span class="na">Endpoint</span> <span class="o">=</span> <span class="s">home-server.example-vpn.dev:51820</span>
+<span class="na">PublicKey</span> <span class="o">=</span> <span class="s">&lt;public key for home-server.example-vpn.dev&gt;</span>
+<span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">192.0.2.3/32</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对等节点（peer）是中继服务器，用来将流量转发到其他对等节点（peer）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Peer]</span>
+<span class="c1"># Name = public-server1.example-vpn.tld</span>
+<span class="na">Endpoint</span> <span class="o">=</span> <span class="s">public-server1.example-vpn.tld:51820</span>
+<span class="na">PublicKey</span> <span class="o">=</span> <span class="s">&lt;public key for public-server1.example-vpn.tld&gt;</span>
+<span class="c1"># 路由整个 VPN 子网的流量</span>
+<span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">192.0.2.1/24</span>
+<span class="na">PersistentKeepalive</span> <span class="o">=</span> <span class="s">25</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="-endpoint">① Endpoint</h4>
+<p>指定远端对等节点（peer）的公网地址。如果对等节点（peer）位于 NAT 后面或者没有稳定的公网访问地址，就忽略这个字段。通常只需要指定<strong>中继服务器</strong>的 <code>Endpoint</code>，当然有稳定公网 IP 的节点也可以指定。例如：</p>
+<ul>
+<li>
+<p>通过 IP 指定：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Endpoint</span> <span class="o">=</span> <span class="s">123.124.125.126:51820</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>通过域名指定：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Endpoint</span> <span class="o">=</span> <span class="s">public-server1.example-vpn.tld:51820</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="-allowedips">② AllowedIPs</h4>
+<p>允许该对等节点（peer）发送过来的 VPN 流量中的源地址范围。同时这个字段也会作为本机路由表中 wg0 绑定的 IP 地址范围。如果对等节点（peer）是常规的客户端，则将其设置为节点本身的单个 IP；如果对等节点（peer）是中继服务器，则将其设置为可路由的子网范围。可以使用 <code>,</code> 来指定多个 IP 或子网范围。该字段也可以指定多次。</p>
+<p>当决定如何对一个数据包进行路由时，系统首先会选择最具体的路由，如果不匹配再选择更宽泛的路由。例如，对于一个发往 <code>192.0.2.3</code> 的数据包，系统首先会寻找地址为 <code>192.0.2.3/32</code> 的对等节点（peer），如果没有再寻找地址为 <code>192.0.2.1/24</code> 的对等节点（peer），以此类推。</p>
+<p>例如：</p>
+<ul>
+<li>
+<p>对等节点（peer）是常规客户端，只路由自身的流量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">192.0.2.3/32</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对等节点（peer）是中继服务器，可以将流量转发到其他对等节点（peer）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">192.0.2.1/24</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对等节点（peer）是中继服务器，可以转发所有的流量，包括外网流量和 VPN 流量，可以用来干嘛你懂得：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">0.0.0.0/0,::/0</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对等节点（peer）是中继服务器，可以路由其自身和其他对等节点（peer）的流量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">192.0.2.3/32,192.0.2.4/32</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对等节点（peer）是中继服务器，可以路由其自身的流量和它所在的内网的流量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">192.0.2.3/32,192.168.1.1/24</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="-publickey">③ PublicKey</h4>
+<p>对等节点（peer）的公钥，所有节点（包括中继服务器）都必须设置。可与其他对等节点（peer）共用同一个公钥。</p>
+<p>公钥可通过命令 <code>wg pubkey &lt; example.key &gt; example.key.pub</code> 来生成，其中 <code>example.key</code> 是上面生成的私钥。</p>
+<p>例如：<code>PublicKey = somePublicKeyAbcdAbcdAbcdAbcd=</code></p>
+<h4 id="-persistentkeepalive">④ PersistentKeepalive</h4>
+<p>如果连接是从一个位于 NAT 后面的对等节点（peer）到一个公网可达的对等节点（peer），那么 NAT 后面的对等节点（peer）必须定期发送一个出站 ping 包来检查连通性，如果 IP 有变化，就会自动更新<code>Endpoint</code>。</p>
+<p>例如：</p>
+<ul>
+<li>本地节点与对等节点（peer）可直连：该字段不需要指定，因为不需要连接检查。</li>
+<li>对等节点（peer）位于 NAT 后面：该字段不需要指定，因为维持连接是客户端（连接的发起方）的责任。</li>
+<li>本地节点位于 NAT 后面，对等节点（peer）公网可达：需要指定该字段 <code>PersistentKeepalive = 25</code>，表示每隔 <code>25</code> 秒发送一次 ping 来检查连接。</li>
+</ul>
+<h2 id="3-高级特性">3. 高级特性</h2>
+<h3 id="ipv6">IPv6</h3>
+<p>前面的例子主要使用 <code>IPv4</code>，WireGuard 也支持 <code>IPv6</code>。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Interface]</span>
+<span class="na">AllowedIps</span> <span class="o">=</span> <span class="s">192.0.2.3/24, 2001:DB8::/64</span>
+
+<span class="k">[Peer]</span>
+<span class="na">...</span>
+<span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">0.0.0.0/0, ::/0</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="转发所有流量">转发所有流量</h3>
+<p>如果你想通过 VPN 转发所有的流量，包括 VPN 子网和公网流量，需要在 <code>[Peer]</code> 的 <code>AllowedIPs</code> 中添加 <code>0.0.0.0/0, ::/0</code>。</p>
+<p>即便只转发 <code>IPv4</code> 流量，也要指定一个 <code>IPv6</code> 网段，以避免将 <code>IPv6</code> 数据包泄露到 VPN 之外。详情参考：<a href="https://www.reddit.com/r/WireGuard/comments/b0m5g2/ipv6_leaks_psa_for_anyone_here_using_wireguard_to/">reddit.com/r/WireGuard/comments/b0m5g2/ipv6_leaks_psa_for_anyone_here_using_wireguard_to</a></p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Interface]</span>
+<span class="c1"># Name = phone.example-vpn.dev</span>
+<span class="na">Address</span> <span class="o">=</span> <span class="s">192.0.2.3/32</span>
+<span class="na">PrivateKey</span> <span class="o">=</span> <span class="s">&lt;private key for phone.example-vpn.dev&gt;</span>
+
+<span class="k">[Peer]</span>
+<span class="c1"># Name = public-server1.example-vpn.dev</span>
+<span class="na">PublicKey</span> <span class="o">=</span> <span class="s">&lt;public key for public-server1.example-vpn.dev&gt;</span>
+<span class="na">Endpoint</span> <span class="o">=</span> <span class="s">public-server1.example-vpn.dev:51820</span>
+<span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">0.0.0.0/0, ::/0</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>一般只有把 VPN 当做武当纵云梯来用时，才会需要转发所有流量，不多说，点到为止。</p>
+<h3 id="nat-to-nat-连接">NAT-to-NAT 连接</h3>
+<p>如果两个对等节点（peer）都位于 NAT 后面，想不通过中继服务器直接连接，需要保证至少有一个对等节点（peer）具有稳定的公网出口，使用静态公网 IP 或者通过 <code>DDNS</code> 动态更新 <code>FQDN</code> 都可以。</p>
+<p><code>WebRTC</code> 协议可以动态配置两个 NAT 之间的连接，它可以通过信令服务器来检测每个主机的 <code>IP:Port</code> 组合。而 WireGuard 没有这个功能，它没有没有信令服务器来动态搜索其他主机，只能硬编码 <code>Endpoint+ListenPort</code>，并通过 <code>PersistentKeepalive</code> 来维持连接。</p>
+<p>总结一下 NAT-to-NAT 连接的前提条件：</p>
+<ul>
+<li>至少有一个对等节点（peer）有固定的公网 IP，如果都没有固定的公网 IP，也可以使用 <code>DDNS</code> 来维护一个稳定的域名。</li>
+<li>至少有一个对等节点（peer）指定 UDP <code>ListenPort</code>，而且它的 NAT 路由器不能做 UDP 源端口随机化，否则返回的数据包将被发送到之前指定的 <code>ListenPort</code>，并被路由器丢弃，不会发送到新分配的随机端口。</li>
+<li>所有的对等节点（peer）必须在 <code>[Peer]</code> 配置中启用其他对等节点（peer）的 <code>PersistentKeepalive</code>，这样就可以维持连接的持久性。</li>
+</ul>
+<p>对于通信双方来说，只要<strong>服务端</strong>所在的 NAT 路由器没有指定到 NAT 后面的对等节点（peer）的转发规则，就需要进行 UDP 打洞。</p>
+<p>UDP 打洞的原理：</p>
+<ol>
+<li><code>Peer1</code> 向 <code>Peer2</code> 发送一个 UDP 数据包，不过 <code>Peer2</code> 的 NAT 路由器不知道该将这个包发给谁，直接丢弃了，不过没关系，这一步的目的是让 <code>Peer1</code> 的 NAT 路由器能够接收 UDP 响应并转发到后面的 <code>Peer1</code>。</li>
+<li><code>Peer2</code> 向 <code>Peer1</code> 发送一个 UDP 数据包，由于上一步的作用，<code>Peer1</code> 的 NAT 路由器已经建立临时转发规则，可以接收 UDP 响应，所以可以接收到该数据包，并转发到 <code>Peer1</code>。</li>
+<li><code>Peer1</code> 向 <code>Peer2</code> 发送一个 UDP 响应，由于上一步的作用，由于上一步的作用，<code>Peer2</code> 的 NAT 路由器已经可以接收 UDP 响应，所以可以接收到该数据包，并转发到 <code>Peer2</code>。</li>
+</ol>
+<p><strong>这种发送一个初始的数据包被拒绝，然后利用路由器已建立的转发规则来接收响应的过程被称为 『UDP 打洞』。</strong></p>
+<p>当你发送一个 UDP 数据包出去时，路由器通常会创建一个临时规则来映射源地址/端口和目的地址/端口，反之亦然。从目的地址和端口返回的 UDP 数据包会被转发到原来的源地址和端口，这就是大多数 UDP 应用在 NAT 后面的运作方式（如 BitTorrent、Skype 等）。这个临时规则会在一段时间后失效，所以 NAT 后面的客户端必须通过 <code>PersistentKeepalive</code> 定期发送数据包来维持连接的持久性。</p>
+<p>当两个对等节点（peer）都位于 NAT 后面时，要想让 UDP 打洞生效，需要两个节点在差不多的时间向对方发送数据包，这就意味着双方需要提前知道对方的公网地址和端口号，可以在 <code>wg0.conf</code> 中指定。</p>
+<h4 id="udp-打洞的局限性">UDP 打洞的局限性</h4>
+<p>从 2019 年开始，很多以前用过的老式打洞方法都不再有效了。以前很著名的就是 <a href="https://github.com/samyk/pwnat">pwnat</a> 开创的一种新的打洞方法，它能够在不需要代理、第三方服务器、upnp、DMZ、sproofing、dns 转换的情况下实现 NAT 中的 P2P 通信。它的原理也很简单：</p>
+<p>通过让客户端假装成为一个互联网上任意的 <code>ICMP</code> 跳跃点（ a random hop on the Internet）来解决这个问题，从而让服务端能够获取到客户端的 IP 地址。<code>traceroute</code> 命令也是使用这项技术来检测 Internet 上的跳跃点。</p>
+<p>具体来说，当服务器启动时，它开始向固定地址 <code>3.3.3.3</code> 发送固定的 <strong>ICMP 回应请求包</strong>（ICMP echo request packets）。显然，我们无法从 <code>3.3.3.3</code> 收到返回的 <strong>ICMP 回应数据包</strong>（ICMP echo packets）。然而，<code>3.3.3.3</code> 并不是我们可以访问的主机，我们也不是想伪装成它来发 ICMP 回应数据包。相反，pwnat 技术的实现原理在于，当我们的客户端想要连接服务端时，客户端（知道服务器IP地址）会向服务端送 <strong>ICMP 超时数据包</strong>（ICMP Time Exceeded packet）。 这个 ICMP 数据包里面包含了服务端发送到 <code>3.3.3.3</code> 的原始固定 <strong>ICMP 回应请求包</strong>。</p>
+<p>为什么要这样做呢？好吧，我们假装是互联网上的一个 ICMP 跳越点，礼貌地告诉服务器它原来的 <strong>ICMP 回应请求包</strong>无法传递到 <code>3.3.3.3</code>。而你的 NAT 是一个聪明的设备，它会注意到 <strong>ICMP 超时数据包</strong>内的数据包与服务器发出 <strong>ICMP 回应请求包</strong>相匹配。然后它将 <strong>ICMP 超时数据包</strong>转发回 NAT 后面的服务器，包括来自客户端的完整 IP 数据包头，从而让服务端知道客户端 IP 地址是什么！</p>
+<p>现在这种类似的 UDP 打洞方法受到了很多的限制，详情可以参考<a href="https://fuckcloudnative.io/posts/wireguard-docs-theory/">上篇文章</a>，这里不过多阐述。除了 UDP 打洞之外，我们仍然可以使用硬编码的方式指定两个对等节点（peer）的公网地址和端口号，这个方法对大多数 NAT 网络都有效。</p>
+<h4 id="源端口随机化">源端口随机化</h4>
+<p>如果所有的对等节点（peer）都在具有严格的 UDP 源端口随机化的 NAT 后面（比如大多数蜂窝网络），那么无法实现 <code>NAT-to-NAT</code> 连接。因为双方都无法协商出一个 <code>ListenPort</code>，并保证自己的 NAT 在发出 ping 包后能够接收发往该端口的流量，所以就无法初始化打洞，导致连接失败。因此，一般在 <code>LTE/3G</code> 网络中无法进行 p2p 通信。</p>
+<h4 id="使用信令服务器">使用信令服务器</h4>
+<p>上节提到了，如果所有的对等节点（peer）都在具有严格的 UDP 源端口随机化的 NAT 后面，就无法直接实现 <code>NAT-to-NAT</code> 连接，但通过第三方的信令服务器是可以实现的。信令服务器相当于一个中转站，它会告诉通信双方关于对方的 <code>IP:Port</code> 信息。这里有几个项目可以参考：</p>
+<ul>
+<li><a href="https://github.com/takutakahashi/wg-connect">takutakahashi/wg-connect</a></li>
+<li><a href="https://git.zx2c4.com/wireguard-tools/tree/contrib/nat-hole-punching/">git.zx2c4.com/wireguard-tools/tree/contrib/nat-hole-punching</a></li>
+</ul>
+<h4 id="动态-ip-地址">动态 IP 地址</h4>
+<p>WireGuard 只会在启动时解析域名，如果你使用 <code>DDNS</code> 来动态更新域名解析，那么每当 IP 发生变化时，就需要重新启动 WireGuard。目前建议的解决方案是使用 <code>PostUp</code> 钩子每隔几分钟或几小时重新启动 WireGuard 来强制解析域名。</p>
+<p>总的来说，<code>NAT-to-NAT</code> 连接极为不稳定，而且还有一堆其他的限制，所以还是建议通过中继服务器来通信。</p>
+<p>NAT-to-NAT 配置示例：</p>
+<p>Peer1：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Interface]</span>
+<span class="na">...</span>
+<span class="na">ListenPort</span> <span class="o">=</span> <span class="s">12000</span>
+
+<span class="k">[Peer]</span>
+<span class="na">...</span>
+<span class="na">Endpoint</span> <span class="o">=</span> <span class="s">peer2.example-vpn.dev:12000</span>
+<span class="na">PersistentKeepalive</span> <span class="o">=</span> <span class="s">25</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Peer2：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Interface]</span>
+<span class="na">...</span>
+<span class="na">ListenPort</span> <span class="o">=</span> <span class="s">12000</span>
+
+<span class="k">[Peer]</span>
+<span class="na">...</span>
+<span class="na">Endpoint</span> <span class="o">=</span> <span class="s">peer1.example-vpn.dev:12000</span>
+<span class="na">PersistentKeepalive</span> <span class="o">=</span> <span class="s">25</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>更多资料：</p>
+<ul>
+<li><a href="https://github.com/samyk/pwnat">samyk/pwnat</a></li>
+<li><a href="https://en.wikipedia.org/wiki/UDP_hole_punching">en.wikipedia.org/wiki/UDP_hole_punching</a></li>
+<li><a href="https://stackoverflow.com/questions/8892142/udp-hole-punching-algorithm">stackoverflow.com/questions/8892142/udp-hole-punching-algorithm</a></li>
+<li><a href="https://stackoverflow.com/questions/12359502/udp-hole-punching-not-going-through-on-3g">stackoverflow.com/questions/12359502/udp-hole-punching-not-going-through-on-3g</a></li>
+<li><a href="https://stackoverflow.com/questions/11819349/udp-hole-punching-not-possible-with-mobile-provider">stackoverflow.com/questions/11819349/udp-hole-punching-not-possible-with-mobile-provider</a></li>
+<li><a href="https://github.com/WireGuard/WireGuard/tree/master/contrib/examples/nat-hole-punching">WireGuard/WireGuard@<code>master</code>/contrib/examples/nat-hole-punching</a></li>
+<li><a href="https://staaldraad.github.io/2017/04/17/nat-to-nat-with-wireguard/">staaldraad.github.io/2017/04/17/nat-to-nat-with-wireguard</a></li>
+<li><a href="https://golb.hplar.ch/2019/01/expose-server-vpn.html">golb.hplar.ch/2019/01/expose-server-vpn.html</a></li>
+</ul>
+<h3 id="动态分配子网-ip">动态分配子网 IP</h3>
+<p>这里指的是对等节点（peer）的 VPN 子网 IP 的动态分配，类似于 DHCP，不是指 <code>Endpoint</code>。</p>
+<p>WireGuard 官方已经在开发动态分配子网 IP 的功能，具体的实现可以看这里：<a href="https://github.com/WireGuard/wg-dynamic">WireGuard/wg-dynamic</a></p>
+<p>当然，你也可以使用 <code>PostUp</code> 在运行时从文件中读取 IP 值来实现一个动态分配 IP 的系统，类似于 Kubernetes 的 CNI 插件。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Interface]</span>
+<span class="na">...</span>
+<span class="na">PostUp</span> <span class="o">=</span> <span class="s">wg set %i allowed-ips /etc/wireguard/wg0.key &lt;(some command)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="奇技淫巧">奇技淫巧</h3>
+<h4 id="共享一个-peersconf-文件">共享一个 peers.conf 文件</h4>
+<p>介绍一个秘密功能，可以简化 WireGuard 的配置工作。如果某个 <code>peer</code> 的公钥与本地接口的私钥能够配对，那么 WireGuard 会忽略该 <code>peer</code>。利用这个特性，我们可以在所有节点上共用同一个 peer 列表，每个节点只需要单独定义一个 <code>[Interface]</code> 就行了，即使列表中有本节点，也会被忽略。具体方式如下：</p>
+<ul>
+<li>每个对等节点（peer）都有一个单独的 <code>/etc/wireguard/wg0.conf</code> 文件，只包含 <code>[Interface]</code> 部分的配置。</li>
+<li>每个对等节点（peer）共用同一个 <code>/etc/wireguard/peers.conf</code> 文件，其中包含了所有的 peer。</li>
+<li>Wg0.conf 文件中需要配置一个 PostUp 钩子，内容为 <code>PostUp = wg addconf /etc/wireguard/peers.conf</code>。</li>
+</ul>
+<p>关于 <code>peers.conf</code> 的共享方式有很多种，你可以通过 <code>ansible</code> 这样的工具来分发，可以使用 <code>Dropbox</code> 之类的网盘来同步，当然也可以使用 <code>ceph</code> 这种分布式文件系统来将其挂载到不同的节点上。</p>
+<h4 id="从文件或命令输出中读取配置">从文件或命令输出中读取配置</h4>
+<p>WireGuard 也可以从任意命令的输出或文件中读取内容来修改配置的值，利用这个特性可以方便管理密钥，例如可以在运行时从 <code>Kubernetes Secrets</code> 或 <code>AWS KMS</code> 等第三方服务读取密钥。</p>
+<h3 id="容器化">容器化</h3>
+<p>WireGuard 也可以跑在容器中，最简单的方式是使用 <code>--privileged</code> 和 <code>--cap-add=all</code> 参数，让容器可以加载内核模块。</p>
+<p>你可以让 WireGuard 跑在容器中，向宿主机暴露一个网络接口；也可以让 WireGuard 运行在宿主机中，向特定的容器暴露一个接口。</p>
+<p>下面给出一个具体的示例，本示例中的 <code>vpn_test</code> 容器通过 WireGuard 中继服务器来路由所有流量。本示例中给出的容器配置是 <code>docker-compose</code> 的配置文件格式。</p>
+<p>中继服务器容器配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">wireguard</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">linuxserver/wireguard</span><span class="w">
+</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">51820</span><span class="p">:</span><span class="m">51820</span><span class="l">/udp</span><span class="w">
+</span><span class="w">    </span><span class="nt">cap_add</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">NET_ADMIN</span><span class="w">
+</span><span class="w">      </span>- <span class="l">SYS_MODULE</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">/lib/modules:/lib/modules</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./wg0.conf:/config/wg0.conf:ro</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>中继服务器 WireGuard 配置 <code>wg0.conf</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Interface]</span>
+<span class="c1"># Name = relay1.wg.example.com</span>
+<span class="na">Address</span> <span class="o">=</span> <span class="s">192.0.2.1/24</span>
+<span class="na">ListenPort</span> <span class="o">=</span> <span class="s">51820</span>
+<span class="na">PrivateKey</span> <span class="o">=</span> <span class="s">oJpRt2Oq27vIB5/UVb7BRqCwad2YMReQgH5tlxz8YmI=</span>
+<span class="na">DNS</span> <span class="o">=</span> <span class="s">1.1.1.1,8.8.8.8</span>
+<span class="na">PostUp</span> <span class="o">=</span> <span class="s">iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; ip6tables -A FORWARD -i wg0  -j ACCEPT; ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</span>
+<span class="na">PostDown</span> <span class="o">=</span> <span class="s">iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE</span>
+
+<span class="k">[Peer]</span>
+<span class="c1"># Name = peer1.wg.example.com</span>
+<span class="na">PublicKey</span> <span class="o">=</span> <span class="s">I+hXRAJOG/UE2IQvIHsou2zTgkUyPve2pzvHTnd/2Gg=</span>
+<span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">192.0.2.2/32</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>客户端容器配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span class="lnt" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span class="lnt" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">wireguard</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">linuxserver/wireguard</span><span class="w">
+</span><span class="w">    </span><span class="nt">cap_add</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">NET_ADMIN</span><span class="w">
+</span><span class="w">      </span>- <span class="l">SYS_MODULE</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">/lib/modules:/lib/modules</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./wg0.conf:/config/wg0.conf:ro</span><span class="w">
+</span><span class="w">    
+</span><span class="w">  </span><span class="nt">vpn_test</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">curlimages/curl</span><span class="w">
+</span><span class="w">    </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="l">curl -s http://whatismyip.akamai.com/</span><span class="w">
+</span><span class="w">    </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;service:wireguard&#39;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>客户端 WireGuard 配置 <code>wg0.conf</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Interface]</span>
+<span class="c1"># Name = peer1.wg.example.com</span>
+<span class="na">Address</span> <span class="o">=</span> <span class="s">192.0.2.2/32</span>
+<span class="na">PrivateKey</span> <span class="o">=</span> <span class="s">YCW76edD4W7nZrPbWZxPZhcs32CsBLIi1sEhsV/sgk8=</span>
+<span class="na">DNS</span> <span class="o">=</span> <span class="s">1.1.1.1,8.8.8.8</span>
+
+<span class="k">[Peer]</span>
+<span class="c1"># Name = relay1.wg.example.com</span>
+<span class="na">Endpoint</span> <span class="o">=</span> <span class="s">relay1.wg.example.com:51820</span>
+<span class="na">PublicKey</span> <span class="o">=</span> <span class="s">zJNKewtL3gcHdG62V3GaBkErFtapJWsAx+2um0c0B1s=</span>
+<span class="na">AllowedIPs</span> <span class="o">=</span> <span class="s">192.0.2.1/24,0.0.0.0/0</span>
+<span class="na">PersistentKeepalive</span> <span class="o">=</span> <span class="s">21</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>原文链接：https://fuckcloudnative.io/posts/wireguard-docs-practice/</p>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">liliming</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2021-05-28
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://www.llmgo.cn/tags/wireguard/">wireguard</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/wg-gen-web/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">Wg Gen Web 使用
+</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/wireguard-working-principle/">
+            <span class="next-text nav-default">WireGuard 的工作原理
+</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+
+
+<a href="https://www.llmgo.cn/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2018 -
+    2021
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        liliming
+        
+      </span>
+      <span class="division">|</span>
+      <span class="beian">
+        <a class="beian-link" href="https://beian.miit.gov.cn/">京ICP备18035378号-1</a>
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

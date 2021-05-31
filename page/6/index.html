@@ -295,16 +295,15 @@
   <header class="post-header">
     <h1 class="post-title">
       
-      <a class="post-link" href="/post/use-cephfs-kubernetes-pv-pvc/">在 kubernetes 上使用CephFS作为文件存储</a>
+      <a class="post-link" href="/post/go-build-constraint-problem/">go构建约束问题</a>
     </h1>
     
     <div class="post-meta">
-      <time datetime="2021-04-12" class="post-time">
-        2021-04-12
+      <time datetime="2021-04-22" class="post-time">
+        2021-04-22
       </time>
       <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/kubernetes/"> kubernetes </a>
-          <a href="https://www.llmgo.cn/categories/ceph/"> ceph </a>
+          <a href="https://www.llmgo.cn/categories/go/"> go </a>
           
         </div>
       
@@ -316,10 +315,10 @@
   <div class="post-content">
     
     <div class="post-summary">
-      在 kubernetes 上使用CephFS作为文件存储 最近想使用cephfs来代替nfs来作为共享存储，这里来记录一下方法，这里主要是使用pv，pvc的模式。 前
+      go构建约束问题 这是go的条件编译导致的，具体的方法是在go文件的第一行注释写//+build linux表明这个文件在Linux平台才能编译
     </div>
     <div class="read-more">
-      <a href="/post/use-cephfs-kubernetes-pv-pvc/" class="read-more-link">Read more</a>
+      <a href="/post/go-build-constraint-problem/" class="read-more-link">Read more</a>
     </div>
     
   </div>
@@ -330,46 +329,12 @@
   <header class="post-header">
     <h1 class="post-title">
       
-      <a class="post-link" href="/post/use-aliyun-build-image/">教你使用阿里云构建海外镜像</a>
+      <a class="post-link" href="/post/logrotate/">日志切割神器logrotate</a>
     </h1>
     
     <div class="post-meta">
-      <time datetime="2021-04-09" class="post-time">
-        2021-04-09
-      </time>
-      <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/docker/"> docker </a>
-          
-        </div>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      教你使用阿里云构建海外镜像 我们平时有时候需要拉取国外的镜像，但是非常慢，或者非常大，容易失败，这里可以使用阿里云的免费容器镜像仓库+代码仓库
-    </div>
-    <div class="read-more">
-      <a href="/post/use-aliyun-build-image/" class="read-more-link">Read more</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/post/git-commands/">git 常用命令</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2021-04-09" class="post-time">
-        2021-04-09
+      <time datetime="2021-04-14" class="post-time">
+        2021-04-14
       </time>
       <div class="post-category">
           <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
@@ -384,10 +349,44 @@
   <div class="post-content">
     
     <div class="post-summary">
-      Git 全局设置 1 2 git config --global user.name &#34;Administrator&#34; git config --global user.email &#34;admin@example.com&#34; 创建新版本库 1 2 3 4 5 6 git clone git@code.aliyun.com:llmgo/test.git cd test touch README.md git add README.md git commit -m &#34;add README&#34; git push -u origin master 已存在的文件夹或 Git 仓库 1 2 3 4 5 6 cd existing_folder git init
+      日志切割神器logrotate [toc] logrotate 是一个 linux 系统日志的管理工具。可以对单个日志文件或者某个目录下的文件按时间 / 大小进行切割，压缩操作；指定日志
     </div>
     <div class="read-more">
-      <a href="/post/git-commands/" class="read-more-link">Read more</a>
+      <a href="/post/logrotate/" class="read-more-link">Read more</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      <a class="post-link" href="/post/go-sample-websocket/">golang 使用websocket简单使用</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2021-04-13" class="post-time">
+        2021-04-13
+      </time>
+      <div class="post-category">
+          <a href="https://www.llmgo.cn/categories/go/"> go </a>
+          
+        </div>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      golang websocket简单使用 废话不多说，直接贴代码 server.go 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 package main import ( &#34;fmt&#34; &#34;golang.org/x/net/websocket&#34; &#34;net/http&#34; ) func Echo(ws *websocket.Conn) { fmt.Println(&#34;new
+    </div>
+    <div class="read-more">
+      <a href="/post/go-sample-websocket/" class="read-more-link">Read more</a>
     </div>
     
   </div>
@@ -1137,6 +1136,30 @@
 
       
 
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
       
       
       <li><a href="/page/7/">»</a></li>
@@ -1144,7 +1167,7 @@
 
       
       
-      <li><a href="/page/25/">»»</a></li>
+      <li><a href="/page/26/">»»</a></li>
       
 
       </ul>

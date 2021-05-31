@@ -6,7 +6,16 @@
     <description>Recent content in Tags on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 25 May 2021 17:31:19 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 31 May 2021 11:46:24 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>wireguard</title>
+      <link>https://www.llmgo.cn/tags/wireguard/</link>
+      <pubDate>Mon, 31 May 2021 11:46:24 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/tags/wireguard/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>linux</title>
       <link>https://www.llmgo.cn/tags/linux/</link>
@@ -175,15 +184,6 @@
       <pubDate>Wed, 07 Apr 2021 10:33:57 +0800</pubDate>
       
       <guid>https://www.llmgo.cn/tags/redis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>macbook</title>
-      <link>https://www.llmgo.cn/tags/macbook/</link>
-      <pubDate>Wed, 07 Apr 2021 10:33:20 +0800</pubDate>
-      
-      <guid>https://www.llmgo.cn/tags/macbook/</guid>
       <description></description>
     </item>
     

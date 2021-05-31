@@ -295,7 +295,7 @@
   <header class="post-header">
     <h1 class="post-title">
       
-      <a class="post-link" href="/post/redis-introduction/">redis 介绍</a>
+      <a class="post-link" href="/post/redis-cluster-add-del-nodes/">Redis 5.0 cluster 添加和移除节点</a>
     </h1>
     
     <div class="post-meta">
@@ -304,41 +304,7 @@
       </time>
       <div class="post-category">
           <a href="https://www.llmgo.cn/categories/redis/"> redis </a>
-          
-        </div>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      Redis REmote DIctionary Server(Redis) 是一个由Salvatore Sanfilippo写的key-value存储系统。 Redis是一个开源的使用ANSI C语言编写、遵守BS
-    </div>
-    <div class="read-more">
-      <a href="/post/redis-introduction/" class="read-more-link">Read more</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/post/redis-batchd-del-keys/">redis 批量删除keys</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2021-04-07" class="post-time">
-        2021-04-07
-      </time>
-      <div class="post-category">
           <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
-          <a href="https://www.llmgo.cn/categories/redis/"> redis </a>
           
         </div>
       
@@ -350,10 +316,10 @@
   <div class="post-content">
     
     <div class="post-summary">
-      Redis 删除 Black 开头的key 适用于keys数量比较少的情况，如果keys数量大，由于redis是单线程的，容易造成堵塞。 1 redis-cli -a 1q2w3e -n 0 -p 6379 --raw keys Black* | xargs redis-cli
+      添加节点 搭建Redis集群文档: https://www.cnblogs.com/esofar/p/10486621.html 如果所示，之前的集群是三主三从的Redis集群，现在要加入一主一从，主从复制。主节点端口是7004，从节点
     </div>
     <div class="read-more">
-      <a href="/post/redis-batchd-del-keys/" class="read-more-link">Read more</a>
+      <a href="/post/redis-cluster-add-del-nodes/" class="read-more-link">Read more</a>
     </div>
     
   </div>
@@ -364,7 +330,41 @@
   <header class="post-header">
     <h1 class="post-title">
       
-      <a class="post-link" href="/post/etcd-in-kubernetes-recover/">kubernetes 集群 etcd 故障恢复</a>
+      <a class="post-link" href="/post/mac-vim-autocolor/">Mac Vim Autocolor</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2021-04-07" class="post-time">
+        2021-04-07
+      </time>
+      <div class="post-category">
+          <a href="https://www.llmgo.cn/categories/macbook/"> macbook </a>
+          
+        </div>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      macos vim 增加配色 在 ~目录下，vim .vimrc 1 2 3 set nu colorscheme desert syntax on
+    </div>
+    <div class="read-more">
+      <a href="/post/mac-vim-autocolor/" class="read-more-link">Read more</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      <a class="post-link" href="/post/kube-state-metrics/">kube-state-metrics 搭建</a>
     </h1>
     
     <div class="post-meta">
@@ -373,7 +373,6 @@
       </time>
       <div class="post-category">
           <a href="https://www.llmgo.cn/categories/kubernetes/"> kubernetes </a>
-          <a href="https://www.llmgo.cn/categories/etcd/"> etcd </a>
           
         </div>
       
@@ -385,10 +384,10 @@
   <div class="post-content">
     
     <div class="post-summary">
-      kubernetes 集群 etcd 故障恢复 由于升级集群为多master的时候其中原先的master节点挂了。 恢复过程 删除有问题的etcd节点 1 2 3 4 # 列出所有成员 $ ./etcdctl
+      克隆代码 1 $ git clone https://github.com/kubernetes/kube-state-metrics.git --depth 1 进入目录 1 2 3 4 5 $ cd kube-state-metrics/examples $ ls autosharding standard # 一个是自动分片statefulset版本，一个是标准deployment版，我们选择
     </div>
     <div class="read-more">
-      <a href="/post/etcd-in-kubernetes-recover/" class="read-more-link">Read more</a>
+      <a href="/post/kube-state-metrics/" class="read-more-link">Read more</a>
     </div>
     
   </div>
@@ -721,8 +720,6 @@
 
             
             
-              
-            
 
           
           
@@ -731,12 +728,6 @@
         
 
         
-        
-          <li class="">
-            <a href="/page/13/">
-              13
-            </a>
-          </li>
         
 
       
@@ -1113,6 +1104,37 @@
 
       
 
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/26/">
+              26
+            </a>
+          </li>
+        
+
+      
+
       
       
       <li><a href="/page/21/">»</a></li>
@@ -1120,7 +1142,7 @@
 
       
       
-      <li><a href="/page/25/">»»</a></li>
+      <li><a href="/page/26/">»»</a></li>
       
 
       </ul>

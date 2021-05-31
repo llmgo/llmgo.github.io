@@ -295,7 +295,7 @@
   <header class="post-header">
     <h1 class="post-title">
       
-      <a class="post-link" href="/post/centos-install-py3/">CentOS 7 安装 Py3</a>
+      <a class="post-link" href="/post/go-cat-n/">go 实现cat -n 命令</a>
     </h1>
     
     <div class="post-meta">
@@ -303,7 +303,7 @@
         2021-04-07
       </time>
       <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/python/"> python </a>
+          <a href="https://www.llmgo.cn/categories/go/"> go </a>
           
         </div>
       
@@ -315,10 +315,10 @@
   <div class="post-content">
     
     <div class="post-summary">
-      Python 升级到Python3 下载依赖包 1 2 3 4 5 6 7 8 9 10 11 12 13 yum install -y python-devel \ mysql-devel \ libxml2 \ libxml2-devel \ libxslt* \ zlib \ zlib-devel \ gcc \ gcc-c++ \ openssl \ openssl-devel \ openldap \ openldap-devel python 下载 1 wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz 解压包 1 tar xf Python-3.6.5.tgz
+      1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 package main import ( &#34;bufio&#34; &#34;flag&#34; &#34;fmt&#34; &#34;io&#34; &#34;os&#34; ) // 扩展 cat.go 例子，使用 flag 添加一
     </div>
     <div class="read-more">
-      <a href="/post/centos-install-py3/" class="read-more-link">Read more</a>
+      <a href="/post/go-cat-n/" class="read-more-link">Read more</a>
     </div>
     
   </div>
@@ -329,7 +329,7 @@
   <header class="post-header">
     <h1 class="post-title">
       
-      <a class="post-link" href="/post/mvn-command/">mvn 命令基本使用</a>
+      <a class="post-link" href="/post/go-cat/">go 实现cat命令</a>
     </h1>
     
     <div class="post-meta">
@@ -337,7 +337,7 @@
         2021-04-07
       </time>
       <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/java/"> java </a>
+          <a href="https://www.llmgo.cn/categories/go/"> go </a>
           
         </div>
       
@@ -349,10 +349,10 @@
   <div class="post-content">
     
     <div class="post-summary">
-      Mvn常用命令 序号 命令 含义 1 mvn archetype:create 创建Maven项目 2 mvn compile 编译源代码 3 mvn test-compile 编译测试代码 4 mvn test 运行测试 5 mvn site 生成项目相关信息的网站 6 mvn clean 清除项目
+      1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 package main import ( &#34;bufio&#34; &#34;flag&#34; &#34;fmt&#34; &#34;io&#34; &#34;os&#34; ) // 实现linux cat命令 func cat(r *bufio.Reader) { for { line, err := r.ReadBytes(&#39;\n&#39;)
     </div>
     <div class="read-more">
-      <a href="/post/mvn-command/" class="read-more-link">Read more</a>
+      <a href="/post/go-cat/" class="read-more-link">Read more</a>
     </div>
     
   </div>
@@ -363,7 +363,7 @@
   <header class="post-header">
     <h1 class="post-title">
       
-      <a class="post-link" href="/post/redis-cluster-add-del-nodes/">Redis 5.0 cluster 添加和移除节点</a>
+      <a class="post-link" href="/post/go-99/">go 99乘法表</a>
     </h1>
     
     <div class="post-meta">
@@ -371,8 +371,7 @@
         2021-04-07
       </time>
       <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/redis/"> redis </a>
-          <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
+          <a href="https://www.llmgo.cn/categories/go/"> go </a>
           
         </div>
       
@@ -384,10 +383,10 @@
   <div class="post-content">
     
     <div class="post-summary">
-      添加节点 搭建Redis集群文档: https://www.cnblogs.com/esofar/p/10486621.html 如果所示，之前的集群是三主三从的Redis集群，现在要加入一主一从，主从复制。主节点端口是7004，从节点
+      99 乘法表 1 2 3 4 5 6 7 8 9 10 11 12 13 14 package main import &#34;fmt&#34; func main() { // 打印99乘法表 for i := 1; i &lt;= 9; i++ { for j := 1; j &lt;= i; j++ { fmt.Printf(&#34;%d * %d = %d\t&#34;, j, i, i*j) } fmt.Println() } }
     </div>
     <div class="read-more">
-      <a href="/post/redis-cluster-add-del-nodes/" class="read-more-link">Read more</a>
+      <a href="/post/go-99/" class="read-more-link">Read more</a>
     </div>
     
   </div>
@@ -1062,6 +1061,27 @@
 
       
 
+        
+
+        
+        
+
+          
+          
+          
+
+            
+
+          
+
+        
+        
+
+        
+        
+
+      
+
       
       
       <li><a href="/page/19/">»</a></li>
@@ -1069,7 +1089,7 @@
 
       
       
-      <li><a href="/page/25/">»»</a></li>
+      <li><a href="/page/26/">»»</a></li>
       
 
       </ul>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>systemd 启动时报错 Permission denied
+  <title>Wg Gen Web 使用
  - 一个小运维的博客</title>
   
 
@@ -24,7 +24,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="liliming" />
-  <meta name="description" content="systemd 启动时报错 Permission denied 文件权限正确，但是通过 systemd启动时仍然报 Permission denied 错误。 1 2 May 25 17:19:33 rocky-linux systemd[36839]: stargz-snapshotter.service: Failed to execute command: Permission denied May 25 17:19:33 rocky-linux systemd[36839]: stargz-snapshotter.service: Failed at step EXEC spawning /usr/local/bin/containerd-stargz 解决方案 是 SELinux 搞" />
+  <meta name="description" content="Wg Gen Web 用于WireGuard的基于Web的简单配置生成器。 为什么是另一个？ 所有WireGuard UI实施都试图通过应用配置和创建网络规则来管" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -36,7 +36,7 @@
 <meta name="generator" content="Hugo 0.82.0" />
 
 
-<link rel="canonical" href="https://www.llmgo.cn/post/systemd-startup-permission-denied/" />
+<link rel="canonical" href="https://www.llmgo.cn/post/wg-gen-web/" />
 
 
 
@@ -60,23 +60,23 @@
 
 
 
-<meta property="og:title" content="systemd 启动时报错 Permission denied
+<meta property="og:title" content="Wg Gen Web 使用
 " />
-<meta property="og:description" content="systemd 启动时报错 Permission denied 文件权限正确，但是通过 systemd启动时仍然报 Permission denied 错误。 1 2 May 25 17:19:33 rocky-linux systemd[36839]: stargz-snapshotter.service: Failed to execute command: Permission denied May 25 17:19:33 rocky-linux systemd[36839]: stargz-snapshotter.service: Failed at step EXEC spawning /usr/local/bin/containerd-stargz 解决方案 是 SELinux 搞" />
+<meta property="og:description" content="Wg Gen Web 用于WireGuard的基于Web的简单配置生成器。 为什么是另一个？ 所有WireGuard UI实施都试图通过应用配置和创建网络规则来管" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.llmgo.cn/post/systemd-startup-permission-denied/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-05-25T17:31:19&#43;08:00" />
-<meta property="article:modified_time" content="2021-05-25T17:31:19&#43;08:00" />
+<meta property="og:url" content="https://www.llmgo.cn/post/wg-gen-web/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-31T11:46:24&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-31T11:46:24&#43;08:00" />
 
-<meta itemprop="name" content="systemd 启动时报错 Permission denied
+<meta itemprop="name" content="Wg Gen Web 使用
 ">
-<meta itemprop="description" content="systemd 启动时报错 Permission denied 文件权限正确，但是通过 systemd启动时仍然报 Permission denied 错误。 1 2 May 25 17:19:33 rocky-linux systemd[36839]: stargz-snapshotter.service: Failed to execute command: Permission denied May 25 17:19:33 rocky-linux systemd[36839]: stargz-snapshotter.service: Failed at step EXEC spawning /usr/local/bin/containerd-stargz 解决方案 是 SELinux 搞"><meta itemprop="datePublished" content="2021-05-25T17:31:19&#43;08:00" />
-<meta itemprop="dateModified" content="2021-05-25T17:31:19&#43;08:00" />
-<meta itemprop="wordCount" content="218">
-<meta itemprop="keywords" content="linux," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="systemd 启动时报错 Permission denied
+<meta itemprop="description" content="Wg Gen Web 用于WireGuard的基于Web的简单配置生成器。 为什么是另一个？ 所有WireGuard UI实施都试图通过应用配置和创建网络规则来管"><meta itemprop="datePublished" content="2021-05-31T11:46:24&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-31T11:46:24&#43;08:00" />
+<meta itemprop="wordCount" content="805">
+<meta itemprop="keywords" content="wireguard," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Wg Gen Web 使用
 "/>
-<meta name="twitter:description" content="systemd 启动时报错 Permission denied 文件权限正确，但是通过 systemd启动时仍然报 Permission denied 错误。 1 2 May 25 17:19:33 rocky-linux systemd[36839]: stargz-snapshotter.service: Failed to execute command: Permission denied May 25 17:19:33 rocky-linux systemd[36839]: stargz-snapshotter.service: Failed at step EXEC spawning /usr/local/bin/containerd-stargz 解决方案 是 SELinux 搞"/>
+<meta name="twitter:description" content="Wg Gen Web 用于WireGuard的基于Web的简单配置生成器。 为什么是另一个？ 所有WireGuard UI实施都试图通过应用配置和创建网络规则来管"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -296,15 +296,15 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">systemd 启动时报错 Permission denied
+      <h1 class="post-title">Wg Gen Web 使用
 </h1>
       
       <div class="post-meta">
-        <time datetime="2021-05-25" class="post-time">
-          2021-05-25
+        <time datetime="2021-05-31" class="post-time">
+          2021-05-31
         </time>
         <div class="post-category">
-            <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
+            <a href="https://www.llmgo.cn/categories/wireguard/"> wireguard </a>
             
           </div>
         
@@ -322,40 +322,150 @@
 <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么是另一个">为什么是另一个？</a></li>
+    <li><a href="#特征">特征</a></li>
+    <li><a href="#运行">运行</a>
+      <ul>
+        <li><a href="#docker">Docker</a></li>
+        <li><a href="#直接没有docker">直接没有Docker</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
 
 
     
     <div class="post-content">
-      <h1 id="systemd-启动时报错-permission-denied">systemd 启动时报错 Permission denied</h1>
-<p>文件权限正确，但是通过 systemd启动时仍然报 <code>Permission denied</code> 错误。</p>
+      <h1 id="wg-gen-web">Wg Gen Web</h1>
+<p><img src="http://image.llmgo.cn/img/wg-gen-web_cover.png" alt="用于WireGuard的简单的基于Web的配置生成器"></p>
+<p>用于<a href="https://wireguard.com/">WireGuard的</a>基于Web的简单配置生成器。</p>
+<p><a href="https://goreportcard.com/report/github.com/vx3r/wg-gen-web"><img src="https://goreportcard.com/badge/github.com/vx3r/wg-gen-web" alt="Go Report Card"></a>
+<a href="http://www.wtfpl.net/about/"><img src="https://img.shields.io/badge/License-WTFPL-brightgreen.svg" alt="License: WTFPL"></a>
+<img src="https://img.shields.io/discord/681699554189377567" alt="Discord">
+<img src="https://github.com/vx3r/wg-gen-web/actions/workflows/dockerimage.yml/badge.svg" alt="Build docker images via buildx">
+<img src="https://img.shields.io/github/last-commit/vx3r/wg-gen-web" alt="GitHub last commit">
+<img src="https://img.shields.io/docker/pulls/vx3r/wg-gen-web" alt="Docker Pulls">
+<img src="https://img.shields.io/github/go-mod/go-version/vx3r/wg-gen-web" alt="GitHub go.mod Go version">
+<img src="https://img.shields.io/github/languages/code-size/vx3r/wg-gen-web" alt="GitHub code size in bytes"></p>
+<h2 id="为什么是另一个">为什么是另一个？</h2>
+<p>所有WireGuard UI实施都试图通过应用配置和创建网络规则来管理服务。此实现仅生成配置，由您决定是否创建网络规则并将配置应用于WireGuard。例如，通过使用<a href="https://github.com/inotify-tools/inotify-tools/wiki">inotifywait</a>监视生成的目录。</p>
+<p>目标是在容器中运行Wg Gen Web，并在主机系统上运行WireGuard。</p>
+<ul>
+<li>
+<h2 id="特征">特征</h2>
+<ul>
+<li>自托管和基于Web</li>
+<li>从分配给客户端的网络池中自动选择IP</li>
+<li>QR码可方便地配置移动客户端</li>
+<li>使用QR码和客户端配置将电子邮件发送给客户端</li>
+<li>启用/禁用客户端</li>
+<li><code>wg0.conf</code>修改后生成</li>
+<li>支援IPv6</li>
+<li>用户身份验证（Oauth2 OIDC）</li>
+<li>Dockerized</li>
+<li>很酷的外观</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://image.llmgo.cn/img/wg-gen-web_screenshot.png" alt="截屏"></p>
+<h2 id="运行">运行</h2>
+<h3 id="docker">Docker</h3>
+<p>运行Wg Gen Web的最简单方法是使用容器映像</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
-</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">May <span class="m">25</span> 17:19:33 rocky-linux systemd<span class="o">[</span>36839<span class="o">]</span>: stargz-snapshotter.service: Failed to execute command: Permission denied
-May <span class="m">25</span> 17:19:33 rocky-linux systemd<span class="o">[</span>36839<span class="o">]</span>: stargz-snapshotter.service: Failed at step EXEC spawning /usr/local/bin/containerd-stargz
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run --rm -it -v /tmp/wireguard:/data -p 8080:8080 -e &#34;WG_CONF_DIR=/data&#34; vx3r/wg-gen-web:latest
 </code></pre></td></tr></table>
 </div>
-</div><p>解决方案</p>
-<p>是 SELinux 搞的鬼。</p>
-<p>这是由于执行文件的 安全上下文 不正确导致的错误，我这边是因为可执行文件是先存放在用户主目录，然后移动到目标目录的。
-但是将可执行文件从用户主目录移动到目标目录时它们的 SELinux 上下文不会自动变更，依然是用户主目录。所以出现了问题。</p>
-<p>既然知道了原因，那么解决方案也有了，执行下面的命令即可解决。</p>
+</div><p>Docker compose 代码, 用于演示服务器，wg-json-api服务是可选的</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span class="lnt" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span class="lnt" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span class="lnt" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span class="lnt" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span class="lnt" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span class="lnt" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span class="lnt" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span class="lnt" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span class="lnt" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span class="lnt" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span class="lnt" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span class="lnt" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span class="lnt" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span class="lnt" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span class="lnt" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span class="lnt" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span class="lnt" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span class="lnt" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">sudo restorecon -rv /usr/local/bin/
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">version: &#39;3.6&#39;
+services:
+  wg-gen-web-demo:
+    image: vx3r/wg-gen-web:latest
+    container_name: wg-gen-web-demo
+    restart: unless-stopped
+    expose:
+      - &#34;8080/tcp&#34;
+    environment:
+      - WG_CONF_DIR=/data
+      - WG_INTERFACE_NAME=wg0.conf
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USERNAME=no-reply@gmail.com
+      - SMTP_PASSWORD=******************
+      - SMTP_FROM=Wg Gen Web &lt;no-reply@gmail.com&gt;
+      - OAUTH2_PROVIDER_NAME=github
+      - OAUTH2_PROVIDER=https://github.com
+      - OAUTH2_CLIENT_ID=******************
+      - OAUTH2_CLIENT_SECRET=******************
+      - OAUTH2_REDIRECT_URL=https://wg-gen-web-demo.127-0-0-1.fr
+    volumes:
+      - /etc/wireguard:/data
+  wg-json-api:
+    image: james/wg-api:latest
+    container_name: wg-json-api
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    network_mode: &#34;host&#34;
+    command: wg-api --device wg0 --listen &lt;API_LISTEN_IP&gt;:8182
 </code></pre></td></tr></table>
 </div>
-</div><ul>
-<li><a href="https://blog.csdn.net/kunyus/article/details/106592236">https://blog.csdn.net/kunyus/article/details/106592236</a></li>
+</div><p>请注意，映射<code>/etc/wireguard</code>到<code>/data</code>docker内部将删除主机的当前配置。如果需要，请确保从中备份文件<code>/etc/wireguard</code>。</p>
+<p>一种解决方法是将更<code>WG_INTERFACE_NAME</code>改为其他内容，因为它将创建一个新接口（<code>wg-auto.conf</code>例如），请注意，如果这样做，则必须相应地调整守护程序。</p>
+<p>要获取**&lt;API_LISTEN_IP&gt;**的值，请查看“ <a href="https://github.com/vx3r/wg-gen-web/#wireguard-status-display">WireGuard状态显示”</a>部分。如果应禁用状态显示，请从docker-compose文件中删除整个服务，或将127.0.0.1用作&lt;API_LISTEN_IP&gt;。</p>
+<h3 id="直接没有docker">直接没有Docker</h3>
+<p>从我的GitLab服务器上免费下载最新的工件：</p>
+<ul>
+<li><a href="https://github.com/vx3r/wg-gen-web/-/jobs/artifacts/master/download?job=build-back">后端</a></li>
+<li><a href="https://github.com/vx3r/wg-gen-web/-/jobs/artifacts/master/download?job=build-front">前端</a></li>
+</ul>
+<p>将所有内容放在一个目录中，<code>.env</code>使用所有配置创建文件，然后运行后端。</p>
+<hr>
+<p>原文：</p>
+<ul>
+<li><a href="https://github.com/vx3r/wg-gen-web/">https://github.com/vx3r/wg-gen-web/</a></li>
 </ul>
 
     </div>
@@ -370,7 +480,7 @@ May <span class="m">25</span> 17:19:33 rocky-linux systemd<span class="o">[</spa
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-      2021-05-25
+      2021-05-31
       
     </span>
   </p>
@@ -387,30 +497,16 @@ May <span class="m">25</span> 17:19:33 rocky-linux systemd<span class="o">[</spa
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://www.llmgo.cn/tags/linux/">linux</a>
+          <a href="https://www.llmgo.cn/tags/wireguard/">wireguard</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/wireguard-quick-start-docs/">
-            
-            <i class="iconfont">
-              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
-  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="18" height="18">
-  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
-</svg>
-
-            </i>
-            <span class="prev-text nav-default">wireguard 快速安装教程
-</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
         
-          <a class="next" href="/post/prometheus-reload/">
-            <span class="next-text nav-default">prometheus 通过命令热加载
+          <a class="next" href="/post/wireguard-docs-practice/">
+            <span class="next-text nav-default">WireGuard 的搭建使用与配置详解
 </span>
             <span class="prev-text nav-mobile">Next</span>
             

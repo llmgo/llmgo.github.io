@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wireguard on 一个小运维的博客</title>
+    <link>https://www.llmgo.cn/categories/wireguard/</link>
+    <description>Recent content in wireguard on 一个小运维的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 31 May 2021 11:46:24 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/categories/wireguard/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Wg Gen Web 使用
+</title>
+      <link>https://www.llmgo.cn/post/wg-gen-web/</link>
+      <pubDate>Mon, 31 May 2021 11:46:24 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/wg-gen-web/</guid>
+      <description>Wg Gen Web 用于WireGuard的基于Web的简单配置生成器。 为什么是另一个？ 所有WireGuard UI实施都试图通过应用配置和创建网络规则来管</description>
+    </item>
+    
+    <item>
+      <title>WireGuard 的搭建使用与配置详解
+</title>
+      <link>https://www.llmgo.cn/post/wireguard-docs-practice/</link>
+      <pubDate>Fri, 28 May 2021 16:41:16 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/wireguard-docs-practice/</guid>
+      <description>WireGuard 的搭建使用与配置详解 一、快速开始 1. 安装 centos 7 1 2 3 4 5 6 7 8 $ yum install epel-release https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm $ yum install yum-plugin-elrepo $ yum install kmod-wireguard wireguard-tools # 如果你使用的是非标准内核，需要安装 DKMS 包 $ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm $ curl</description>
+    </item>
+    
+    <item>
+      <title>WireGuard 的工作原理
+</title>
+      <link>https://www.llmgo.cn/post/wireguard-working-principle/</link>
+      <pubDate>Fri, 28 May 2021 15:47:09 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/wireguard-working-principle/</guid>
+      <description>WireGuard 的工作原理 WireGuard 是由 Jason Donenfeld 等人用 C 语言编写的一个开源 VPN 协议，被视为下一代 VPN 协议，旨在解决许多困扰 IPSec/IKEv2、OpenVPN 或 L2TP 等其他</description>
+    </item>
+    
+    <item>
+      <title>wireguard 快速安装教程
+</title>
+      <link>https://www.llmgo.cn/post/wireguard-quick-start-docs/</link>
+      <pubDate>Fri, 28 May 2021 15:16:26 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/wireguard-quick-start-docs/</guid>
+      <description>wireguard 快速安装教程 [toc] WireGuard 的安装和使用条件非常苛刻，对内核版本要求极高，不仅如此，在不同的系统中，内核，内核源码包，内核头文件必须存在且这三者版本要</description>
+    </item>
+    
+  </channel>
+</rss>

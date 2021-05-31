@@ -295,16 +295,16 @@
   <header class="post-header">
     <h1 class="post-title">
       
-      <a class="post-link" href="/post/use-gopsutil-lib-get-mem-info/">利用gopsutil库来获取mac内存信息
+      <a class="post-link" href="/post/wireguard-quick-start-docs/">wireguard 快速安装教程
 </a>
     </h1>
     
     <div class="post-meta">
-      <time datetime="2021-05-18" class="post-time">
-        2021-05-18
+      <time datetime="2021-05-28" class="post-time">
+        2021-05-28
       </time>
       <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/go/"> go </a>
+          <a href="https://www.llmgo.cn/categories/wireguard/"> wireguard </a>
           
         </div>
       
@@ -316,10 +316,10 @@
   <div class="post-content">
     
     <div class="post-summary">
-      利用gopsutil库来获取mac内存信息 由于mac上没有free命令来查看内存使用，所以可以利用gopsutil来获取内存信息来展示 代码：
+      wireguard 快速安装教程 [toc] WireGuard 的安装和使用条件非常苛刻，对内核版本要求极高，不仅如此，在不同的系统中，内核，内核源码包，内核头文件必须存在且这三者版本要
     </div>
     <div class="read-more">
-      <a href="/post/use-gopsutil-lib-get-mem-info/" class="read-more-link">Read more</a>
+      <a href="/post/wireguard-quick-start-docs/" class="read-more-link">Read more</a>
     </div>
     
   </div>
@@ -330,16 +330,16 @@
   <header class="post-header">
     <h1 class="post-title">
       
-      <a class="post-link" href="/post/the-way-restart-kubernetes/">kubernetes 重启的几种方法
+      <a class="post-link" href="/post/systemd-startup-permission-denied/">systemd 启动时报错 Permission denied
 </a>
     </h1>
     
     <div class="post-meta">
-      <time datetime="2021-05-13" class="post-time">
-        2021-05-13
+      <time datetime="2021-05-25" class="post-time">
+        2021-05-25
       </time>
       <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/kubernetes/"> kubernetes </a>
+          <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
           
         </div>
       
@@ -351,10 +351,10 @@
   <div class="post-content">
     
     <div class="post-summary">
-      kubernetes 重启的几种方法 方法1 1 2 kubectl scale deployment XXXX --replicas=0 -n &lt;NAMESPACE&gt; kubectl scale deployment XXXX --replicas=1 -n &lt;NAMESPACE&gt; 方法2 1 kubectl delete pod &lt;POD_NAME&gt; -n &lt;NAMESPACE&gt; 方法3 1 kubectl get pod &lt;POD_NAME&gt; -n &lt;NAMESPACE&gt; -o yaml | kubectl replace --force -f - 方法4 Kubernetes 1.15开始才有 1 kubectl rollout
+      systemd 启动时报错 Permission denied 文件权限正确，但是通过 systemd启动时仍然报 Permission denied 错误。 1 2 May 25 17:19:33 rocky-linux systemd[36839]: stargz-snapshotter.service: Failed to execute command: Permission denied May 25 17:19:33 rocky-linux systemd[36839]: stargz-snapshotter.service: Failed at step EXEC spawning /usr/local/bin/containerd-stargz 解决方案 是 SELinux 搞
     </div>
     <div class="read-more">
-      <a href="/post/the-way-restart-kubernetes/" class="read-more-link">Read more</a>
+      <a href="/post/systemd-startup-permission-denied/" class="read-more-link">Read more</a>
     </div>
     
   </div>
@@ -365,16 +365,16 @@
   <header class="post-header">
     <h1 class="post-title">
       
-      <a class="post-link" href="/post/usage-of-golang-sync-waitgroup/">Golang sync.WaitGroup 的用法
+      <a class="post-link" href="/post/prometheus-reload/">prometheus 通过命令热加载
 </a>
     </h1>
     
     <div class="post-meta">
-      <time datetime="2021-05-12" class="post-time">
-        2021-05-12
+      <time datetime="2021-05-24" class="post-time">
+        2021-05-24
       </time>
       <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/go/"> go </a>
+          <a href="https://www.llmgo.cn/categories/prometheus/"> prometheus </a>
           
         </div>
       
@@ -386,10 +386,10 @@
   <div class="post-content">
     
     <div class="post-summary">
-      Golang sync.WaitGroup 的用法 介绍 经常会看到一下代码 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import ( &#34;fmt&#34; &#34;time&#34; ) func main(){ for i := 0; i &lt; 100 ; i++{ go fmt.Println(i) } time.Sleep(time.Second) } 主线程为了等待goroutine都运
+      prometheus 通过命令热加载 1 2 $ curl -XPOST localhost:9090/-/reload Lifecycle API is not enabled. 添加--web.enable-lifecycle参数 1 2 3 4 5 Type=simple User=prometheus ExecStart=/data1/prometheus/prometheus --config.file=/data1/prometheus/prometheus.yml --storage.tsdb.path=/data1/prometheus/data --web.enable-lifecycle ExecReload=/bin/kill -HUP Restart=on-failure
     </div>
     <div class="read-more">
-      <a href="/post/usage-of-golang-sync-waitgroup/" class="read-more-link">Read more</a>
+      <a href="/post/prometheus-reload/" class="read-more-link">Read more</a>
     </div>
     
   </div>
@@ -1139,6 +1139,30 @@
 
       
 
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+
+          
+          
+          
+
+        
+        
+
+        
+        
+
+      
+
       
       
       <li><a href="/page/3/">»</a></li>
@@ -1146,7 +1170,7 @@
 
       
       
-      <li><a href="/page/25/">»»</a></li>
+      <li><a href="/page/26/">»»</a></li>
       
 
       </ul>
