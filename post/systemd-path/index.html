@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>systemd path 实时监控文件和目录变动
+ - 一个小运维的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="liliming" />
+  <meta name="description" content="systemd path 实时监控文件和目录变动 [toc] systemd path工具提供了监控文件、目录变化并触发执行指定操作的功能。 有时候这种监控功能是非常实用的，比如监控到/et" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+<link rel="canonical" href="https://www.llmgo.cn/post/systemd-path/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.b3a8813c06e6d785beba22bf8264e174fa2cb3a396b22f9ba24e2c00c18aaf7f.css" integrity="sha256-s6iBPAbm14W&#43;uiK/gmThdPoss6OWsi&#43;bok4sAMGKr38=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="systemd path 实时监控文件和目录变动
+" />
+<meta property="og:description" content="systemd path 实时监控文件和目录变动 [toc] systemd path工具提供了监控文件、目录变化并触发执行指定操作的功能。 有时候这种监控功能是非常实用的，比如监控到/et" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.llmgo.cn/post/systemd-path/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-31T17:03:36&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-31T17:03:36&#43;08:00" />
+
+<meta itemprop="name" content="systemd path 实时监控文件和目录变动
+">
+<meta itemprop="description" content="systemd path 实时监控文件和目录变动 [toc] systemd path工具提供了监控文件、目录变化并触发执行指定操作的功能。 有时候这种监控功能是非常实用的，比如监控到/et"><meta itemprop="datePublished" content="2021-05-31T17:03:36&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-31T17:03:36&#43;08:00" />
+<meta itemprop="wordCount" content="2944">
+<meta itemprop="keywords" content="linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="systemd path 实时监控文件和目录变动
+"/>
+<meta name="twitter:description" content="systemd path 实时监控文件和目录变动 [toc] systemd path工具提供了监控文件、目录变化并触发执行指定操作的功能。 有时候这种监控功能是非常实用的，比如监控到/et"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">不宜妄自菲薄</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/categories/">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/about/">关于</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      不宜妄自菲薄
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.llmgo.cn/about/">关于</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">systemd path 实时监控文件和目录变动
+</h1>
+      
+      <div class="post-meta">
+        <time datetime="2021-05-31" class="post-time">
+          2021-05-31
+        </time>
+        <div class="post-category">
+            <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#systemd-path能监控哪些操作">systemd path能监控哪些操作</a></li>
+    <li><a href="#systemd-path使用示例">systemd path使用示例</a>
+      <ul>
+        <li><a href="#示例一">示例一</a></li>
+        <li><a href="#示例二">示例二</a></li>
+      </ul>
+    </li>
+    <li><a href="#systemd-path临时监控">systemd path临时监控</a></li>
+    <li><a href="#systemd-path资源控制">systemd path资源控制</a></li>
+    <li><a href="#systemd-path的bug">systemd path的『Bug』</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+
+    
+    <div class="post-content">
+      <h1 id="systemd-path-实时监控文件和目录变动">systemd path 实时监控文件和目录变动</h1>
+<p>[toc]</p>
+<p>systemd path工具提供了监控文件、目录变化并触发执行指定操作的功能。</p>
+<p>有时候这种监控功能是非常实用的，比如监控到<code>/etc/nginx/nginx.conf</code>或<code>/etc/nginx/conf.d/</code>发生变化后，立即reload nginx。虽然，用户也可以使用inotify类的工具来监控，但远不如systemd path更方便、更简单且更易于观察监控效果和调试。</p>
+<p>其实，systemd path的底层使用的是inotify，所以受限于inotify的缺陷，systemd path只能监控本地文件系统，而无法监控网络文件系统。</p>
+<h2 id="systemd-path能监控哪些操作">systemd path能监控哪些操作</h2>
+<p>systemd path暴露的监控功能并不多，它能监控的动作包括：</p>
+<ul>
+<li>
+<p><strong>PathExists</strong>：指定路径是否存在，当发现它存在时，执行指定操作</p>
+</li>
+<li>
+<p><strong>PathExistsGlob</strong>：是否存在至少一个与模式匹配的路径，当发现存在时，执行指定操作</p>
+</li>
+<li>
+<p><strong>PathExists</strong>：指定路径是否存在，当发现它存在时,执行指定操作</p>
+</li>
+<li>
+<p><strong>PathModified</strong>: 类似于PathChanged</p>
+</li>
+<li>
+<p><strong>DirectoryNotEmpty</strong>：指定的目录是否非空，如果非空,执行指定操作</p>
+</li>
+</ul>
+<p>这些指令监控的路径必须是绝对路径。</p>
+<p>可以多次使用这些指令，且同一个指令也可以使用多次，这样就能够同时监控多个文件或目录，它们将共用事件触发后执行的操作。如果想要对不同监控目录执行不同操作，那只能定义多个systemd path的监控实例。</p>
+<p>如果监控某路径时发现权限不足，则一直等待，直到有权监控。</p>
+<p>如果在启动Path Unit时(<code>systemctl start xxx.path</code>)，指定的路径已经存在(对于PathExists与PathExistsGlob来说)或者指定的目录非空(对于DirectoryNotEmpty来说)，将会立即触发并执行对应操作。不过，对于PathChanged与PathModified来说，并不遵守这个规则。</p>
+<h2 id="systemd-path使用示例">systemd path使用示例</h2>
+<h3 id="示例一">示例一</h3>
+<p>要使用systemd path的功能，需至少编写两个文件，一个.path文件和一个.service文件，这两个文件的前缀名称通常保持一致，但并非必须。这两个文件可以位于以下路径：</p>
+<ul>
+<li>/usr/lib/systemd/system/</li>
+<li>/etc/systemd/system/</li>
+<li>~/.config/systemd/user/：用户级监控，只在该用户登录后才监控，该用户所有会话都退出后停止监控</li>
+</ul>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">/usr/lib/systemd/system/test.path
+/usr/lib/systemd/system/test.service
+
+/etc/systemd/system/test.path
+/etc/systemd/system/test.service
+
+~/.config/systemd/user/test.path
+~/.config/systemd/user/test.service
+</code></pre></td></tr></table>
+</div>
+</div><p>例如，有以下监控需求：</p>
+<ul>
+<li>
+<p>监控<code>/tmp/foo</code>目录下的所有文件修改、创建、删除等操作</p>
+</li>
+<li>
+<p>如果被监控目录<code>/tmp/foo</code>不存在，则创建</p>
+</li>
+<li>
+<p>监控<code>/tmp/a.log</code>文件的更改</p>
+</li>
+<li>
+<p>监控<code>/tmp/file.lock</code>锁文件是否存在</p>
+</li>
+</ul>
+<p>为了简化，这些监控触发的事件都执行同一个操作：向<code>/tmp/path.log</code>中写入一行信息。</p>
+<p>此处将path_test.path文件和path_test.service文件放在<code>/etc/systemd/system/</code>目录下。</p>
+<p>path_test.path内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span class="lnt" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/systemd/system/path_test.path
+<span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span> <span class="o">=</span> monitor some files
+
+<span class="o">[</span>Path<span class="o">]</span>
+<span class="nv">PathChanged</span> <span class="o">=</span> /tmp/foo
+<span class="nv">PathModified</span> <span class="o">=</span> /tmp/a.log
+<span class="nv">PathExists</span> <span class="o">=</span> /tmp/file.lock
+<span class="nv">MakeDirectory</span> <span class="o">=</span> yes
+<span class="nv">Unit</span> <span class="o">=</span> path_test.service
+
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">WantedBy</span> <span class="o">=</span> multi-user.target
+</code></pre></td></tr></table>
+</div>
+</div><p>其中MakeDirectory指令默认为no，当设置为yes时表示如果监控的目录不存在，则自动创建目录，但该指令对PathExists指令无效。</p>
+<p>Unit指令表示该sysmted path实例监控到符合条件的事件时启动的服务单元，即要执行的对应操作。通常省略该指令，这时启动的服务名称和path实例的名称一致(除了后缀)，例如path_test.path默认启动的是path_test.service服务。</p>
+<p>path_test.service内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/systemd/system/path_test.service
+<span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span> <span class="o">=</span> path_test.service
+
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">ExecStart</span> <span class="o">=</span> /bin/bash -c <span class="s1">&#39;echo file changed &gt;&gt;/tmp/path.log&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后执行如下操作启动该systemd path实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">systemctl daemon-reload
+systemctl start path_test.path
+</code></pre></td></tr></table>
+</div>
+</div><p>使用如下命令可以列出当前已启动的所有systemd path实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ systemctl --type<span class="o">=</span>path list-units --no-pager
+UNIT                               LOAD   ACTIVE SUB     DESCRIPTION                              
+systemd-ask-password-console.path  loaded active waiting Dispatch Password Requests to Console
+systemd-ask-password-wall.path     loaded active waiting Forward Password Requests to Wall Dir
+path_test.path                     loaded active waiting monitor some files
+</code></pre></td></tr></table>
+</div>
+</div><p>然后测试该systemd path能否如愿工作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ touch /tmp/foo/a
+$ touch /tmp/foo/a
+$ touch /tmp/a.log
+$ echo &#39;hello world&#39; &gt;&gt;/tmp/a.log
+$ rm -rf /tmp/a.log
+</code></pre></td></tr></table>
+</div>
+</div><p>如果想观察触发情况，可使用journalctl。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ journalctl -u path_test.service
+Jul <span class="m">05</span> 16:09:43 junmajinlong.com systemd<span class="o">[</span>1<span class="o">]</span>: Started path_test.service.
+Jul <span class="m">05</span> 16:09:45 junmajinlong.com systemd<span class="o">[</span>1<span class="o">]</span>: Started path_test.service.
+Jul <span class="m">05</span> 16:09:47 junmajinlong.com systemd<span class="o">[</span>1<span class="o">]</span>: Started path_test.service.
+Jul <span class="m">05</span> 16:09:49 junmajinlong.com systemd<span class="o">[</span>1<span class="o">]</span>: Started path_test.service.
+Jul <span class="m">05</span> 16:09:51 junmajinlong.com systemd<span class="o">[</span>1<span class="o">]</span>: Started path_test.service.
+Jul <span class="m">05</span> 16:09:55 junmajinlong.com systemd<span class="o">[</span>1<span class="o">]</span>: Started path_test.service.
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="示例二">示例二</h3>
+<p>通过systemd来监听wireguard配置文件的实时变化，一但配置文件有所改动，就立即触发 reload。</p>
+<ul>
+<li>wg-gen-web.service（用于reload）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span class="lnt" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span class="lnt" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cat <span class="s">&lt;&lt;&#39;EOF&#39;&gt; /etc/systemd/system/wg-gen-web.service
+</span><span class="s">[Unit]
+</span><span class="s">Description=Restart WireGuard
+</span><span class="s">After=network.target
+</span><span class="s">
+</span><span class="s">[Service]
+</span><span class="s">Type=oneshot
+</span><span class="s">ExecStart=/usr/bin/systemctl reload wg-quick@wg0.service
+</span><span class="s">
+</span><span class="s">[Install]
+</span><span class="s">WantedBy=multi-user.target
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>wg-gen-web.path（用于监听文件变化）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span class="lnt" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cat <span class="s">&lt;&lt;&#39;EOF&#39;&gt; /etc/systemd/system/wg-gen-web.path
+</span><span class="s">[Unit]
+</span><span class="s">Description=Watch /etc/wireguard for changes
+</span><span class="s">
+</span><span class="s">[Path]
+</span><span class="s">PathModified=/etc/wireguard
+</span><span class="s">
+</span><span class="s">[Install]
+</span><span class="s">WantedBy=multi-user.target
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>设置开机自启</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">systemctl <span class="nb">enable</span> wg-gen-web.service wg-gen-web.path --now
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="systemd-path临时监控">systemd path临时监控</h2>
+<p>使用systemd-run命令可以临时监控路径。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ systemd-run --path-property<span class="o">=</span><span class="nv">PathModified</span><span class="o">=</span>/tmp/b.log <span class="nb">echo</span> <span class="s1">&#39;file changed&#39;</span>
+Running path as unit: run-rb6f67e732fb243c7b530673cac867582.path
+Will run service as unit: run-rb6f67e732fb243c7b530673cac867582.service
+</code></pre></td></tr></table>
+</div>
+</div><p>可以查看当前已启动的systemd path实例，包括临时监控实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ systemctl --type<span class="o">=</span>path list-units --no-pager
+</code></pre></td></tr></table>
+</div>
+</div><p>如果需要停止，使用run-xxxxxx名称即可：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">systemctl stop run-rb6f67e732fb243c7b530673cac867582.path
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="systemd-path资源控制">systemd path资源控制</h2>
+<p>systemd path触发的任务可能会消耗大量资源，比如执行rsync的定时任务、执行数据库备份的定时任务，等等，它们可能会消耗网络带宽，消耗IO带宽，消耗CPU等资源。</p>
+<p>想要控制这些定时任务的资源使用量也非常简单，因为真正执行任务的是.service，而Service配置文件中可以轻松地配置一些资源控制指令或直接使用Slice定义的CGroup。这些资源控制类的指令可参考man systemd.resource-control。</p>
+<p>例如，直接在[Service]中定义资源控制指令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">Type</span><span class="o">=</span>simple
+<span class="nv">MemoryLimit</span><span class="o">=</span>20M
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/backup.sh
+</code></pre></td></tr></table>
+</div>
+</div><p>又或者让Service使用定义好的Slice：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[Service]
+ExecStart=/usr/bin/backup.sh
+Slice=backup.slice
+</code></pre></td></tr></table>
+</div>
+</div><p>其中backup.slice的内容为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span class="lnt" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span class="lnt" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span class="lnt" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span class="lnt" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span class="lnt" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span class="lnt" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span class="lnt" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span><span class="lnt" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9">9</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ cat /usr/lib/systemd/system/backup.slice
+<span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>Limited resources Slice
+<span class="nv">DefaultDependencies</span><span class="o">=</span>no
+<span class="nv">Before</span><span class="o">=</span>slices.target
+
+<span class="o">[</span>Slice<span class="o">]</span>
+<span class="nv">CPUQuota</span><span class="o">=</span>50%
+<span class="nv">MemoryLimit</span><span class="o">=</span>20M
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="systemd-path的bug">systemd path的『Bug』</h2>
+<p>systemd path监控路径上所产生的事件是需要时间的，如果两个事件发生时的时间间隔太短，systemd path可能会丢失第二个甚至后续第三个第四个等等事件。</p>
+<p>例如，使用PathChanged或PathModified监控路径<code>/tmp/foo</code>目录时，执行以下操作触发事件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ touch /tmp/foo/a <span class="o">&amp;&amp;</span> rm -rf /tmp/foo/a期待的是systemd path能够捕获这两个事件并执行两次对应的操作，但实际上只会执行一次对应操作。换句话说，systemd path丢失了一次事件。
+</code></pre></td></tr></table>
+</div>
+</div><p>之所以会丢失事件，是因为touch产生的事件被systemd path捕获，systemd path立即启动对应.service服务做出对应操作，在本次操作还未执行完时，rm又立即产生了新的事件，于是systemd path再次启动服务，但此时服务尚未退出，所以本次启动服务实际上什么事也不做。</p>
+<p>所以，从结果上看去就像是systemd path丢失了事件，但实际上是因为服务尚未退出的情况下再次启动服务不会做任何事情。</p>
+<p>可以加上一点休眠时间来耽搁一会：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ touch /tmp/foo/a <span class="o">&amp;&amp;</span> sleep 0.1 <span class="o">&amp;&amp;</span> rm -rf /tmp/foo/a
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的命令会成功执行两次对应操作。</p>
+<p>再比如，将<code>.service</code>文件中的<code>ExecStart</code>设置为<code>/usr/bin/sleep 5</code>，那么在5秒内的所有操作，除了第一次触发的事件外，其它都会丢失。</p>
+<p>systemd path的这个『bug』也有好处，因为可以让瞬间产生的多个有关联关系的事件只执行单次任务，从而避免了中间过程产生的事件也重复触发相关操作。</p>
+<hr>
+<ul>
+<li><a href="https://www.junmajinlong.com/linux/systemd/systemd_path/">https://www.junmajinlong.com/linux/systemd/systemd_path/</a></li>
+</ul>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">liliming</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2021-05-31
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://www.llmgo.cn/tags/linux/">linux</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/wg-gen-web/">
+            <span class="next-text nav-default">Wg Gen Web 使用
+</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+
+
+<a href="https://www.llmgo.cn/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2018 -
+    2021
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        liliming
+        
+      </span>
+      <span class="division">|</span>
+      <span class="beian">
+        <a class="beian-link" href="https://beian.miit.gov.cn/">京ICP备18035378号-1</a>
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

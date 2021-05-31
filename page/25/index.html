@@ -295,6 +295,41 @@
   <header class="post-header">
     <h1 class="post-title">
       
+      <a class="post-link" href="/post/go-rand/">Go rand 的一点记录</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2021-04-06" class="post-time">
+        2021-04-06
+      </time>
+      <div class="post-category">
+          <a href="https://www.llmgo.cn/categories/golang/"> golang </a>
+          <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
+          
+        </div>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      rand 废话不多说，直接上代码 1 2 3 4 5 6 7 8 9 10 package main import ( &#34;fmt&#34; &#34;math/rand&#34; ) func main() { fmt.Println(rand.Intn(100)) } 乍一看没问题 1 2 3 4 5 6 [liliming@llmTAT ~/mygo/code.llmgo.cn/temp 11:05:36]$ go run . 81 [liliming@llmTAT ~/mygo/code.llmgo.cn/temp 11:08:10]$ go run . 81 [liliming@llmTAT ~/mygo/code.llmgo.cn/temp 11:08:12]$ go run . 81 但是每
+    </div>
+    <div class="read-more">
+      <a href="/post/go-rand/" class="read-more-link">Read more</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
       <a class="post-link" href="/post/go-channel/">Go 协程</a>
     </h1>
     
@@ -355,41 +390,6 @@
     </div>
     <div class="read-more">
       <a href="/post/go-mail/" class="read-more-link">Read more</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/post/go-use-viper-parse-ini/">Go使用第三方库viper来解析ini文件</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2021-04-06" class="post-time">
-        2021-04-06
-      </time>
-      <div class="post-category">
-          <a href="https://www.llmgo.cn/categories/golang/"> golang </a>
-          <a href="https://www.llmgo.cn/categories/linux/"> linux </a>
-          
-        </div>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      Go使用第三方库viper来解析ini文件 准备配置文件 1 2 3 4 5 6 7 8 9 $ cat &lt;&lt;EOF&gt; config.ini city=beijing age=100 [common] app=nginx [lol] mid=fizz ad=timor EOF 代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
-    </div>
-    <div class="read-more">
-      <a href="/post/go-use-viper-parse-ini/" class="read-more-link">Read more</a>
     </div>
     
   </div>
@@ -745,8 +745,6 @@
 
             
             
-              
-            
 
           
           
@@ -755,12 +753,6 @@
         
 
         
-        
-          <li class="">
-            <a href="/page/14/">
-              14
-            </a>
-          </li>
         
 
       
@@ -1137,6 +1129,37 @@
 
       
 
+        
+
+        
+        
+
+          
+          
+          
+
+            
+            
+              
+            
+
+          
+          
+
+        
+        
+
+        
+        
+          <li class="">
+            <a href="/page/27/">
+              27
+            </a>
+          </li>
+        
+
+      
+
       
       
       <li><a href="/page/26/">»</a></li>
@@ -1144,7 +1167,7 @@
 
       
       
-      <li><a href="/page/26/">»»</a></li>
+      <li><a href="/page/27/">»»</a></li>
       
 
       </ul>
