@@ -43,15 +43,7 @@
         <description>&lt;h1 id=&#34;wg-gen-web&#34;&gt;Wg Gen Web&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;http://image.llmgo.cn/img/wg-gen-web_cover.png&#34; alt=&#34;用于WireGuard的简单的基于Web的配置生成器&#34;&gt;&lt;/p&gt;
 &lt;p&gt;用于&lt;a href=&#34;https://wireguard.com/&#34;&gt;WireGuard的&lt;/a&gt;基于Web的简单配置生成器。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://goreportcard.com/report/github.com/vx3r/wg-gen-web&#34;&gt;&lt;img src=&#34;https://goreportcard.com/badge/github.com/vx3r/wg-gen-web&#34; alt=&#34;Go Report Card&#34;&gt;&lt;/a&gt;
-&lt;a href=&#34;http://www.wtfpl.net/about/&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/License-WTFPL-brightgreen.svg&#34; alt=&#34;License: WTFPL&#34;&gt;&lt;/a&gt;
-&lt;img src=&#34;https://img.shields.io/discord/681699554189377567&#34; alt=&#34;Discord&#34;&gt;
-&lt;img src=&#34;https://github.com/vx3r/wg-gen-web/actions/workflows/dockerimage.yml/badge.svg&#34; alt=&#34;Build docker images via buildx&#34;&gt;
-&lt;img src=&#34;https://img.shields.io/github/last-commit/vx3r/wg-gen-web&#34; alt=&#34;GitHub last commit&#34;&gt;
-&lt;img src=&#34;https://img.shields.io/docker/pulls/vx3r/wg-gen-web&#34; alt=&#34;Docker Pulls&#34;&gt;
-&lt;img src=&#34;https://img.shields.io/github/go-mod/go-version/vx3r/wg-gen-web&#34; alt=&#34;GitHub go.mod Go version&#34;&gt;
-&lt;img src=&#34;https://img.shields.io/github/languages/code-size/vx3r/wg-gen-web&#34; alt=&#34;GitHub code size in bytes&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;为什么是另一个&#34;&gt;为什么是另一个？&lt;/h2&gt;
+&lt;h2 id=&#34;为什么是wg-gen-web&#34;&gt;为什么是Wg Gen Web？&lt;/h2&gt;
 &lt;p&gt;所有WireGuard UI实施都试图通过应用配置和创建网络规则来管理服务。此实现仅生成配置，由您决定是否创建网络规则并将配置应用于WireGuard。例如，通过使用&lt;a href=&#34;https://github.com/inotify-tools/inotify-tools/wiki&#34;&gt;inotifywait&lt;/a&gt;监视生成的目录。&lt;/p&gt;
 &lt;p&gt;目标是在容器中运行Wg Gen Web，并在主机系统上运行WireGuard。&lt;/p&gt;
 &lt;ul&gt;
