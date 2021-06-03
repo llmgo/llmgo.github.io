@@ -351,7 +351,7 @@
 </ul>
 <h2 id="什么是redis群集">什么是Redis群集？</h2>
 <p><strong>Redis Cluster</strong>是一组Redis实例，旨在通过对数据库进行分区来扩展数据库，从而使其更具弹性。群集中的每个成员（无论是主副本还是辅助副本）都管理哈希槽的子集。如果主机无法访问，则其从机将升级为主机。在由三个主节点组成的最小Redis群集中，每个主节点都有一个从节点（以实现最小的故障转移），每个主节点都分配有一个介于0到16,383之间的哈希槽范围。节点A包含从0到5000的哈希槽，节点B从5001到10000，节点C从10001到16383。群集内部的通信是通过内部总线进行的，使用八卦协议传播有关群集的信息或发现新节点。</p>
-<p><img src="http://ww1.sinaimg.cn/large/006bW9ocly1g8wiwlf6zqj30lm0ffacx.jpg" alt="undefined"></p>
+<p><img src="http://image.llmgo.cn/img/006bW9ocly1g8wiwlf6zqj30lm0ffacx.jpg" alt="undefined"></p>
 <h2 id="在kubernetes中部署redis集群">在Kubernetes中部署Redis集群</h2>
 <p>在<code>Kubernetes</code>中部署Redis集群面临挑战，因为每个Redis实例都依赖于一个配置文件，该文件可以跟踪其他集群实例及其角色。为此，我们需要结合使用<code>Kubernetes</code> <code>StatefulSets</code>和<code>PersistentVolumes</code>。</p>
 <h3 id="部署redis">部署Redis</h3>
