@@ -6,7 +6,17 @@
     <description>Recent content in linux on 一个小运维的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 31 May 2021 17:03:36 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Sep 2022 16:36:06 +0800</lastBuildDate><atom:link href="https://www.llmgo.cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS7创建逻辑卷LVM及LVM扩容
+</title>
+      <link>https://www.llmgo.cn/post/centos-lvm-create-and-expansion/</link>
+      <pubDate>Mon, 12 Sep 2022 16:36:06 +0800</pubDate>
+      
+      <guid>https://www.llmgo.cn/post/centos-lvm-create-and-expansion/</guid>
+      <description>CentOS7创建逻辑卷LVM及LVM扩容 [toc] lvm全称&amp;quot;Logical Volume Manager&amp;quot;，中文意思为&amp;quot;逻辑卷管</description>
+    </item>
+    
     <item>
       <title>systemd path 实时监控文件和目录变动
 </title>
